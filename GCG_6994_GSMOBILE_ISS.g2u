@@ -1,0 +1,191 @@
+﻿Program.Sub.Preflight.Start
+Program.Sub.Preflight.End
+
+Program.Sub.Main.Start
+v.Local.bRet.Declare
+v.Local.iTXID.Declare
+v.Local.sLinkpath.Declare
+v.Local.sSql.Declare
+V.Local.sPartRev.Declare
+v.Local.sPart.Declare
+v.Local.sRev.Declare
+v.Local.sLocation.Declare
+v.Local.fQtytoIssue.Declare
+v.Local.fQtytoDrop.Declare
+v.Local.sResults.Declare
+v.Local.sError.Declare
+v.Local.iRet.Declare
+v.Local.sOpFactor.Declare
+v.Local.sStockUM.Declare
+v.Local.fConversion.Declare
+v.Local.fConvertedQty.Declare
+v.Local.bUseGlobalConversion.Declare("Boolean",false)
+V.Local.fCost.Declare
+
+f.Intrinsic.Control.Try
+	F.Intrinsic.Variable.PassedExists("DATA-TRANSID",V.Local.bRet)
+	f.Intrinsic.Control.If(v.Local.bRet)
+				
+		F.ODBC.Connection!ConC.OpenCommonConnection
+		F.ODBC.Connection!ConC.ExecuteAndReturn("Select TXID From Mobile_Custom_Trans Where TNAME = 'Custom Mobile Issue and Drop Material'",V.Local.iTXID)
+		F.ODBC.Connection!ConC.Close
+		
+		F.ODBC.Connection!Con.OpenCompanyConnection
+		
+'		f.Intrinsic.String.Build("<head><meta http-equiv='refresh' content='0; URL=https://sasgcmobile.gss-cloud.net/Pages/Custom.aspx?sTXID={0}'></head>",V.Local.iTXID,v.Local.sLinkpath)
+		f.Intrinsic.String.Build("<head><meta http-equiv='refresh' content='0; URL=http:Custom.aspx?sTXID={0}'></head>",V.Local.iTXID,v.Local.sLinkpath)
+		
+		'Build datatable with entered information from GS Mobile Page
+		F.Intrinsic.String.Build("Select FIELD_1 as WorkOrder,FIELD_2 as Suffix,FIELD_3 as Seq,FIELD_4 as PART,FIELD_5 as Location,FIELD_6 as Lot,FIELD_7 as Bin,FIELD_8 as Heat,FIELD_9 as Serial,FIELD_10 as QtytoIssue,FIELD_11 as IssueUOM,FIELD_13 as QtytoDrop, FIELD_14 as UOMDrop, USER_ID From Wireless_Line WHere Trans_ID = '{0}'",V.Passed.DATA-TRANSID,V.Local.sSql)
+		F.Data.DataTable.CreateFromSQL("Wire","con",V.Local.sSql,True)
+		
+		'Check if Qty was entered
+		f.Intrinsic.Control.If(v.DataTable.Wire(0).QtytoIssue!FieldValTrim,=,"","AND",v.DataTable.Wire(0).QtytoDrop!FieldValTrim,=,"")
+			F.Intrinsic.String.Build("<table cellpadding = {0}0{0} cellspacing={0}2{0} border = {0}1{0}><tr><td>Issue and Drop quantity fields are empty. Please refresh and enter an Issue or Drop quantity.</td></tr></table>",V.Ambient.DblQuote,V.Local.sResults)
+			f.Intrinsic.Control.GoTo("GoToMessage")
+		f.Intrinsic.Control.EndIf
+		
+		'Grab Part
+		f.Intrinsic.String.Build("Select PART from JOB_OPERATIONS where Job = '{0}' and Suffix = '{1}' and Seq = '{2}'",v.DataTable.Wire(0).WorkOrder!FieldValTrim,v.DataTable.Wire(0).Suffix!FieldValTrim,v.DataTable.Wire(0).Seq!FieldValTrim,v.Local.sSql)
+		f.ODBC.Connection!con.ExecuteAndReturn(v.Local.sSql,v.Local.sPart)
+		'Check if part is attached to work order sequence
+		f.Intrinsic.Control.If(v.Local.sPart,=,"")
+			F.Intrinsic.String.Build("<table cellpadding = {0}0{0} cellspacing={0}2{0} border = {0}1{0}><tr><td>Part is not attached to entered work order sequence or work order sequence does not exist. </td></tr></table>",V.Ambient.DblQuote,V.Local.sResults)
+			f.Intrinsic.Control.GoTo("GoToMessage")
+		f.Intrinsic.Control.EndIf
+		
+		'Get stock UM
+		f.Intrinsic.String.Build("Select DISTINCT UM_INVENTORY from V_INVENTORY_MSTR where PART = '{0}'",v.Local.sPart.RTrim,v.Local.sSQL)
+		f.ODBC.Connection!con.ExecuteAndReturn(v.Local.sSql,v.Local.sStockUM)
+		
+		'Skip if no qty to issue entered
+		f.Intrinsic.Control.If(v.DataTable.Wire(0).QtytoIssue!FieldValTrim,<>,"")
+			'Convert Qty
+			f.Intrinsic.String.Build("Select Factor, Operator from GCG_6994_UOM_MAINT where PART = '{0}' and UOM = '{1}' and TO_UOM = '{2}'",v.Local.sPart.Trim,V.Local.sStockUM,v.DataTable.Wire(0).IssueUOM!FieldValTrim,v.Local.sSQL)
+			f.ODBC.Connection!con.ExecuteAndReturn(v.Local.sSQL,v.Local.sOpFactor)
+			f.Intrinsic.String.Split(v.Local.sOpFactor,"*!*",v.Local.sOpFactor)
+			
+			'If nothing, no conversion is entered for part in custom UOM Maint
+			f.Intrinsic.Control.If(v.Local.sOpFactor(0),=,"")		
+				
+				'Check if global UOM is found
+				f.Intrinsic.Control.If(v.Local.sOpFactor(0),=,"")
+					
+					f.Intrinsic.String.Build("Select Conversion from UM_CONVERSION where FROM_UM = '{0}' and TO_UM = '{1}'",v.DataTable.Wire(0).IssueUOM!FieldValTrim,v.Local.sStockUM,v.Local.sSQL)
+					f.ODBC.Connection!con.ExecuteAndReturn(v.Local.sSQL,v.Local.fConversion)
+					
+					'If no conversion fount, set error message
+					f.Intrinsic.Control.If(v.Local.fConversion,=,0)
+						F.Intrinsic.String.Build("<table cellpadding = {0}0{0} cellspacing={0}2{0} border = {0}1{0}><tr><td>Conversion does not exist for UOM selected. Please choose a valid UOM conversion. </td></tr></table>",V.Ambient.DblQuote,V.Local.sResults)
+						f.Intrinsic.Control.GoTo("GoToMessage")
+					f.Intrinsic.Control.Else
+						f.Intrinsic.Math.Mult(v.Local.fQtytoApply,v.Local.fConversion,v.Local.fConvertedQty)
+						v.Local.bUseGlobalConversion.Set(true)
+					f.Intrinsic.Control.EndIf			
+					
+				f.Intrinsic.Control.EndIf
+			
+			f.Intrinsic.Control.EndIf
+				
+			'Use global or custom converted qty
+			f.Intrinsic.Control.If(v.Local.bUseGlobalConversion,=,true)
+				v.Local.fQtytoIssue.Set(v.Local.fConvertedQty)
+			f.Intrinsic.Control.Else				
+				f.Intrinsic.Control.SelectCase(v.Local.sOpFactor(1))
+					f.Intrinsic.Control.Case("*")
+						f.Intrinsic.Math.Mult(v.DataTable.Wire(0).QtytoIssue!FieldValTrim,v.Local.sOpFactor(0),v.Local.fQtytoIssue)
+					f.Intrinsic.Control.Case("/")
+						f.Intrinsic.Math.Div(v.DataTable.Wire(0).QtytoIssue!FieldValTrim,v.Local.sOpFactor(0),v.Local.fQtytoIssue)
+					f.Intrinsic.Control.Case("+")
+						f.Intrinsic.Math.Add(v.DataTable.Wire(0).QtytoIssue!FieldValTrim,v.Local.sOpFactor(0),v.Local.fQtytoIssue)
+					f.Intrinsic.Control.Case("-")
+						f.Intrinsic.Math.Sub(v.DataTable.Wire(0).QtytoIssue!FieldValTrim,v.Local.sOpFactor(0),v.Local.fQtytoIssue)
+				f.Intrinsic.Control.EndSelect
+			f.Intrinsic.Control.EndIf		
+						
+					
+			'If not float, multiply by 10000 for callwrapper			
+			f.Intrinsic.String.IsInString(v.Local.fQtytoIssue,".",true,v.Local.iRet)
+			f.Intrinsic.Control.If(v.Local.iRet,=,0)
+				f.Intrinsic.Math.Mult(v.Local.fQtytoIssue,10000,v.Local.fQtytoIssue)
+			f.Intrinsic.Control.EndIf
+			
+			V.Local.sPart.Set(V.Local.sPart.Trim)
+			V.Local.sPartRev.Set(V.Local.sPart.Trim)
+			F.Intrinsic.Control.If(V.Local.sPart.Length,>,17)
+				F.Intrinsic.String.RPad(V.Local.sPart," ",20,V.Local.sPart)
+				F.Intrinsic.String.Right(V.Local.sPart,3,V.Local.sRev)
+				F.Intrinsic.String.Left(V.Local.sPart,17,V.Local.sPart)
+			F.Intrinsic.Control.EndIf
+			'Issue Material
+			f.Data.Datatable.AddRow("450100","Part",v.Local.sPart.Trim,"Rev",v.Local.sRev.Trim,"Location",v.DataTable.Wire(0).Location!FieldValTrim,"Quantity",v.Local.fQtytoIssue,"Lot",v.DataTable.Wire(0).Lot!FieldValTrim,"Bin",v.DataTable.Wire(0).Bin!FieldValTrim,"Heat",v.DataTable.Wire(0).Heat!FieldValTrim,"Serial",v.DataTable.Wire(0).Serial!FieldValTrim,"WONumber",v.DataTable.Wire(0).WorkOrder!FieldValTrim,"WOSuffix",v.DataTable.Wire(0).Suffix!FieldValTrim,"WOSeq",v.DataTable.Wire(0).Seq!FieldValTrim)
+				
+			f.Intrinsic.Control.CallSub(450100Async)
+		
+		f.Intrinsic.Control.EndIf
+		
+		f.Intrinsic.Control.If(v.DataTable.Wire(0).QtytoDrop!FieldValTrim,<>,"","OR",V.DataTable.Wire(0).QtyToDrop!FieldValFloat,>,0)
+			F.Intrinsic.String.Build("Select Part From Item_Master Where Part = '{0}' and Location = '{1}' and Lot = '{2}' and Bin = '{3}' and Heat = '{4}' and Serial_Number = '{5}'",V.Local.sPartRev,v.DataTable.Wire(0).Location!FieldValTrim,v.DataTable.Wire(0).Lot!FieldValTrim,"DROP",v.DataTable.Wire(0).Heat!FieldValTrim,v.DataTable.Wire(0).Serial!FieldValTrim,V.Local.sSql)
+			F.ODBC.Connection!Con.ExecuteAndReturn(V.Local.sSql,V.Local.sPart)
+			F.Intrinsic.Control.If(V.Local.sPart.Trim,=,"")
+				F.Intrinsic.String.Build("select MAX(COST) COST from V_ITEM_HISTORY where JOB='{0}' and Suffix = '{1}' and SEQUENCE = '{2}' and Lot = '{3}' and Heat = '{4}' and Serial_NUMBER = '{5}' and Code_Transaction = 'J55' GROUP BY LOT,HEAT, SERIAL_NUMBER",v.DataTable.Wire(0).WorkOrder!FieldValTrim,v.DataTable.Wire(0).Suffix!FieldValTrim,v.DataTable.Wire(0).Seq!FieldValTrim,v.DataTable.Wire(0).Lot!FieldValTrim,v.DataTable.Wire(0).Heat!FieldValTrim,v.DataTable.Wire(0).Serial!FieldValTrim,V.Local.sSql)
+				F.ODBC.Connection!Con.ExecuteAndReturn(V.Local.fCost)
+				'adding Item Master Record and setting cost to cost retreived from Item Hist
+				V.Local.sSql.Set("SELECT * from ITEM_MASTER")
+				Function.ODBC.Connection!Con.OpenRecordsetRW("rstitem",V.Local.sSql)
+	
+				Function.ODBC.Con!rstitem.AddNew
+				Function.ODBC.Con!rstitem.Set!PART(V.Local.sPartTrim.Trim)
+				Function.ODBC.Con!rstitem.Set!LOCATION(v.DataTable.Wire(0).Location!FieldValTrim)
+				Function.ODBC.Con!rstitem.Set!LOT(v.DataTable.Wire(0).Lot!FieldValTrim)
+				Function.ODBC.Con!rstitem.Set!BIN("DROP")
+				Function.ODBC.Con!rstitem.Set!HEAT(v.DataTable.Wire(0).Heat!FieldValTrim)
+				Function.ODBC.Con!rstitem.Set!SERIAL_NUMBER(v.DataTable.Wire(0).Serial!FieldValTrim)
+				Function.ODBC.Con!rstitem.Set!QUANTITY(0)
+				Function.ODBC.Con!rstitem.Set!QTY_AVAILABLE_SHIP(0)
+				Function.ODBC.Con!rstitem.Set!UNIT_COST(V.Local.fCost)
+				Function.ODBC.Con!rstitem.Set!MATL_COST(V.Local.fCost)
+				Function.ODBC.Con!rstitem.Set!DATE_LAST_REC("00000000")
+				Function.ODBC.Con!rstitem.Set!DATE_EXPIRATION("00000000")
+				Function.ODBC.Con!rstitem.Set!USERID(v.DataTable.Wire(0).USER_ID!FieldValTrim)
+				F.ODBC.Con!rstitem.Update
+				F.ODBC.Con!rstitem.Close
+			F.Intrinsic.Control.EndIf
+			'If not float, multiply by 10000 for callwrapper
+			v.Local.fQtytoDrop.Set(v.DataTable.Wire(0).QtytoDrop!FieldValFloat)
+			f.Intrinsic.String.IsInString(v.Local.fQtytoDrop,".",true,v.Local.iRet)
+			f.Intrinsic.Control.If(v.Local.iRet,=,0)
+				f.Intrinsic.Math.Mult(v.Local.fQtytoDrop,10000,v.Local.fQtytoDrop)
+			f.Intrinsic.Control.EndIf
+				
+			'Drop must be negative
+			f.Intrinsic.Math.Mult(v.Local.fQtytoDrop,-1,v.Local.fQtytoDrop)
+		
+			'Drop Material
+			f.Data.Datatable.AddRow("450100","Part",v.Local.sPart.Trim,"Rev",v.Local.sRev.Trim,"Location",v.DataTable.Wire(0).Location!FieldValTrim,"Quantity",v.Local.fQtytoDrop,"Lot",v.DataTable.Wire(0).Lot!FieldValTrim,"Bin","DROP","Heat",v.DataTable.Wire(0).Heat!FieldValTrim,"Serial",v.DataTable.Wire(0).Serial!FieldValTrim,"WONumber",v.DataTable.Wire(0).WorkOrder!FieldValTrim,"WOSuffix",v.DataTable.Wire(0).Suffix!FieldValTrim,"WOSeq",v.DataTable.Wire(0).Seq!FieldValTrim)
+		
+			f.Intrinsic.Control.CallSub(450100Async)
+		
+		f.Intrinsic.Control.EndIf
+		
+		F.ODBC.Connection!Con.Close
+		
+		v.Local.sResults.Set(v.Local.sLinkpath)
+		
+		f.Intrinsic.Control.Label("GoToMessage")
+	
+		F.Global.Mobile.setcustomresult(v.Caller.CompanyCode,V.Passed.DATA-TRANSID,v.Local.sResults)
+	
+	f.Intrinsic.Control.EndIf
+
+f.Intrinsic.Control.Catch
+	F.Intrinsic.String.Build("<table cellpadding = {0}0{0} cellspacing={0}2{0} border = {0}1{0}><tr><td>Error Received Issue Material: {0}{1}{0}Contact Global Shop..</td></tr></table>",V.Ambient.DblQuote,V.Local.sError,V.Local.sResults)
+	F.Global.Mobile.setcustomresult(v.Caller.CompanyCode,V.Passed.DATA-TRANSID,v.Local.sResults)
+	f.Intrinsic.Control.End
+f.Intrinsic.Control.EndTry
+Program.Sub.Main.End
+
+Program.Sub.Comments.Start
+${$5$}$20.1.8713.32002$}$1
+${$6$}$rking$}$20240124132844268$}$QNdZLVy4bWuiWa9jh1ZTiPY99LydZoBNJ1j0ryYxuhTKYCqA+9FZzv5mZ0wRz+XXFa1kX8xkviA=
+Program.Sub.Comments.End
