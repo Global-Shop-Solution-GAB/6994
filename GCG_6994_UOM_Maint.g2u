@@ -1,0 +1,674 @@
+﻿Program.Sub.ScreenSU.Start
+Gui.FrmUOMMaint..Create(BaseForm)
+Gui.FrmUOMMaint..Caption("Part UOM Management")
+Gui.FrmUOMMaint..Size(1024,720)
+Gui.FrmUOMMaint..MinX(0)
+Gui.FrmUOMMaint..MinY(0)
+Gui.FrmUOMMaint..Position(0,0)
+Gui.FrmUOMMaint..AlwaysOnTop(False)
+Gui.FrmUOMMaint..FontName("Tahoma")
+Gui.FrmUOMMaint..FontSize(8.25)
+Gui.FrmUOMMaint..ControlBox(True)
+Gui.FrmUOMMaint..MaxButton(True)
+Gui.FrmUOMMaint..MinButton(True)
+Gui.FrmUOMMaint..MousePointer(0)
+Gui.FrmUOMMaint..Moveable(True)
+Gui.FrmUOMMaint..Sizeable(True)
+Gui.FrmUOMMaint..ShowInTaskBar(True)
+Gui.FrmUOMMaint..TitleBar(True)
+Gui.FrmUOMMaint..Event(UnLoad,FrmUOMMaint_UnLoad)
+Gui.FrmUOMMaint.frame1.Create(Frame)
+Gui.FrmUOMMaint.frame1.Enabled(True)
+Gui.FrmUOMMaint.frame1.Visible(True)
+Gui.FrmUOMMaint.frame1.Zorder(0)
+Gui.FrmUOMMaint.frame1.Size(1024,690)
+Gui.FrmUOMMaint.frame1.Position(0,0)
+Gui.FrmUOMMaint.frame1.Caption("")
+Gui.FrmUOMMaint.frame1.FontName("Tahoma")
+Gui.FrmUOMMaint.frame1.FontSize(8.25)
+Gui.FrmUOMMaint.frame1.Dock(5)
+Gui.FrmUOMMaint.lbl1.Create(Label,"Part",True,20,13,0,12,17,True,0,"Tahoma",8.25,,0,0)
+Gui.FrmUOMMaint.lbl1.BorderStyle(0)
+Gui.FrmUOMMaint.txt_Part.Create(TextBox,"",True,218,20,0,44,14,True,0,"Tahoma",8.25,,1)
+Gui.FrmUOMMaint.lbl2.Create(Label,"Loc",True,16,13,0,282,16,True,0,"Tahoma",8.25,,0,0)
+Gui.FrmUOMMaint.lbl2.BorderStyle(0)
+Gui.FrmUOMMaint.txt_Loc.Create(TextBox,"",True,100,20,0,313,14,True,0,"Tahoma",8.25,,1)
+Gui.FrmUOMMaint.cmd_New_Conversion.Create(Button)
+Gui.FrmUOMMaint.cmd_New_Conversion.Enabled(True)
+Gui.FrmUOMMaint.cmd_New_Conversion.Visible(True)
+Gui.FrmUOMMaint.cmd_New_Conversion.Zorder(0)
+Gui.FrmUOMMaint.cmd_New_Conversion.Size(75,23)
+Gui.FrmUOMMaint.cmd_New_Conversion.Position(449,12)
+Gui.FrmUOMMaint.cmd_New_Conversion.Caption("Add")
+Gui.FrmUOMMaint.cmd_New_Conversion.FontName("Tahoma")
+Gui.FrmUOMMaint.cmd_New_Conversion.FontSize(8.25)
+Gui.FrmUOMMaint.cmd_New_Conversion.Event(Click,cmd_New_Conversion_Click)
+Gui.FrmUOMMaint.GsGc_UOM.Create(GsGridControl)
+Gui.FrmUOMMaint.GsGc_UOM.Enabled(True)
+Gui.FrmUOMMaint.GsGc_UOM.Visible(True)
+Gui.FrmUOMMaint.GsGc_UOM.Zorder(0)
+Gui.FrmUOMMaint.GsGc_UOM.Size(1024,645)
+Gui.FrmUOMMaint.GsGc_UOM.Position(0,45)
+Gui.FrmUOMMaint.GsGc_UOM.Dock(2)
+Gui.FrmUOMMaint.GsGc_UOM.Anchor(15)
+Gui.FrmUOMMaint.GsGc_UOM.Event(RowClick,GsGc_UOM_RowClick)
+Gui.Frm_AddUOM..Create(BaseForm)
+Gui.Frm_AddUOM..Caption("UOM Information")
+Gui.Frm_AddUOM..Size(256,248)
+Gui.Frm_AddUOM..MinX(0)
+Gui.Frm_AddUOM..MinY(0)
+Gui.Frm_AddUOM..Position(0,0)
+Gui.Frm_AddUOM..AlwaysOnTop(False)
+Gui.Frm_AddUOM..FontName("Tahoma")
+Gui.Frm_AddUOM..FontSize(8.25)
+Gui.Frm_AddUOM..ControlBox(True)
+Gui.Frm_AddUOM..MaxButton(True)
+Gui.Frm_AddUOM..MinButton(True)
+Gui.Frm_AddUOM..MousePointer(0)
+Gui.Frm_AddUOM..Moveable(True)
+Gui.Frm_AddUOM..Sizeable(True)
+Gui.Frm_AddUOM..ShowInTaskBar(True)
+Gui.Frm_AddUOM..TitleBar(True)
+Gui.Frm_AddUOM..Event(UnLoad,Frm_AddUOM_UnLoad)
+Gui.Frm_AddUOM.lbl1.Create(Label,"UOM",True,23,13,0,5,23,True,0,"Tahoma",8.25,,0,0)
+Gui.Frm_AddUOM.lbl1.BorderStyle(0)
+Gui.Frm_AddUOM.txt_UOM.Create(TextBox,"",True,180,20,0,69,20,True,0,"Tahoma",8.25,,1)
+Gui.Frm_AddUOM.txt_DESCRIPTION.Create(TextBox,"",True,180,20,0,69,44,True,0,"Tahoma",8.25,,1)
+Gui.Frm_AddUOM.lbl_Description.Create(Label,"Description",True,53,13,0,4,48,True,0,"Tahoma",8.25,,0,0)
+Gui.Frm_AddUOM.lbl_Description.BorderStyle(0)
+Gui.Frm_AddUOM.lbl2.Create(Label,"Factor",True,31,13,0,5,74,True,0,"Tahoma",8.25,,0,0)
+Gui.Frm_AddUOM.lbl2.BorderStyle(0)
+Gui.Frm_AddUOM.txt_Factor.Create(TextBox,"",True,180,20,0,69,70,True,0,"Tahoma",8.25,,1)
+Gui.Frm_AddUOM.lbl3.Create(Label,"Operator",True,44,13,0,4,100,True,0,"Tahoma",8.25,,0,0)
+Gui.Frm_AddUOM.lbl3.BorderStyle(0)
+Gui.Frm_AddUOM.cbo_Operator.Create(ComboBox)
+Gui.Frm_AddUOM.cbo_Operator.Enabled(True)
+Gui.Frm_AddUOM.cbo_Operator.Visible(True)
+Gui.Frm_AddUOM.cbo_Operator.Zorder(0)
+Gui.Frm_AddUOM.cbo_Operator.Size(180,20)
+Gui.Frm_AddUOM.cbo_Operator.Position(69,95)
+Gui.Frm_AddUOM.cbo_Operator.FontName("Tahoma")
+Gui.Frm_AddUOM.cbo_Operator.FontSize(8.25)
+Gui.Frm_AddUOM.txt_To_UOM.Create(TextBox,"",True,180,20,0,69,122,True,0,"Tahoma",8.25,,1)
+Gui.Frm_AddUOM.lbl4.Create(Label,"To UOM",True,38,13,0,5,126,True,0,"Tahoma",8.25,,0,0)
+Gui.Frm_AddUOM.lbl4.BorderStyle(0)
+Gui.Frm_AddUOM.chk_CHECK.Create(CheckBox)
+Gui.Frm_AddUOM.chk_CHECK.Enabled(True)
+Gui.Frm_AddUOM.chk_CHECK.Visible(True)
+Gui.Frm_AddUOM.chk_CHECK.Zorder(0)
+Gui.Frm_AddUOM.chk_CHECK.Size(75,20)
+Gui.Frm_AddUOM.chk_CHECK.Position(6,153)
+Gui.Frm_AddUOM.chk_CHECK.Caption("Track")
+Gui.Frm_AddUOM.chk_CHECK.FontName("Tahoma")
+Gui.Frm_AddUOM.chk_CHECK.FontSize(8.25)
+Gui.Frm_AddUOM.cmd_Submit.Create(Button)
+Gui.Frm_AddUOM.cmd_Submit.Enabled(True)
+Gui.Frm_AddUOM.cmd_Submit.Visible(True)
+Gui.Frm_AddUOM.cmd_Submit.Zorder(0)
+Gui.Frm_AddUOM.cmd_Submit.Size(75,23)
+Gui.Frm_AddUOM.cmd_Submit.Position(6,187)
+Gui.Frm_AddUOM.cmd_Submit.Caption("Submit")
+Gui.Frm_AddUOM.cmd_Submit.FontName("Tahoma")
+Gui.Frm_AddUOM.cmd_Submit.FontSize(8.25)
+Gui.Frm_AddUOM.cmd_Submit.Event(Click,cmd_Submit_Click)
+Gui.Frm_AddUOM.cmd_Clear.Create(Button)
+Gui.Frm_AddUOM.cmd_Clear.Enabled(True)
+Gui.Frm_AddUOM.cmd_Clear.Visible(True)
+Gui.Frm_AddUOM.cmd_Clear.Zorder(0)
+Gui.Frm_AddUOM.cmd_Clear.Size(75,23)
+Gui.Frm_AddUOM.cmd_Clear.Position(89,187)
+Gui.Frm_AddUOM.cmd_Clear.Caption("Clear")
+Gui.Frm_AddUOM.cmd_Clear.FontName("Tahoma")
+Gui.Frm_AddUOM.cmd_Clear.FontSize(8.25)
+Gui.Frm_AddUOM.cmd_Clear.Event(Click,cmd_Clear_Click)
+Gui.Frm_AddUOM.cmd_Delete.Create(Button)
+Gui.Frm_AddUOM.cmd_Delete.Enabled(True)
+Gui.Frm_AddUOM.cmd_Delete.Visible(True)
+Gui.Frm_AddUOM.cmd_Delete.Zorder(0)
+Gui.Frm_AddUOM.cmd_Delete.Size(75,23)
+Gui.Frm_AddUOM.cmd_Delete.Position(174,187)
+Gui.Frm_AddUOM.cmd_Delete.Caption("Delete")
+Gui.Frm_AddUOM.cmd_Delete.FontName("Tahoma")
+Gui.Frm_AddUOM.cmd_Delete.FontSize(8.25)
+Gui.Frm_AddUOM.cmd_Delete.Event(Click,cmd_Delete_Click)
+Gui.Frm_AddUOM.chk_Selected.Create(CheckBox)
+Gui.Frm_AddUOM.chk_Selected.Enabled(True)
+Gui.Frm_AddUOM.chk_Selected.Visible(True)
+Gui.Frm_AddUOM.chk_Selected.Zorder(0)
+Gui.Frm_AddUOM.chk_Selected.Size(75,20)
+Gui.Frm_AddUOM.chk_Selected.Position(75,153)
+Gui.Frm_AddUOM.chk_Selected.Caption("Select")
+Gui.Frm_AddUOM.chk_Selected.FontName("Tahoma")
+Gui.Frm_AddUOM.chk_Selected.FontSize(8.25)
+Program.Sub.ScreenSU.End
+
+Program.Sub.Preflight.Start
+v.Global.sSelectedUOM.Declare
+Program.Sub.Preflight.End
+
+Program.Sub.Main.Start
+Function.Intrinsic.UI.UsePixels ' Allows you to use Pixels instead of Twips throughout
+v.Local.iRet.Declare
+
+f.Intrinsic.Control.Try
+	F.Intrinsic.Control.SelectCase(V.caller.Hook)
+		'Hook 12010 is the Populate hook
+		F.Intrinsic.Control.Case("10120")
+			F.Intrinsic.Control.CallSub(PopulateButton)
+			
+		F.Intrinsic.Control.Case("10210")
+			'Check if part was selected
+			f.Intrinsic.Control.If(v.Passed.000007,=,"")
+				f.Intrinsic.UI.Msgbox("Please select a part.","Custom UOM Maintenance",0,v.Local.iRet)
+				f.Intrinsic.Control.End
+			f.Intrinsic.Control.EndIf
+			
+			F.ODBC.Connection!con.OpenCompanyConnection(999)
+			f.Intrinsic.Control.CallSub(SetMaxLengths)
+			f.Intrinsic.Control.CallSub(LoadOperators)
+			F.Intrinsic.Control.CallSub(LoadGrid)
+		
+		'Hook 57152 is the Populate hook for Inventory Extended Status - NEW
+		F.Intrinsic.Control.Case("57152")
+			F.Intrinsic.Control.CallSub(InvExtStatusAddCol)
+			
+		'Hook for purchasing lines save
+		F.Intrinsic.Control.Case("17060")
+			F.Intrinsic.Control.CallSub(PurchLinePreSave)
+	
+		F.Intrinsic.Control.CaseElse
+			F.Intrinsic.Control.End
+			
+	F.Intrinsic.Control.EndSelect
+f.Intrinsic.Control.Catch
+	f.Intrinsic.Control.CallSub(ErrorMsg, CurrentSub, v.Ambient.CurrentSubroutine)
+f.Intrinsic.Control.EndTry
+Program.Sub.Main.End
+
+Program.Sub.LoadEmptyGrid.Start
+f.Intrinsic.Control.Try
+
+	f.Data.DataTable.Create("dtEmptyGrid",true)
+	f.Data.DataTable.AddColumn("dtEmptyGrid","UOM","String",)
+	f.Data.DataTable.AddColumn("dtEmptyGrid","Description","String")
+	f.Data.DataTable.AddColumn("dtEmptyGrid","Factor","String")
+	f.Data.DataTable.AddColumn("dtEmptyGrid","Operator","String")
+	f.Data.DataTable.AddColumn("dtEmptyGrid","To UOM","String")
+	f.Data.DataTable.AddColumn("dtEmptyGrid","Track","Boolean")
+
+	gui.FrmUOMMaint.GsGc_UOM.AddGridviewFromDatatable("gvEmptyGrid","dtEmptyGrid")
+	gui.FrmUOMMaint.GsGc_UOM.MainView("gvEmptyGrid")
+
+f.Intrinsic.Control.Catch
+	f.Intrinsic.Control.CallSub(ErrorMsg, CurrentSub, v.Ambient.CurrentSubroutine)
+f.Intrinsic.Control.EndTry
+Program.Sub.LoadEmptyGrid.End
+
+Program.Sub.LoadGrid.Start
+v.Local.sSQL.Declare
+f.Intrinsic.Control.Try
+	
+	'not using Location
+	f.Intrinsic.String.Build("Select * from GCG_6994_UOM_MAINT where PART = '{0}'",v.Passed.000007.Trim,v.Local.sSQL)
+	f.Data.DataTable.CreateFromSQL("dtLoadGrid","con",v.Local.sSQL)
+	
+	gui.FrmUOMMaint.GsGc_UOM.AddGridviewFromDatatable("gvLoadGrid","dtLoadGrid")
+	gui.FrmUOMMaint.GsGc_UOM.MainView("gvLoadGrid")
+	f.Intrinsic.Control.CallSub(SetGridProperties)
+	gui.FrmUOMMaint.txt_Part.Text(v.Passed.000007.Trim)
+	gui.FrmUOMMaint.txt_Loc.Text(v.Passed.000009.Trim)	
+	gui.FrmUOMMaint..Show()
+	
+f.Intrinsic.Control.Catch
+	f.Intrinsic.Control.CallSub(ErrorMsg, CurrentSub, v.Ambient.CurrentSubroutine)
+f.Intrinsic.Control.EndTry
+Program.Sub.LoadGrid.End
+
+Program.Sub.ErrorMsg.Start
+v.Local.sError.Declare
+f.Intrinsic.String.Build("Project GCG_6994_UOM_Maint.g2u {0}{0}Subroutine: {1}{0}Error: {2} with Description: {3}", v.Ambient.NewLine, v.Args.CurrentSub, v.Ambient.ErrorNumber, v.Ambient.ErrorDescription, v.Local.sError)
+f.Intrinsic.UI.Msgbox(v.Local.sError)
+f.ODBC.Connection!con.Close
+f.Intrinsic.Control.End
+Program.Sub.ErrorMsg.End
+
+Program.Sub.FrmUOMMaint_UnLoad.Start
+f.ODBC.Connection!con.Close
+f.Intrinsic.Control.End
+Program.Sub.FrmUOMMaint_UnLoad.End
+
+Program.Sub.SetMaxLengths.Start
+f.Intrinsic.Control.Try
+	gui.Frm_AddUOM.txt_UOM.MaxLength(2)
+	gui.Frm_AddUOM.txt_DESCRIPTION.MaxLength(30)
+	gui.Frm_AddUOM.txt_Factor.NumericOnly(1)
+	gui.Frm_AddUOM.txt_To_UOM.MaxLength(2)
+	
+	gui.FrmUOMMaint.txt_Part.Enabled(false)
+	gui.FrmUOMMaint.txt_Loc.Enabled(false)
+f.Intrinsic.Control.Catch
+	f.Intrinsic.Control.CallSub(ErrorMsg, CurrentSub, v.Ambient.CurrentSubroutine)
+f.Intrinsic.Control.EndTry
+Program.Sub.SetMaxLengths.End
+
+Program.Sub.cmd_New_Conversion_Click.Start
+gui.Frm_AddUOM..Show()
+Program.Sub.cmd_New_Conversion_Click.End
+
+Program.Sub.cmd_Submit_Click.Start
+f.Intrinsic.Control.Try
+	v.Local.sSQL.Declare
+	v.Local.iRet.Declare
+
+	'Invoke wait and query to see if record exists
+	gui.FrmUOMMaint.GsGc_UOM.InvokeWait("Loading Grid...","UOM Maintenance [6994]")	
+	
+	f.Intrinsic.String.Build("Select * from GCG_6994_UOM_MAINT where PART = '{0}' and UOM = '{1}' and TO_UOM = '{2}'",v.Screen.FrmUOMMaint!txt_Part.Text,v.Screen.Frm_AddUOM!txt_UOM.Text,V.Screen.Frm_AddUOM!txt_To_UOM.Text,v.Local.sSQL)
+	f.ODBC.Connection!con.OpenRecordsetRW("rstUOM",v.Local.sSQL)
+	
+	'Make Sure required fields are filled
+	f.Intrinsic.Control.If(v.Screen.Frm_AddUOM!txt_UOM.Text,=,"","OR",v.Screen.Frm_AddUOM!txt_DESCRIPTION.Text,=,"")
+		f.Intrinsic.UI.Msgbox("Please fill out all fields.","Custom UOM Maintenance",0,v.Local.iRet)
+		f.Intrinsic.Control.GoTo("SkipSubmit")
+	f.Intrinsic.Control.EndIf
+	
+	f.Intrinsic.Control.If(v.Screen.Frm_AddUOM!txt_Factor.Text,=,"","OR",v.Screen.Frm_AddUOM!cbo_Operator.Text,=,"")
+		f.Intrinsic.UI.Msgbox("Please fill out all fields.","Custom UOM Maintenance",0,v.Local.iRet)
+		f.Intrinsic.Control.GoTo("SkipSubmit")
+	f.Intrinsic.Control.EndIf
+	
+	f.Intrinsic.Control.If(v.Screen.Frm_AddUOM!txt_To_UOM.Text,=,"")
+		f.Intrinsic.UI.Msgbox("Please fill out all fields.","Custom UOM Maintenance",0,v.Local.iRet)
+		f.Intrinsic.Control.GoTo("SkipSubmit")
+	f.Intrinsic.Control.EndIf
+	
+	f.Intrinsic.Control.If(v.Screen.Frm_AddUOM!chk_Selected.Value,=,1)
+		'Clear other selected UOM
+		f.Intrinsic.String.Build("UPDATE GCG_6994_UOM_MAINT SET SELECTED = 0 WHERE PART = '{0}'",v.Screen.FrmUOMMaint!txt_Part.Text,v.Local.sSQL)
+		f.ODBC.Connection!con.Execute(v.Local.sSQL)
+	f.Intrinsic.Control.EndIf
+	
+	'If no records found
+	f.Intrinsic.Control.If(v.ODBC.con!rstUOM.EOF)	
+		f.ODBC.con!rstUOM.AddNew
+		f.ODBC.con!rstUOM.Set!UOM(v.Screen.Frm_AddUOM!txt_UOM.Text)
+		f.ODBC.con!rstUOM.Set!DESCRIPTION(v.Screen.Frm_AddUOM!txt_DESCRIPTION.Text)
+		f.ODBC.con!rstUOM.Set!FACTOR(v.Screen.Frm_AddUOM!txt_Factor.Text)
+		f.ODBC.con!rstUOM.Set!OPERATOR(v.Screen.Frm_AddUOM!cbo_Operator.Value)
+		f.ODBC.con!rstUOM.Set!TO_UOM(v.Screen.Frm_AddUOM!txt_To_UOM.Text)
+		f.ODBC.con!rstUOM.Set!TRACK(v.Screen.Frm_AddUOM!chk_CHECK.Value)
+		f.ODBC.con!rstUOM.Set!PART(v.Screen.FrmUOMMaint!txt_Part.Text)
+		f.ODBC.con!rstUOM.Set!LOCATION(v.Screen.FrmUOMMaint!txt_Loc.Text)	
+		f.ODBC.con!rstUOM.Set!SELECTED(v.Screen.Frm_AddUOM!chk_Selected.Value)
+	'if Records are found
+	f.Intrinsic.Control.Else
+		f.Intrinsic.UI.Msgbox("Conversion already exists. Would you like to alter the existing Record?","UOM Maintenance [6994]",4,v.Local.iRet)
+		f.Intrinsic.Control.If(v.Local.iRet,=,7)
+			f.Intrinsic.Control.GoTo("SkipSubmit")
+		f.Intrinsic.Control.EndIf
+		f.ODBC.con!rstUOM.Set!UOM(v.Screen.Frm_AddUOM!txt_UOM.Text)
+		f.ODBC.con!rstUOM.Set!DESCRIPTION(v.Screen.Frm_AddUOM!txt_DESCRIPTION.Text)
+		f.ODBC.con!rstUOM.Set!FACTOR(v.Screen.Frm_AddUOM!txt_Factor.Text)
+		f.ODBC.con!rstUOM.Set!OPERATOR(v.Screen.Frm_AddUOM!cbo_Operator.Value)
+		f.ODBC.con!rstUOM.Set!TO_UOM(v.Screen.Frm_AddUOM!txt_To_UOM.Text)
+		f.ODBC.con!rstUOM.Set!TRACK(v.Screen.Frm_AddUOM!chk_CHECK.Value)
+		f.ODBC.con!rstUOM.Set!PART(v.Screen.FrmUOMMaint!txt_Part.Text)
+		f.ODBC.con!rstUOM.Set!LOCATION(v.Screen.FrmUOMMaint!txt_Loc.Text)
+		f.ODBC.con!rstUOM.Set!SELECTED(v.Screen.Frm_AddUOM!chk_Selected.Value)
+	f.Intrinsic.Control.EndIf
+	
+	F.ODBC.con!rstUOM.Update
+
+	gui.Frm_AddUOM.txt_UOM.Text("")
+	gui.Frm_AddUOM.txt_DESCRIPTION.Text("")
+	gui.Frm_AddUOM.txt_Factor.Text(0)
+	gui.Frm_AddUOM.cbo_Operator.Text("")
+	gui.Frm_AddUOM.txt_To_UOM.Text("")
+	gui.Frm_AddUOM.chk_CHECK.Value(false)
+	gui.Frm_AddUOM..Visible(false)
+	
+	f.Intrinsic.Control.CallSub(LoadGrid)
+	
+	f.Intrinsic.Control.Label("SkipSubmit")
+	f.ODBC.con!rstUOM.Close	
+	gui.FrmUOMMaint.GsGc_UOM.HideWait()
+	
+f.Intrinsic.Control.Catch
+	f.Intrinsic.Control.CallSub(ErrorMsg, CurrentSub, v.Ambient.CurrentSubroutine)
+f.Intrinsic.Control.EndTry
+Program.Sub.cmd_Submit_Click.End
+
+Program.Sub.LoadOperators.Start
+f.Intrinsic.Control.Try
+	
+	gui.Frm_AddUOM.cbo_Operator.AddItem("+",0)
+	gui.Frm_AddUOM.cbo_Operator.AddItem("-",1)
+	gui.Frm_AddUOM.cbo_Operator.AddItem("*",2)
+	gui.Frm_AddUOM.cbo_Operator.AddItem("/",3)
+
+f.Intrinsic.Control.Catch
+	f.Intrinsic.Control.CallSub(ErrorMsg, CurrentSub, v.Ambient.CurrentSubroutine)
+f.Intrinsic.Control.EndTry
+Program.Sub.LoadOperators.End
+
+Program.Sub.SetGridProperties.Start
+f.Intrinsic.Control.Try
+	
+	gui.FrmUOMMaint.GsGc_UOM.SetGridviewProperty("gvLoadGrid","Showgrouppanel","true")
+	gui.FrmUOMMaint.GsGc_UOM.SetGridviewProperty("gvLoadGrid","AllowFilter","true")
+	gui.FrmUOMMaint.GsGc_UOM.SetGridviewProperty("gvLoadGrid","AllowSort","true")
+	gui.FrmUOMMaint.GsGc_UOM.SetGridviewProperty("gvLoadGrid","ShowConditionalFormattingItem","true")
+	gui.FrmUOMMaint.GsGc_UOM.SetGridviewProperty("gvLoadGrid","AllowColumnMoving","true")
+	gui.FrmUOMMaint.GsGc_UOM.SetGridviewProperty("gvLoadGrid","AllowColumnResizing","true")
+	gui.FrmUOMMaint.GsGc_UOM.SetGridviewProperty("gvLoadGrid","OptionsFilterUseNewCustomFilterDialog","true")
+	gui.FrmUOMMaint.GsGc_UOM.SetGridviewProperty("gvLoadGrid","OptionsViewColumnAutoWidth","true")
+	gui.FrmUOMMaint.GsGc_UOM.SetGridviewProperty("gvLoadGrid","OptionsViewRowAutoHeight","true")
+	gui.FrmUOMMaint.GsGc_UOM.SetGridviewProperty("gvLoadGrid","Editable","false")
+	gui.FrmUOMMaint.GsGc_UOM.SetGridviewProperty("gvLoadGrid","Readonly","true")
+	
+	gui.FrmUOMMaint.GsGc_UOM.SetColumnProperty("gvLoadGrid","UOM","Caption","UOM")
+	gui.FrmUOMMaint.GsGc_UOM.SetColumnProperty("gvLoadGrid","DESCRIPTION","Caption","Description")
+	gui.FrmUOMMaint.GsGc_UOM.SetColumnProperty("gvLoadGrid","FACTOR","Caption","Factor")
+	gui.FrmUOMMaint.GsGc_UOM.SetColumnProperty("gvLoadGrid","OPERATOR","Caption","Operator")
+	gui.FrmUOMMaint.GsGc_UOM.SetColumnProperty("gvLoadGrid","TO_UOM","Caption","To UOM")
+	gui.FrmUOMMaint.GsGc_UOM.SetColumnProperty("gvLoadGrid","TRACK","Caption","Track")
+	gui.FrmUOMMaint.GsGc_UOM.SetColumnProperty("gvLoadGrid","SELECTED","Caption","Select")
+	
+	gui.FrmUOMMaint.GsGc_UOM.SetColumnProperty("gvLoadGrid","PART","VISIBLE","FALSE")
+	gui.FrmUOMMaint.GsGc_UOM.SetColumnProperty("gvLoadGrid","LOCATION","VISIBLE","FALSE")
+
+f.Intrinsic.Control.Catch
+	f.Intrinsic.Control.CallSub(ErrorMsg, CurrentSub, v.Ambient.CurrentSubroutine)
+f.Intrinsic.Control.EndTry
+Program.Sub.SetGridProperties.End
+
+Program.Sub.PopulateButton.Start
+f.Intrinsic.Control.Try
+
+	v.Passed.000068.Set("UOM Maint")
+
+f.Intrinsic.Control.Catch
+	f.Intrinsic.Control.CallSub(ErrorMsg, CurrentSub, v.Ambient.CurrentSubroutine)
+f.Intrinsic.Control.EndTry
+Program.Sub.PopulateButton.End
+
+Program.Sub.GsGc_UOM_RowClick.Start
+f.Intrinsic.Control.Try
+	v.Local.sUOM.Declare
+	v.Local.sDescription.Declare
+	v.Local.sFactor.Declare
+	v.Local.sOperator.Declare
+	v.Local.sToUOM.Declare
+	v.Local.bTrack.Declare
+	v.Local.bSelected.Declare
+
+	'F.Intrinsic.Control.SelectCase(v.Args.Column)
+		gui.FrmUOMMaint.GsGc_UOM.GetCellValueByColumnName("gvLoadGrid","UOM",v.Args.RowIndex,V.Local.sUOM)
+		gui.FrmUOMMaint.GsGc_UOM.GetCellValueByColumnName("gvLoadGrid","DESCRIPTION",v.Args.RowIndex,V.Local.sDescription)
+		gui.FrmUOMMaint.GsGc_UOM.GetCellValueByColumnName("gvLoadGrid","FACTOR",v.Args.RowIndex,V.Local.sFactor)
+		gui.FrmUOMMaint.GsGc_UOM.GetCellValueByColumnName("gvLoadGrid","OPERATOR",v.Args.RowIndex,V.Local.sOperator)
+		gui.FrmUOMMaint.GsGc_UOM.GetCellValueByColumnName("gvLoadGrid","TO_UOM",v.Args.RowIndex,V.Local.sToUOM)
+		gui.FrmUOMMaint.GsGc_UOM.GetCellValueByColumnName("gvLoadGrid","TRACK",v.Args.RowIndex,V.Local.bTrack)
+		gui.FrmUOMMaint.GsGc_UOM.GetCellValueByColumnName("gvLoadGrid","SELECTED",v.Args.RowIndex,V.Local.bSelected)
+		
+		gui.Frm_AddUOM.txt_UOM.Text(v.Local.sUOM)
+		gui.Frm_AddUOM.txt_DESCRIPTION.Text(v.Local.sDescription)
+		gui.Frm_AddUOM.txt_Factor.Text(v.Local.sFactor)
+		gui.Frm_AddUOM.cbo_Operator.Text(v.Local.sOperator)
+		gui.Frm_AddUOM.txt_To_UOM.Text(v.Local.sToUOM)
+		gui.Frm_AddUOM.chk_CHECK.Value(V.Local.bTrack)
+		gui.Frm_AddUOM.chk_Selected.Value(v.Local.bSelected)
+		gui.Frm_AddUOM..Show()
+	'F.Intrinsic.Control.EndSelect
+
+f.Intrinsic.Control.Catch
+	f.Intrinsic.Control.CallSub(ErrorMsg, CurrentSub, v.Ambient.CurrentSubroutine)
+f.Intrinsic.Control.EndTry
+Program.Sub.GsGc_UOM_RowClick.End
+
+Program.Sub.Frm_AddUOM_UnLoad.Start
+f.Intrinsic.Control.Try
+	gui.Frm_AddUOM..Visible(false)
+	gui.Frm_AddUOM.txt_UOM.Text("")
+	gui.Frm_AddUOM.txt_DESCRIPTION.Text("")
+	gui.Frm_AddUOM.txt_Factor.Text(0)
+	gui.Frm_AddUOM.cbo_Operator.Text("")
+	gui.Frm_AddUOM.txt_To_UOM.Text("")
+	gui.Frm_AddUOM.chk_CHECK.Value(false)
+f.Intrinsic.Control.Catch
+	f.Intrinsic.Control.CallSub(ErrorMsg, CurrentSub, v.Ambient.CurrentSubroutine)
+f.Intrinsic.Control.EndTry	
+Program.Sub.Frm_AddUOM_UnLoad.End
+
+Program.Sub.cmd_Clear_Click.Start
+f.Intrinsic.Control.Try
+
+	gui.Frm_AddUOM.txt_UOM.Text("")
+	gui.Frm_AddUOM.txt_DESCRIPTION.Text("")
+	gui.Frm_AddUOM.txt_Factor.Text("")
+	gui.Frm_AddUOM.cbo_Operator.Text("")
+	gui.Frm_AddUOM.txt_To_UOM.Text("")
+	gui.Frm_AddUOM.chk_CHECK.Value(false)
+	gui.Frm_AddUOM..Show()
+	
+f.Intrinsic.Control.Catch
+	f.Intrinsic.Control.CallSub(ErrorMsg, CurrentSub, v.Ambient.CurrentSubroutine)
+f.Intrinsic.Control.EndTry
+Program.Sub.cmd_Clear_Click.End
+
+Program.Sub.cmd_Delete_Click.Start
+f.Intrinsic.Control.Try
+	v.Local.sSQL.Declare
+	v.Local.iRet.Declare
+
+	'Invoke wait and query to see if record exists
+	gui.FrmUOMMaint.GsGc_UOM.InvokeWait("Loading Grid...","UOM Maintenance [6994]")
+	f.Intrinsic.String.Build("Select * from GCG_6994_UOM_MAINT where PART = '{0}' and UOM = '{1}' and TO_UOM = '{2}'",v.Screen.FrmUOMMaint!txt_Part.Text,v.Screen.Frm_AddUOM!txt_UOM.Text,V.Screen.Frm_AddUOM!txt_To_UOM.Text,v.Local.sSQL)
+	f.ODBC.Connection!con.OpenRecordsetRW("rstUOM",v.Local.sSQL)
+	
+	'If record exist, delete
+	f.Intrinsic.Control.If(v.ODBC.con!rstUOM.EOF,=,false)
+		F.ODBC.con!rstUOM.Delete
+	'Let user know Record does not exist
+	f.Intrinsic.Control.Else
+		f.Intrinsic.UI.Msgbox("Record does not exist.",1,v.Local.iRet)
+		f.Intrinsic.Control.GoTo("SkipClose")
+	f.Intrinsic.Control.EndIf
+	
+	'Reset Text fields
+	gui.Frm_AddUOM..Visible(false)
+	gui.Frm_AddUOM.txt_UOM.Text("")
+	gui.Frm_AddUOM.txt_DESCRIPTION.Text("")
+	gui.Frm_AddUOM.txt_Factor.Text(0)
+	gui.Frm_AddUOM.cbo_Operator.Text("")
+	gui.Frm_AddUOM.txt_To_UOM.Text("")
+	gui.Frm_AddUOM.chk_CHECK.Value(false)
+	
+	'Reload Grid
+	f.Intrinsic.Control.CallSub(LoadGrid)
+	gui.Frm_AddUOM..Visible(false)
+	
+	'Label to skip logic if Record does not exist
+	f.Intrinsic.Control.Label("SkipClose")
+	F.ODBC.con!rstUOM.Close
+	gui.FrmUOMMaint.GsGc_UOM.HideWait()
+		
+f.Intrinsic.Control.Catch
+	f.Intrinsic.Control.CallSub(ErrorMsg, CurrentSub, v.Ambient.CurrentSubroutine)
+f.Intrinsic.Control.EndTry
+Program.Sub.cmd_Delete_Click.End
+
+Program.Sub.InvExtStatusAddCol.Start
+f.Intrinsic.Control.Try
+	V.Local.sError.Declare(String,"")
+	V.Local.sRet.Declare(String,"")
+	V.Local.iCount.Declare(Long,0)
+	V.Local.i.Declare(Long,0)
+	V.Local.sPart.Declare(String,"")
+	V.Local.sTemp.Declare(String,"")
+	V.Local.sSql.Declare(String,"")
+	V.Local.sDesc.Declare(String,"")
+	v.Local.bUseRevision.Declare(Boolean,False)
+	V.Local.sID.Declare(String,"")
+	V.Local.iCol.Declare(Long,0)
+	V.Local.bRet.Declare(Boolean,False)
+	V.Local.iTemp.Declare(Long,0)
+	V.Local.iDesCol.Declare(Long,0)
+	V.Local.iPartCol.Declare(Long,0)
+	V.Local.iRevCol.Declare(Long,0)
+	v.Local.iRowCount.Declare(Long,0)
+	v.Local.sRow.Declare(String,"")
+	v.Local.fOperationRet.Declare(Float,0)
+	V.Local.iInvUmIndex.Declare(Long,0)
+	V.Local.iInvQtyIndex.Declare(Long,0)
+	V.Local.sPartRev.Declare(String,"")
+
+	F.ODBC.Connection!con.OpenCompanyConnection(999)
+	'Load BDF passed from Inv Ext Status 
+	F.Intrinsic.BDF.Load("InventoryExtStatus-bdf","GSS_InvExtendedStatus-GridViewLines-bdf")
+	F.Intrinsic.BDF.ReadRowCount("InventoryExtStatus-bdf",V.Local.iRowCount)
+	
+	F.Intrinsic.BDF.Clone("InventoryExtStatus-bdf","Load")
+	F.Intrinsic.BDF.ReadColumnTitle("Load",V.Local.sTemp)
+	F.Intrinsic.String.IsInString(V.Local.sTemp,"Converted UOM",TRUE,V.Local.bRet)
+	
+	'Check if script has already ran. If it has don't add columns
+	f.Intrinsic.Control.If(v.Local.bRet,=,false)
+		f.Intrinsic.BDF.AddColumn("Load","Converted_UOM","String")
+		f.Intrinsic.BDF.AddColumn("Load","Converted_OnHand_Qty","Float")
+		
+		f.Intrinsic.BDF.AddColumn("InventoryExtStatus-bdf","Converted_UOM","String")
+		f.Intrinsic.BDF.AddColumn("InventoryExtStatus-bdf","Converted_OnHand_Qty","Float")
+	f.Intrinsic.Control.EndIf
+	'Set Column titles to show in grid
+	F.Intrinsic.BDF.SetColumnTitle("Load",38,"Converted UOM")
+	F.Intrinsic.BDF.SetColumnTitle("Load",39,"Converted Quantity On Hand")
+
+	F.Intrinsic.BDF.ReadColumnTitle("InventoryExtStatus-bdf",V.Local.sTemp)
+	F.Intrinsic.String.Split(V.Local.sTemp,"*!*",V.Local.sTemp)
+	F.Intrinsic.Control.For(V.Local.i,0,V.Local.sTemp.UBound,1)
+		F.Intrinsic.Control.If(V.Local.sTemp(V.Local.i).UCASE,=,"INV UM")
+			V.Local.iInvUmIndex.Set(V.Local.i)
+		F.Intrinsic.Control.ElseIf(V.Local.sTemp(V.Local.i).UCASE,=,"PART")
+			V.Local.iPartCol.Set(V.Local.i)
+		F.Intrinsic.Control.ElseIf(V.Local.sTemp(V.Local.i).UCASE,=,"REVISION")
+			V.Local.iRevCol.Set(V.Local.i)
+		F.Intrinsic.Control.ElseIf(V.Local.sTemp(V.Local.i).UCASE,=,"ON HAND QUANTITY")
+			V.Local.iInvQtyIndex.Set(V.Local.i)
+		F.Intrinsic.Control.EndIf
+	F.Intrinsic.Control.Next(V.Local.i)
+
+	'Loop through and add data to both new columns
+	f.Intrinsic.Math.Sub(v.Local.iRowCount,1,v.Local.iRowCount)
+	f.Intrinsic.Control.For(v.Local.iCount,0,v.Local.iRowCount,1)
+	
+		f.Intrinsic.BDF.ReadRow("InventoryExtStatus-bdf",v.Local.iCount,v.Local.sRow)
+		F.Intrinsic.String.Split(V.Local.sRow,"|~|",V.Local.sPart)
+			
+		F.Intrinsic.Control.If(V.Local.sPart(V.Local.iRevCol).Trim,<>,"")
+			F.Intrinsic.String.RPad(V.Local.sPart(V.Local.iPartCol).Trim," ",17,V.Local.sPartRev)
+			F.Intrinsic.String.Build("{0}{1}",V.Local.sPartRev,V.Local.sPart(V.Local.iPartCol).Trim,V.Local.sPartRev)
+		F.Intrinsic.Control.Else
+			V.Local.sPartRev.Set(V.Local.sPart(V.Local.iPartCol).Trim)
+		F.Intrinsic.Control.EndIf
+		'NEED TO CHECK FOR CUSTOM UOM SELECTED IN UOM MAINT
+		f.Intrinsic.String.Build("Select Top 1 TO_UOM, FACTOR, OPERATOR from GCG_6994_UOM_MAINT where part = '{0}' and UOM = '{1}' and SELECTED = 1",V.Local.sPartRev.Trim,V.Local.sPart(V.Local.iInvUmIndex),v.Local.sSql)
+		f.ODBC.Connection!con.ExecuteAndReturn(v.Local.sSql,v.Local.sRet)
+		
+		f.Intrinsic.String.Split(v.Local.sRet,"*!*",v.Local.sRet)
+		
+		'Set UOM
+		f.Intrinsic.Control.If(v.Local.sRet,<>,"")	
+			v.Local.sPart(38).Set(v.Local.sRet(0))
+			'sPart(16) = Qty On Hand from Inv Ext Status BDF
+			F.Intrinsic.Control.SelectCase(v.Local.sRet(2))
+				F.Intrinsic.Control.Case("*")
+					f.Intrinsic.Math.Mult(v.Local.sPart(16),v.Local.sRet(1),v.Local.fOperationRet)
+				F.Intrinsic.Control.Case("/")
+					f.Intrinsic.Math.Div(v.Local.sPart(16),v.Local.sRet(1),v.Local.fOperationRet)
+				F.Intrinsic.Control.Case("+")
+					f.Intrinsic.Math.Add(v.Local.sPart(16),v.Local.sRet(1),v.Local.fOperationRet)
+				F.Intrinsic.Control.Case("-")
+					f.Intrinsic.Math.Sub(v.Local.sPart(16),v.Local.sRet(1),v.Local.fOperationRet)				
+			F.Intrinsic.Control.EndSelect
+			v.Local.sPart(39).Set(v.Local.fOperationRet)				
+		f.Intrinsic.Control.Else
+			v.Local.sPart(38).Set(V.Local.sPart(V.Local.iInvUmIndex))
+			v.Local.sPart(39).Set(V.Local.sPart(V.Local.iInvQtyIndex).Float)
+		f.Intrinsic.Control.EndIf
+		
+		'Loop through and add new values to string array then write row to BDF
+		f.Intrinsic.Control.For(v.Local.iTemp,1,v.Local.sPart.UBound,1)
+			F.Intrinsic.String.Build("{0}|~|{1}",V.Local.sPart,V.Local.sPart(V.Local.iTemp),V.Local.sPart)
+		f.Intrinsic.Control.Next(v.Local.iTemp)
+		f.Intrinsic.BDF.WriteRow("Load",v.Local.sPart)
+			
+	f.Intrinsic.Control.Next(v.Local.iCount)
+	
+	F.Intrinsic.BDF.Save("Load", "GSS_InvExtendedStatus-GridViewLines-bdf")
+	
+	f.ODBC.Connection!con.Close
+	f.Intrinsic.Control.End
+
+f.Intrinsic.Control.Catch
+	f.Intrinsic.Control.CallSub(ErrorMsg, CurrentSub, v.Ambient.CurrentSubroutine)
+f.Intrinsic.Control.EndTry
+Program.Sub.InvExtStatusAddCol.End
+
+Program.Sub.PurchLinePreSave.Start
+f.Intrinsic.Control.Try
+	v.Local.sPart.Declare
+	v.Local.sLocation.Declare
+	v.Local.sSQL.Declare
+	v.Local.sRet.Declare
+	v.Local.fInvQty.Declare
+	v.Local.fPurchQty.Declare
+	v.Local.fOperationReturn.Declare
+	V.Local.sPUM.Declare
+	V.Local.sINVUM.Declare
+
+	F.ODBC.Connection!con.OpenCompanyConnection(999)
+
+	v.Local.sPart.Set(v.Passed.000008)
+	v.Local.sLocation.Set(v.Passed.000011)
+	v.Local.fPurchQty.Set(v.Passed.000021)
+	V.Local.sINVUM.Set(V.Passed.000023.Trim)
+	V.Local.sPUM.Set(V.Passed.000020.Trim)
+	
+	F.Intrinsic.Control.If(V.Local.sINVUM,<>,V.Local.sPUM)
+		f.Intrinsic.String.Build("Select FACTOR, OPERATOR from GCG_6994_UOM_MAINT where PART = '{0}' and UOM = '{1}' and TO_UOM = '{2}'",v.Local.sPart,V.Local.sPUM,V.Local.sINVUM,v.Local.sSQL)
+		f.ODBC.Connection!con.ExecuteAndReturn(v.Local.sSQL,v.Local.sRet)
+		
+		f.Intrinsic.String.Split(v.Local.sRet,"*!*",v.Local.sRet)
+		
+		'If UOM Conversion is found
+		f.Intrinsic.Control.If(v.Local.sRet(0),<>,"")
+			'Set Override Conversion Flag
+			v.Passed.000063.Set("Y")
+			'Check which operator
+			F.Intrinsic.Control.SelectCase(v.Local.sRet(1))		
+				F.Intrinsic.Control.Case("*")
+					f.Intrinsic.Math.Mult(v.Local.fPurchQty,v.Local.sRet(0),v.Local.fOperationReturn)
+				F.Intrinsic.Control.Case("/")
+					f.Intrinsic.Math.Div(v.Local.fPurchQty,v.Local.sRet(0),v.Local.fOperationReturn)		
+				F.Intrinsic.Control.Case("+")
+					f.Intrinsic.Math.Add(v.Local.fPurchQty,v.Local.sRet(0),v.Local.fOperationReturn)
+				F.Intrinsic.Control.Case("-")
+					f.Intrinsic.Math.Sub(v.Local.fPurchQty,v.Local.sRet(0),v.Local.fOperationReturn)	
+			F.Intrinsic.Control.EndSelect
+			'Set Inventory Qty
+			v.Passed.000021.Set(V.Local.fPurchQty)
+			v.Passed.000024.Set(v.Local.fOperationReturn)
+		f.Intrinsic.Control.EndIf
+	F.Intrinsic.Control.EndIf
+	
+	f.ODBC.Connection!con.Close
+f.Intrinsic.Control.Catch
+	f.Intrinsic.Control.CallSub(ErrorMsg, CurrentSub, v.Ambient.CurrentSubroutine)
+f.Intrinsic.Control.EndTry
+Program.Sub.PurchLinePreSave.End
+
+Program.Sub.Comments.Start
+${$5$}$20.1.8713.32002$}$1
+${$6$}$rking$}$20240124122149582$}$QNdZLVy4bWuiWa9jh1ZTiPY99LydZoBNJ1j0ryYxuhTVpoKYeU7F+P+DBDAU6xJ8Q6AZ6jnRJVk=
+Program.Sub.Comments.End
