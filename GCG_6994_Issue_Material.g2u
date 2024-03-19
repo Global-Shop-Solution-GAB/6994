@@ -1,0 +1,1439 @@
+﻿Program.Sub.ScreenSU.Start
+Gui.Frm_Issue_Material..Create(BaseForm)
+Gui.Frm_Issue_Material..Caption("Custom Issue Material")
+Gui.Frm_Issue_Material..Size(855,630)
+Gui.Frm_Issue_Material..MinX(0)
+Gui.Frm_Issue_Material..MinY(0)
+Gui.Frm_Issue_Material..Position(0,0)
+Gui.Frm_Issue_Material..AlwaysOnTop(False)
+Gui.Frm_Issue_Material..FontName("Tahoma")
+Gui.Frm_Issue_Material..FontSize(8.25)
+Gui.Frm_Issue_Material..ControlBox(True)
+Gui.Frm_Issue_Material..MaxButton(True)
+Gui.Frm_Issue_Material..MinButton(True)
+Gui.Frm_Issue_Material..MousePointer(0)
+Gui.Frm_Issue_Material..Moveable(True)
+Gui.Frm_Issue_Material..Sizeable(True)
+Gui.Frm_Issue_Material..ShowInTaskBar(True)
+Gui.Frm_Issue_Material..TitleBar(True)
+Gui.Frm_Issue_Material..Event(UnLoad,Frm_Issue_Material_UnLoad)
+Gui.Frm_Issue_Material.lbl1.Create(Label,"Work Order",True,56,13,0,3,19,True,0,"Tahoma",8.25,,0,0)
+Gui.Frm_Issue_Material.lbl1.BorderStyle(0)
+Gui.Frm_Issue_Material.lbl2.Create(Label,"Suffix",True,28,13,0,27,46,True,0,"Tahoma",8.25,,0,0)
+Gui.Frm_Issue_Material.lbl2.BorderStyle(0)
+Gui.Frm_Issue_Material.lbl3.Create(Label,"Sequence",False,47,13,0,6,570,True,0,"Tahoma",8.25,,0,0)
+Gui.Frm_Issue_Material.lbl3.BorderStyle(0)
+Gui.Frm_Issue_Material.txt_Work_Order.Create(TextBox,"",True,122,20,0,64,17,True,0,"Tahoma",8.25,,1)
+Gui.Frm_Issue_Material.txt_Work_Order.Event(GotFocus,txt_Work_Order_GotFocus)
+Gui.Frm_Issue_Material.txt_Work_Order.MaxLength(6)
+Gui.Frm_Issue_Material.txt_Suffix.Create(TextBox,"",True,122,20,0,64,44,True,0,"Tahoma",8.25,,1)
+Gui.Frm_Issue_Material.txt_Suffix.Event(LostFocus,txt_Suffix_LostFocus)
+Gui.Frm_Issue_Material.txt_Suffix.Event(GotFocus,txt_Suffix_GotFocus)
+Gui.Frm_Issue_Material.txt_Suffix.MaxLength(3)
+Gui.Frm_Issue_Material.txt_Sequence.Create(TextBox,"",False,164,20,0,69,568,True,0,"Tahoma",8.25,,1)
+Gui.Frm_Issue_Material.txt_Sequence.Locked(True)
+Gui.Frm_Issue_Material.lbl4.Create(Label,"Part Made",True,49,13,0,6,73,True,0,"Tahoma",8.25,,0,0)
+Gui.Frm_Issue_Material.lbl4.BorderStyle(0)
+Gui.Frm_Issue_Material.txt_Part_Made.Create(TextBox,"",True,122,20,0,64,71,True,0,"Tahoma",8.25,,1)
+Gui.Frm_Issue_Material.txt_Part_Made.ForeColor(-2147483647)
+Gui.Frm_Issue_Material.txt_Part_Made.Locked(True)
+Gui.Frm_Issue_Material.lbl5.Create(Label,"Part Issued",False,55,13,0,242,571,True,0,"Tahoma",8.25,,0,0)
+Gui.Frm_Issue_Material.lbl5.BorderStyle(0)
+Gui.Frm_Issue_Material.txt_Part_Issued.Create(TextBox,"",False,169,20,0,308,569,True,0,"Tahoma",8.25,,1)
+Gui.Frm_Issue_Material.txt_Part_Issued.Locked(True)
+Gui.Frm_Issue_Material.txt_Qty_Remain_UOM.Create(TextBox,"",False,169,20,0,635,569,True,0,"Tahoma",8.25,,1)
+Gui.Frm_Issue_Material.txt_Qty_Remain_UOM.Locked(True)
+Gui.Frm_Issue_Material.lbl6.Create(Label,"Qty Remaining + UOM",False,107,13,0,520,571,True,0,"Tahoma",8.25,,0,0)
+Gui.Frm_Issue_Material.lbl6.BorderStyle(0)
+Gui.Frm_Issue_Material.lbl7.Create(Label,"Issue UOM",True,52,13,0,745,20,True,0,"Tahoma",8.25,,0,0)
+Gui.Frm_Issue_Material.lbl7.BorderStyle(0)
+Gui.Frm_Issue_Material.lbl7.Anchor(9)
+Gui.Frm_Issue_Material.cbo_Issue_Material.Create(ComboBox)
+Gui.Frm_Issue_Material.cbo_Issue_Material.Enabled(True)
+Gui.Frm_Issue_Material.cbo_Issue_Material.Visible(True)
+Gui.Frm_Issue_Material.cbo_Issue_Material.Zorder(0)
+Gui.Frm_Issue_Material.cbo_Issue_Material.Size(52,20)
+Gui.Frm_Issue_Material.cbo_Issue_Material.Position(800,17)
+Gui.Frm_Issue_Material.cbo_Issue_Material.FontName("Tahoma")
+Gui.Frm_Issue_Material.cbo_Issue_Material.FontSize(8.25)
+Gui.Frm_Issue_Material.cbo_Issue_Material.Event(Change,cbo_Issue_Material_Change)
+Gui.Frm_Issue_Material.cbo_Issue_Material.Anchor(9)
+Gui.Frm_Issue_Material.lbl8.Create(Label,"RTS UOM",False,45,13,0,692,571,True,0,"Tahoma",8.25,,0,0)
+Gui.Frm_Issue_Material.lbl8.BorderStyle(0)
+Gui.Frm_Issue_Material.lbl9.Create(Label,"Lot/Bin Selection",True,79,13,0,4,108,True,0,"Tahoma",8.25,,0,0)
+Gui.Frm_Issue_Material.lbl9.BorderStyle(0)
+Gui.Frm_Issue_Material.GsGc_LotBin.Create(GsGridControl)
+Gui.Frm_Issue_Material.GsGc_LotBin.Enabled(True)
+Gui.Frm_Issue_Material.GsGc_LotBin.Visible(True)
+Gui.Frm_Issue_Material.GsGc_LotBin.Zorder(0)
+Gui.Frm_Issue_Material.GsGc_LotBin.Size(851,215)
+Gui.Frm_Issue_Material.GsGc_LotBin.Position(1,123)
+Gui.Frm_Issue_Material.GsGc_LotBin.Dock(0)
+Gui.Frm_Issue_Material.GsGc_LotBin.Anchor(15)
+Gui.Frm_Issue_Material.GsGc_LotBin.Event(CellValueChanged,GsGc_LotBin_CellValueChanged)
+Gui.Frm_Issue_Material.lbl10.Create(Label,"Drop Material Entry",True,93,13,0,3,349,True,0,"Tahoma",8.25,,0,0)
+Gui.Frm_Issue_Material.lbl10.BorderStyle(0)
+Gui.Frm_Issue_Material.GsGcDropMaterial.Create(GsGridControl)
+Gui.Frm_Issue_Material.GsGcDropMaterial.Enabled(True)
+Gui.Frm_Issue_Material.GsGcDropMaterial.Visible(True)
+Gui.Frm_Issue_Material.GsGcDropMaterial.Zorder(0)
+Gui.Frm_Issue_Material.GsGcDropMaterial.Size(851,197)
+Gui.Frm_Issue_Material.GsGcDropMaterial.Position(1,368)
+Gui.Frm_Issue_Material.GsGcDropMaterial.Anchor(15)
+Gui.Frm_Issue_Material.GsGcDropMaterial.Event(CellValueChanged,GsGcDropMaterial_CellValueChanged)
+Gui.Frm_Issue_Material.cmd_Work_Order.Create(Button)
+Gui.Frm_Issue_Material.cmd_Work_Order.Enabled(True)
+Gui.Frm_Issue_Material.cmd_Work_Order.Visible(True)
+Gui.Frm_Issue_Material.cmd_Work_Order.Zorder(0)
+Gui.Frm_Issue_Material.cmd_Work_Order.Size(24,20)
+Gui.Frm_Issue_Material.cmd_Work_Order.Position(190,17)
+Gui.Frm_Issue_Material.cmd_Work_Order.Caption("^")
+Gui.Frm_Issue_Material.cmd_Work_Order.FontName("Tahoma")
+Gui.Frm_Issue_Material.cmd_Work_Order.FontSize(7.8)
+Gui.Frm_Issue_Material.cmd_Work_Order.Event(Click,cmd_Work_Order_Click)
+Gui.Frm_Issue_Material.cbo_RTS_UOM.Create(ComboBox)
+Gui.Frm_Issue_Material.cbo_RTS_UOM.Enabled(True)
+Gui.Frm_Issue_Material.cbo_RTS_UOM.Visible(False)
+Gui.Frm_Issue_Material.cbo_RTS_UOM.Zorder(0)
+Gui.Frm_Issue_Material.cbo_RTS_UOM.Size(100,20)
+Gui.Frm_Issue_Material.cbo_RTS_UOM.Position(750,570)
+Gui.Frm_Issue_Material.cbo_RTS_UOM.FontName("Tahoma")
+Gui.Frm_Issue_Material.cbo_RTS_UOM.FontSize(8.25)
+Gui.Frm_Issue_Material.cbo_RTS_UOM.Event(Change,cbo_RTS_UOM_Change)
+Gui.Frm_Issue_Material.cmd_Issue_Material.Create(Button)
+Gui.Frm_Issue_Material.cmd_Issue_Material.Enabled(True)
+Gui.Frm_Issue_Material.cmd_Issue_Material.Visible(True)
+Gui.Frm_Issue_Material.cmd_Issue_Material.Zorder(0)
+Gui.Frm_Issue_Material.cmd_Issue_Material.Size(75,23)
+Gui.Frm_Issue_Material.cmd_Issue_Material.Position(777,67)
+Gui.Frm_Issue_Material.cmd_Issue_Material.Caption("Issue Material")
+Gui.Frm_Issue_Material.cmd_Issue_Material.FontName("Tahoma")
+Gui.Frm_Issue_Material.cmd_Issue_Material.FontSize(8.25)
+Gui.Frm_Issue_Material.cmd_Issue_Material.Event(Click,cmd_Issue_Material_Click)
+Gui.Frm_Issue_Material.cmd_Issue_Material.Anchor(9)
+Gui.Frm_Issue_Material.cmd_Drop_Material.Create(Button)
+Gui.Frm_Issue_Material.cmd_Drop_Material.Enabled(True)
+Gui.Frm_Issue_Material.cmd_Drop_Material.Visible(True)
+Gui.Frm_Issue_Material.cmd_Drop_Material.Zorder(0)
+Gui.Frm_Issue_Material.cmd_Drop_Material.Size(107,23)
+Gui.Frm_Issue_Material.cmd_Drop_Material.Position(745,95)
+Gui.Frm_Issue_Material.cmd_Drop_Material.Caption("Return Drop Material")
+Gui.Frm_Issue_Material.cmd_Drop_Material.FontName("Tahoma")
+Gui.Frm_Issue_Material.cmd_Drop_Material.FontSize(8.25)
+Gui.Frm_Issue_Material.cmd_Drop_Material.Event(Click,cmd_Drop_Material_Click)
+Gui.Frm_Issue_Material.cmd_Drop_Material.Anchor(9)
+Gui.Frm_Issue_Material.cmdClear.Create(Button)
+Gui.Frm_Issue_Material.cmdClear.Enabled(True)
+Gui.Frm_Issue_Material.cmdClear.Visible(True)
+Gui.Frm_Issue_Material.cmdClear.Zorder(0)
+Gui.Frm_Issue_Material.cmdClear.Size(58,23)
+Gui.Frm_Issue_Material.cmdClear.Position(794,40)
+Gui.Frm_Issue_Material.cmdClear.Caption("Clear")
+Gui.Frm_Issue_Material.cmdClear.FontName("Tahoma")
+Gui.Frm_Issue_Material.cmdClear.FontSize(8.25)
+Gui.Frm_Issue_Material.cmdClear.Event(Click,cmdClear_Click)
+Gui.Frm_Issue_Material.cmdClear.Anchor(9)
+Gui.Frm_Issue_Material.cmd_ISS_PART.Create(Button)
+Gui.Frm_Issue_Material.cmd_ISS_PART.Enabled(True)
+Gui.Frm_Issue_Material.cmd_ISS_PART.Visible(False)
+Gui.Frm_Issue_Material.cmd_ISS_PART.Zorder(0)
+Gui.Frm_Issue_Material.cmd_ISS_PART.Size(24,20)
+Gui.Frm_Issue_Material.cmd_ISS_PART.Position(485,569)
+Gui.Frm_Issue_Material.cmd_ISS_PART.Caption("^")
+Gui.Frm_Issue_Material.cmd_ISS_PART.FontName("Tahoma")
+Gui.Frm_Issue_Material.cmd_ISS_PART.FontSize(7.8)
+Gui.Frm_Issue_Material.cmd_ISS_PART.Event(Click,cmd_ISS_PART_Click)
+Gui.Frm_Issue_Material.GsGridControl1.Create(GsGridControl)
+Gui.Frm_Issue_Material.GsGridControl1.Enabled(True)
+Gui.Frm_Issue_Material.GsGridControl1.Visible(True)
+Gui.Frm_Issue_Material.GsGridControl1.Zorder(0)
+Gui.Frm_Issue_Material.GsGridControl1.Size(523,103)
+Gui.Frm_Issue_Material.GsGridControl1.Position(218,16)
+Gui.Frm_Issue_Material.GsGridControl1.Anchor(13)
+Gui.Frm_Issue_Material.GsGridControl1.Event(RowCellClick,GsGridControl1_RowCellClick)
+Gui.Frm_Issue_Material.lookup_Work_Order.Create(Lookup)
+Gui.Frm_Issue_Material.lookup_Work_Order.Enabled(True)
+Gui.Frm_Issue_Material.lookup_Work_Order.PopulateMode(4)
+Gui.Frm_Issue_Material.lookup_Work_Order.Title("GSS Lookup")
+Gui.Frm_Issue_Material.lookup_Work_Order.StringBasis("")
+Gui.Frm_Issue_Material.lookup_Work_Order.FileBasis("")
+Gui.Frm_Issue_Material.lookup_Work_Order.ColumnDelim("")
+Gui.Frm_Issue_Material.lookup_Work_Order.RowDelim("")
+Gui.Frm_Issue_Material.lookup_Work_Order.PreferredStyle(0)
+Gui.Frm_Issue_Material.lookup_Work_Order.Event(SelectionMade,lookup_Work_Order_SelectionMade)
+Gui.Frm_Issue_Material.lookup_Part.Create(Lookup)
+Gui.Frm_Issue_Material.lookup_Part.Enabled(True)
+Gui.Frm_Issue_Material.lookup_Part.PopulateMode(4)
+Gui.Frm_Issue_Material.lookup_Part.Title("GSS Lookup")
+Gui.Frm_Issue_Material.lookup_Part.StringBasis("")
+Gui.Frm_Issue_Material.lookup_Part.FileBasis("")
+Gui.Frm_Issue_Material.lookup_Part.ColumnDelim("")
+Gui.Frm_Issue_Material.lookup_Part.RowDelim("")
+Gui.Frm_Issue_Material.lookup_Part.PreferredStyle(0)
+Gui.Frm_Issue_Material.lookup_Part.Event(SelectionMade,lookup_Part_SelectionMade)
+Program.Sub.ScreenSU.End
+
+Program.Sub.Preflight.Start
+v.Global.sFileLocation.Declare
+V.Global.iIndex.Declare
+Program.External.Include.Library("450100.lib")
+Program.Sub.Preflight.End
+
+Program.Sub.Main.Start
+f.Intrinsic.Control.Try
+	Function.Intrinsic.UI.UsePixels ' Allows you to use Pixels instead of Twips throughout
+	v.Local.sJob.Declare
+	v.Local.sCustomPath.Declare
+	V.Local.bRet.Declare
+
+	F.ODBC.Connection!con.OpenCompanyConnection(999)
+	f.Intrinsic.Control.CallSub(CreateDir)
+	
+	F.Intrinsic.Control.SelectCase(V.caller.Hook)
+		'Issue Material Entry Hook
+		F.Intrinsic.Control.Case("28800")
+			'Check if I need to use a passed Job/Suffix/Sequence
+			f.Intrinsic.String.Build("{0}\CUSTOM\6994\{1}Job.txt",v.Caller.GlobalDir,V.Caller.Terminal,v.Local.sCustomPath)
+			f.Intrinsic.File.Exists(v.Local.sCustomPath,v.Local.bRet)
+			F.Intrinsic.Control.If(V.Local.bRet)
+				f.Intrinsic.File.File2String(v.Local.sCustomPath,v.Local.sJob)
+				f.Intrinsic.String.Split(v.Local.sJob,"*!*",v.Local.sJob)
+				f.Intrinsic.Control.CallSub(ResetTextFile)
+'				F.Intrinsic.Control.If(V.Local.sJob.Trim,<>,"")
+''					F.Global.Security.IsInGroup(V.Local.sJob.Trim,"CISSUE",V.Caller.CompanyCode,V.Local.bRet)
+''					F.Intrinsic.Control.If(V.Local.bRet,=,False)
+''						'ending program user not in Custom Issue Material Screen Group
+''						F.Intrinsic.Control.End
+''					F.Intrinsic.Control.EndIf
+'				F.Intrinsic.Control.Else
+'					F.Global.Security.IsInGroup(V.Caller.User,"CISSUE",V.Caller.CompanyCode,V.Local.bRet)
+'					F.Intrinsic.Control.If(V.Local.bRet,=,False)
+'						'ending program user not in Custom Issue Material Screen Group
+'						F.Intrinsic.Control.End
+'					F.Intrinsic.Control.EndIf
+'				F.Intrinsic.Control.EndIf
+'			F.Intrinsic.Control.Else
+'				F.Global.Security.IsInGroup(V.Caller.User,"CISSUE",V.Caller.CompanyCode,V.Local.bRet)
+'				F.Intrinsic.Control.If(V.Local.bRet,=,False)
+'					'ending program user not in Custom Issue Material Screen Group
+'					F.Intrinsic.Control.End
+'				F.Intrinsic.Control.EndIf
+			F.Intrinsic.Control.EndIf
+			
+			f.Intrinsic.Control.CallSub(IssueMaterialEntry)
+			f.Intrinsic.Control.CallSub(LoadWorkOrderLookup)
+			f.Intrinsic.Control.CallSub(LoadEmptyGrid)
+
+			gui.Frm_Issue_Material..Show()
+			
+			f.Intrinsic.Control.If(v.Local.sJob(0),<>,"")
+				Gui.Frm_Issue_Material..Enabled(False)
+				f.Intrinsic.Control.CallSub(LoadPassedJob,"Job",v.Local.sJob(1),"Suffix",v.Local.sJob(2),"Sequence",v.Local.sJob(3))
+				Gui.Frm_Issue_Material..Enabled(True)
+			f.Intrinsic.Control.EndIf
+			
+		'SFDC.NET Pre Issue Material Hook
+		F.Intrinsic.Control.Case("50708")
+'			F.Global.Security.IsInGroup(V.Caller.User,"CISSUE",V.Caller.CompanyCode,V.Local.bRet)
+'			F.Intrinsic.Control.If(V.Local.bRet,=,False)
+'				'ending program user not in Custom Issue Material Screen Group
+'				F.Intrinsic.Control.End
+'			F.Intrinsic.Control.EndIf
+			f.Intrinsic.Control.CallSub(SFDCPreIssueMaterial)
+		
+		F.Intrinsic.Control.CaseElse
+'			F.Intrinsic.Control.End
+			
+	F.Intrinsic.Control.EndSelect
+
+	'Testing Purposes
+'	f.Intrinsic.Control.CallSub(LoadWorkOrderLookup)
+'	f.Intrinsic.Control.CallSub(LoadEmptyGrid)
+'	gui.Frm_Issue_Material..Show()
+'	
+f.Intrinsic.Control.Catch
+	f.Intrinsic.Control.CallSub(ErrorMsg, CurrentSub, v.Ambient.CurrentSubroutine)
+f.Intrinsic.Control.EndTry
+Program.Sub.Main.End
+
+Program.Sub.ErrorMsg.Start
+v.Local.sError.Declare
+f.Intrinsic.String.Build("Project GCG_6994_Issue_Material.g2u {0}{0}Subroutine: {1}{0}Error: {2} with Description: {3}", v.Ambient.NewLine, v.Args.CurrentSub, v.Ambient.ErrorNumber, v.Ambient.ErrorDescription, v.Local.sError)
+f.Intrinsic.UI.Msgbox(v.Local.sError)
+f.ODBC.Connection!con.Close
+f.Intrinsic.Control.End
+Program.Sub.ErrorMsg.End
+
+Program.Sub.lookup_Work_Order_SelectionMade.Start
+v.Local.sRet.Declare
+v.Local.sSQL.Declare
+v.Local.sInvUM.Declare
+V.Local.sLoc.Declare
+f.Intrinsic.Control.Try
+	
+	gui.Frm_Issue_Material.txt_Work_Order.Text(v.DataTable.LOOKUP_WORK_ORDER_RESULT(0).JOB!FIELDVALTRIM)
+	gui.Frm_Issue_Material.txt_Suffix.Text(v.DataTable.LOOKUP_WORK_ORDER_RESULT(0).SUFFIX!FIELDVALTRIM)
+	
+	Gui.Frm_Issue_Material.txt_Part_Made.Text(v.DataTable.LOOKUP_WORK_ORDER_RESULT(0).Part!FIELDVALTRIM)
+	
+	f.Intrinsic.String.Build("select B.Seq, B.Part, A.Location, B.Description, B.Hours_Estimated-B.Hours_Actual as Qty, B.UM, '' as ISS_UM from JOB_HEADER A JOIN JOB_OPERATIONS B on A.JOB = B.JOB and A.SUFFIX = B.SUFFIX where A.JOB = '{0}' and A.SUFFIX = '{1}' and LMO = 'M' order by B.Seq",v.DataTable.LOOKUP_WORK_ORDER_RESULT(0).JOB!FIELDVALTRIM,v.DataTable.LOOKUP_WORK_ORDER_RESULT(0).SUFFIX!FIELDVALTRIM,v.Local.sSQL)
+
+	F.Data.DataTable.CreateFromSQL("dtJobTemp",con,V.Local.sSQL,True)
+	F.Data.DataTable.DeleteRow("dtJob")
+	F.Data.DataTable.AcceptChanges("dtJob")
+	F.Data.DataTable.Merge("dtJobTemp","dtJob",False,2)
+	F.Data.DataTable.Close("dtJobTemp")
+	
+	f.Intrinsic.String.Build("select Location from JOB_HEADER where JOB = '{0}' and SUFFIX = '{1}'",v.DataTable.LOOKUP_WORK_ORDER_RESULT(0).JOB!FIELDVALTRIM,v.DataTable.LOOKUP_WORK_ORDER_RESULT(0).SUFFIX!FIELDVALTRIM,v.Local.sSQL)
+	
+	f.ODBC.Connection!con.ExecuteAndReturn(v.Local.sSQL,v.Local.sLoc)
+	
+	'GRAB INV UM
+	f.Intrinsic.String.Build("select Top 1 UM_INVENTORY from INVENTORY_MSTR where PART = '{0}'",v.DataTable.LOOKUP_WORK_ORDER_RESULT(0).Part!FIELDVALTRIM,v.Local.sSQL)
+	
+	f.ODBC.Connection!con.ExecuteAndReturn(v.Local.sSQL,v.Local.sRet)
+	v.Local.sInvUM.Set(v.Local.sRet)
+	
+	F.Intrinsic.Control.If(V.DataTable.dtInv.Exists)
+		F.Data.DataTable.Close("dtInv")
+	F.Intrinsic.Control.EndIf
+	
+	F.Intrinsic.String.Build("select PART, DESCRIPTION, LOCATION, UM_INVENTORY as UM from INVENTORY_MSTR where Location = '{0}' and UM_INVENTORY = '{1}' and Qty_OnHand > 0 order by Part",V.Local.sLoc,V.Local.sInvUM,V.Local.sSQL)
+	F.Data.DataTable.CreateFromSQL("dtInv","con",V.Local.sSQL,True)
+	gui.Frm_Issue_Material.lookup_Part.DataTableBasis("dtInv")
+	
+f.Intrinsic.Control.Catch
+	f.Intrinsic.Control.CallSub(ErrorMsg, CurrentSub, v.Ambient.CurrentSubroutine)
+f.Intrinsic.Control.EndTry
+Program.Sub.lookup_Work_Order_SelectionMade.End
+
+Program.Sub.cmd_Work_Order_Click.Start
+gui.Frm_Issue_Material.lookup_Work_Order.Show()
+Program.Sub.cmd_Work_Order_Click.End
+
+Program.Sub.LoadWorkOrderLookup.Start
+f.Intrinsic.Control.Try
+	
+	F.Intrinsic.Control.If(V.DataTable.dtWorkOrderLookup.Exists)
+		F.Data.DataTable.Close(dtWorkOrderLookup)
+	F.Intrinsic.Control.EndIf
+	F.Data.DataTable.CreateFromSQL("dtWorkOrderLookup","con","Select Job, Suffix, Part, Description from JOB_HEADER Order by Job,Suffix",True)
+	gui.Frm_Issue_Material.lookup_Work_Order.DataTableBasis("dtWorkOrderLookup")
+	
+f.Intrinsic.Control.Catch
+	f.Intrinsic.Control.CallSub(ErrorMsg, CurrentSub, v.Ambient.CurrentSubroutine)
+f.Intrinsic.Control.EndTry
+Program.Sub.LoadWorkOrderLookup.End
+
+Program.Sub.Frm_Issue_Material_UnLoad.Start
+f.Intrinsic.Control.CallSub(serialize)
+f.ODBC.Connection!con.Close
+f.Intrinsic.Control.End
+Program.Sub.Frm_Issue_Material_UnLoad.End
+
+Program.Sub.IssueMaterialEntry.Start
+f.Intrinsic.Control.Try
+	
+	'Set Override flag
+	V.Passed.777777.Set("1")
+	
+f.Intrinsic.Control.Catch
+	f.Intrinsic.Control.CallSub(ErrorMsg, CurrentSub, v.Ambient.CurrentSubroutine)
+f.Intrinsic.Control.EndTry
+Program.Sub.IssueMaterialEntry.End
+
+Program.Sub.SFDCPreIssueMaterial.Start
+v.Local.sRet.Declare
+v.Local.sSQL.Declare
+v.Local.sInvUM.Declare
+v.Local.sCustomPath.Declare
+v.Local.sJobInfo.Declare
+f.Intrinsic.Control.Try
+
+	'Pass Job information to grab when screen loads
+	f.Intrinsic.String.Build("{0}\CUSTOM\6994\{1}Job.txt",v.Caller.GlobalDir,V.Caller.Terminal,v.Local.sCustomPath)
+	f.Intrinsic.String.Build("{0}*!*{1}*!*{2}*!*{3}",V.Caller.User,v.Passed.Job.String,v.Passed.Job-Suffix.String,v.Passed.Job-Seq.String,v.Local.sJobInfo)
+	f.Intrinsic.File.String2File(v.Local.sCustomPath,v.Local.sJobInfo)
+	
+f.Intrinsic.Control.Catch
+	f.Intrinsic.Control.CallSub(ErrorMsg, CurrentSub, v.Ambient.CurrentSubroutine)
+f.Intrinsic.Control.EndTry
+Program.Sub.SFDCPreIssueMaterial.End
+
+Program.Sub.LoadLotBinGrid.Start
+v.Local.sSQL.Declare
+v.Local.sPart.Declare
+v.Local.sPartTrim.Declare
+v.Local.sOpFactor.Declare
+v.Local.fQtytoApply.Declare
+v.Local.sFromUM.Declare
+v.Local.fConversion.Declare
+v.local.fConvertedQty.Declare
+v.Local.iC.Declare
+v.Local.iRet.Declare
+V.Local.sInvUM.Declare
+V.Local.sLoc.Declare
+
+f.Intrinsic.Control.Try
+	
+	gui.Frm_Issue_Material.GsGc_LotBin.InvokeWait("Loading...","Custom Issue Material [6994]")
+
+	F.Data.DataTable.DeleteRow("dtLotBin")
+	F.Data.DataTable.AcceptChanges("dtLotBin")
+
+	F.Intrinsic.String.Build("select Location from JOB_HEADER Where Job = '{0}' and Suffix = '{1}'",V.Screen.Frm_Issue_Material!txt_Work_Order.Text,V.Screen.Frm_Issue_Material!txt_Suffix.Text,V.Local.sSQL)
+	F.ODBC.Connection!con.ExecuteAndReturn(V.Local.sSQL,V.Local.sLoc)
+	
+	v.Local.sPart.Set(v.Screen.Frm_Issue_Material!txt_Part_Issued.Text)
+	f.Intrinsic.String.Build("Select A.Location, A.Lot, A.Bin, A.Heat, A.Serial_Number, B.UM_INVENTORY, A.Quantity from ITEM_MASTER A left join V_INVENTORY_MSTR B on A.PART = B.PART where A.PART = '{0}' and A.Quantity > 0 and A.Location = '{1}'",v.Local.sPart.RTrim,V.Local.sLoc,v.Local.sSQL)
+	f.Data.DataTable.CreateFromSQL("dtLotBinTemp","con",v.Local.sSQL,true)
+	
+	f.Intrinsic.String.Build("Select Top 1 UM_INVENTORY From V_INVENTORY_MSTR Where PART = '{0}' and Location = '{1}'",v.Local.sPart.RTrim,V.Local.sLoc,v.Local.sSQL)
+	F.ODBC.Connection!Con.ExecuteAndReturn(V.Local.sSQL,V.Local.sInvUM)
+	
+	V.Local.sInvUM.Set(V.Local.sInvUM.Trim)
+	f.Data.DataTable.AddColumn("dtLotBinTemp","Qty_to_Issue","Float")
+	f.Data.DataTable.AddColumn("dtLotBinTemp","Converted_Issue_Qty","Float")
+	
+	v.Local.sPartTrim.Set(v.Screen.Frm_Issue_Material!txt_Part_Issued.Text)	
+	F.Intrinsic.Control.If(V.Local.sInvUM,<>,v.Screen.Frm_Issue_Material!cbo_Issue_Material.Value)
+		f.Intrinsic.String.Build("Select Factor, Operator from GCG_6994_UOM_MAINT where PART = '{0}' and UOM = '{1}' and TO_UOM = '{2}'",v.Local.sPartTrim.RTrim,V.Local.sInvUM,v.Screen.Frm_Issue_Material!cbo_Issue_Material.Value,v.Local.sSQL)
+		f.ODBC.Connection!con.ExecuteAndReturn(v.Local.sSQL,v.Local.sOpFactor)
+		f.Intrinsic.String.Split(v.Local.sOpFactor,"*!*",v.Local.sOpFactor)
+	F.Intrinsic.Control.Else
+		V.Local.sOpFactor.Redim(0,1)
+		V.Local.sOpFactor.Set("1")
+		V.Local.sOpFactor(1).Set("*")
+	F.Intrinsic.Control.EndIf
+
+	f.Intrinsic.Control.For(v.Local.iC,0,v.DataTable.dtLotBinTemp.RowCount--,1)
+	
+		v.Local.sFromUM.Set(v.DataTable.dtLotBinTemp.UM_INVENTORY(v.Local.iC)!FIELDVALTRIM)
+		v.Local.fQtytoApply.Set(v.DataTable.dtLotBinTemp.QUANTITY(v.Local.iC)!FIELDVALTRIM)
+		
+		'Check if custom UOM is found
+		f.Intrinsic.Control.If(v.Local.sOpFactor(0),=,"")
+		
+			f.Intrinsic.String.Build("Select Conversion from UM_CONVERSION where FROM_UM = '{0}' and TO_UM = '{1}'",v.Local.sFromUM,v.Screen.Frm_Issue_Material!cbo_Issue_Material.Value,v.Local.sSQL)
+			f.ODBC.Connection!con.ExecuteAndReturn(v.Local.sSQL,v.Local.fConversion)
+			
+			f.Intrinsic.Control.If(v.Local.fConversion,=,0)
+				f.Intrinsic.UI.Msgbox("Invalid UOM selected. Please select a valid Custom or Global UOM conversion.","Custom Issue Material [6994]",0,v.Local.iRet)
+				f.Intrinsic.Control.GoTo("InvalidLabel")
+			f.Intrinsic.Control.EndIf
+			
+			f.Intrinsic.Math.Mult(v.Local.fQtytoApply,v.Local.fConversion,v.Local.fConvertedQty)
+
+			f.Data.DataTable.SetValue("dtLotBinTemp",v.Local.iC,"Quantity",v.Local.fConvertedQty)
+		
+		f.Intrinsic.Control.EndIf
+		
+		f.Intrinsic.Control.SelectCase(v.Local.sOpFactor(1))
+			f.Intrinsic.Control.Case("*")
+				f.Intrinsic.Math.Mult(v.Local.fQtytoApply,v.Local.sOpFactor(0),v.Local.fConvertedQty)
+				f.Data.DataTable.SetValue("dtLotBinTemp",v.Local.iC,"Quantity",v.Local.fConvertedQty)
+			f.Intrinsic.Control.Case("/")
+				f.Intrinsic.Math.Div(v.Local.fQtytoApply,v.Local.sOpFactor(0),v.Local.fConvertedQty)
+				f.Data.DataTable.SetValue("dtLotBinTemp",v.Local.iC,"Quantity",v.Local.fConvertedQty)
+			f.Intrinsic.Control.Case("+")
+				f.Intrinsic.Math.Add(v.Local.fQtytoApply,v.Local.sOpFactor(0),v.Local.fConvertedQty)
+				f.Data.DataTable.SetValue("dtLotBinTemp",v.Local.iC,"Quantity",v.Local.fConvertedQty)
+			f.Intrinsic.Control.Case("-")
+				f.Intrinsic.Math.Sub(v.Local.fQtytoApply,v.Local.sOpFactor(0),v.Local.fConvertedQty)
+				f.Data.DataTable.SetValue("dtLotBinTemp",v.Local.iC,"Quantity",v.Local.fConvertedQty)
+		f.Intrinsic.Control.EndSelect
+	
+	
+	f.Intrinsic.Control.Next(v.Local.iC)
+	
+	f.Intrinsic.Control.Label("Skip")
+	
+	f.Intrinsic.Control.Label("InvalidLabel")
+	
+	F.Data.DataTable.Merge("dtLotBinTemp","dtLotBin",False,2)
+	F.Data.DataTable.Close("dtLotBinTemp")
+	
+	gui.Frm_Issue_Material.GsGc_LotBin.HideWait
+	
+f.Intrinsic.Control.Catch
+	f.Intrinsic.Control.CallSub(ErrorMsg, CurrentSub, v.Ambient.CurrentSubroutine)
+f.Intrinsic.Control.EndTry
+Program.Sub.LoadLotBinGrid.End
+
+Program.Sub.LoadDropMaterialGrid.Start
+v.Local.sFromUM.Declare
+v.Local.sPart.Declare
+v.Local.sSQL.Declare
+v.Local.sOpFactor1.Declare
+v.Local.sOpFactor2.Declare
+v.Local.iC.Declare
+v.Local.fQtytoApply.Declare
+v.Local.fConversion.Declare
+v.Local.fConvertedQty.Declare
+v.Local.iRet.Declare
+V.Local.sJob.Declare
+V.Local.sSuffix.Declare
+V.Local.sSeq.Declare
+
+f.Intrinsic.Control.Try
+	
+	gui.Frm_Issue_Material.GsGcDropMaterial.InvokeWait("Loading...","Custom Issue Material [6994]")
+
+	V.Local.sJob.Set(V.Screen.Frm_Issue_Material!txt_Work_Order.Text)
+	V.Local.sSuffix.Set(V.Screen.Frm_Issue_Material!txt_Suffix.Text)
+	V.Local.sSeq.Set(V.Screen.Frm_Issue_Material!txt_Sequence.Text)
+	
+'	v.Local.sPart.Set(v.Screen.Frm_Issue_Material!txt_Part_Issued.Text)
+'	f.Intrinsic.String.Build("Select Top 1 UM_INVENTORY from V_INVENTORY_MSTR where PART = '{0}'",v.Local.sPart.Trim,v.Local.sSQL)
+'	f.ODBC.Connection!con.ExecuteAndReturn(v.Local.sSQL,v.Local.sFromUM)
+
+'	F.Intrinsic.String.Build("Select Top 1 Factor, Operator From GCG_6994_UOM_MAINT Where Part = '{0}' and UOM = '{2}' and TO_UOM = '{1}'",V.Local.sPart.Trim,"LB",V.Local.sFromUM.Trim,V.Local.sSQL)
+'	f.ODBC.Connection!con.ExecuteAndReturn(v.Local.sSQL,v.Local.sOpFactor1)
+'	
+'	F.Intrinsic.String.Split(V.Local.sOpFactor1,"*!*",V.Local.sOpFactor1)
+'	
+'	F.Intrinsic.String.Build("Select Top 1 Factor, Operator From GCG_6994_UOM_MAINT Where Part = '{0}' and UOM = '{1}' and TO_UOM = '{2}'",V.Local.sPart.Trim,"LB",V.Local.sFromUM.Trim,V.Local.sSQL)
+'	f.ODBC.Connection!con.ExecuteAndReturn(v.Local.sSQL,v.Local.sOpFactor2)
+'	
+'	F.Intrinsic.String.Split(V.Local.sOpFactor2,"*!*",V.Local.sOpFactor2)
+	
+	F.Intrinsic.String.Build("Select Part, Location, Lot, Max(Bin) as Bin,'DROP' as To_Bin, Heat, Serial_Number, Sum(-1*Quantity) as Qty_Issued, MAX(COST) as Cost From V_Item_History Where Code_Transaction = 'J55' and Reversed <> 'R' and Job = '{0}' and Suffix = '{1}' and Sequence = '{2}' Group by Part, Location, Lot, Heat, Serial_Number Having Sum(-1*Quantity) > 0",V.Local.sJob.Trim,V.Local.sSuffix.Trim,V.Local.sSeq,V.Local.sSQL)
+	f.Intrinsic.Control.If(v.DataTable.dtDropMaterial.Exists)
+		f.Data.Datatable.Close("dtDropMaterial")
+	f.Intrinsic.Control.EndIf
+	f.Data.DataTable.CreateFromSQL("dtDropMaterial","con",v.Local.sSQL,True)
+	f.Data.DataTable.AddColumn("dtDropMaterial","UM_INVENTORY","String",V.Local.sFromUM.Trim)
+	f.Data.DataTable.AddColumn("dtDropMaterial","Qty","Float")
+	F.Data.DataTable.AddColumn("dtDropMaterial","OPER1",String)
+	F.Data.DataTable.AddColumn("dtDropMaterial","OPER2",String)
+	F.Data.DataTable.AddColumn("dtDropMaterial","FACTOR1",Float)
+	F.Data.DataTable.AddColumn("dtDropMaterial","FACTOR2",Float)
+	f.Data.DataTable.AddColumn("dtDropMaterial","DROP_UM",String)
+	
+	F.Data.DataTable.AddExpressionColumn("dtDropMaterial","Converted_Qty",Float,"IIF(OPER1 = '+',Qty+FACTOR1,IIF(OPER1 = '-',Qty-FACTOR1,IIF(OPER1 = '*',Qty*FACTOR1,IIF(OPER1 = '/',Qty/FACTOR1,Qty))))")
+	F.Data.DataTable.AddExpressionColumn("dtDropMaterial","Conv_Qty_Issued",Float,"IIF(OPER2 = '+',Qty_Issued+FACTOR2,IIF(OPER2 = '-',Qty_Issued-FACTOR2,IIF(OPER2 = '*',Qty_Issued*FACTOR2,IIF(OPER1 = '/',Qty_Issued/FACTOR2,Qty_Issued))))")
+	
+	F.Data.DataView.Create("dtDropMaterial","Temp",22,"","")
+	F.Data.DataView.ToDataTableDistinct("dtDropMaterial","Temp","dtPart","Part",True)
+	F.Data.DataView.Close("dtDropMaterial","Temp")
+	F.Intrinsic.Control.For(V.Local.iC,0,V.DataTable.dtPart.RowCount--,1)
+		F.Intrinsic.String.Build("Part = '{0}'",V.DataTable.dtPart(V.Local.iC).Part!FieldValTrim,V.Local.sSQL)
+		F.Data.DataView.Create("dtDropMaterial","Temp",22,V.Local.sSql,"")
+		F.Intrinsic.Control.If(V.DataView.dtDropMaterial!Temp.RowCount--,<>,-1)
+			v.Local.sPart.Set(V.DataTable.dtPart(V.Local.iC).Part!FieldValTrim)
+			f.Intrinsic.String.Build("Select Top 1 UM_INVENTORY from V_INVENTORY_MSTR where PART = '{0}'",v.Local.sPart.Trim,v.Local.sSQL)
+			f.ODBC.Connection!con.ExecuteAndReturn(v.Local.sSQL,v.Local.sFromUM)
+		
+			F.Intrinsic.String.Build("Select Top 1 Factor, Operator From GCG_6994_UOM_MAINT Where Part = '{0}' and UOM = '{2}' and TO_UOM = '{1}'",V.Local.sPart.Trim,"LB",V.Local.sFromUM.Trim,V.Local.sSQL)
+			f.ODBC.Connection!con.ExecuteAndReturn(v.Local.sSQL,v.Local.sOpFactor1)
+			
+			F.Intrinsic.String.Split(V.Local.sOpFactor1,"*!*",V.Local.sOpFactor1)
+			
+			V.Local.sOpFactor1.RedimPreserve(0,1)
+			
+			F.Intrinsic.String.Build("Select Top 1 Factor, Operator From GCG_6994_UOM_MAINT Where Part = '{0}' and UOM = '{1}' and TO_UOM = '{2}'",V.Local.sPart.Trim,"LB",V.Local.sFromUM.Trim,V.Local.sSQL)
+			f.ODBC.Connection!con.ExecuteAndReturn(v.Local.sSQL,v.Local.sOpFactor2)
+			
+			F.Intrinsic.String.Split(V.Local.sOpFactor2,"*!*",V.Local.sOpFactor2)
+			
+			V.Local.sOpFactor2.RedimPreserve(0,1)
+			
+			F.Data.DataView.SetValue("dtDropMaterial","Temp",-1,"OPER1",V.Local.sOpFactor1(1).Trim,"OPER2",V.Local.sOpFactor2(1).Trim,"FACTOR1",V.Local.sOpFactor1.Float,"FACTOR2",V.Local.sOpFactor2.Float)
+			
+			F.Intrinsic.Control.If(V.Local.sOpFactor1.Trim,<>,"","AND",V.Local.sOpFactor2.Trim,<>,"")
+				F.Data.DataView.SetValue("dtDropMaterial","Temp",-1,"DROP_UM","LB")
+			F.Intrinsic.Control.Else
+				F.Data.DataView.SetValue("dtDropMaterial","Temp",-1,"DROP_UM",V.Local.sFromUM)
+			F.Intrinsic.Control.EndIf
+		F.Intrinsic.Control.EndIf
+		F.Data.DataView.Close("dtDropMaterial","Temp")
+	F.Intrinsic.Control.Next(V.Local.iC)
+	F.Data.DataTable.Close("dtPart")
+'	F.Intrinsic.Control.If(V.Local.sOpFactor1.Trim,<>,"","AND",V.Local.sOpFactor2.Trim,<>,"")
+'		f.Data.DataTable.AddColumn("dtDropMaterial","DROP_UM","String","LB")
+'		
+'		F.Intrinsic.Control.SelectCase(V.Local.sOpFactor2(1))
+'			F.Intrinsic.Control.Case("+")
+'				F.Data.DataTable.AddExpressionColumn("dtDropMaterial","Converted_Qty",Float,"Qty+FACTOR1")
+
+'			F.Intrinsic.Control.Case("-")
+'				F.Data.DataTable.AddExpressionColumn("dtDropMaterial","Converted_Qty",Float,"Qty-FACTOR1")
+
+'			F.Intrinsic.Control.Case("*")
+'				F.Data.DataTable.AddExpressionColumn("dtDropMaterial","Converted_Qty",Float,"Qty*FACTOR1")
+
+'			F.Intrinsic.Control.Case("/")
+'				F.Data.DataTable.AddExpressionColumn("dtDropMaterial","Converted_Qty",Float,"Qty/FACTOR1")
+
+'			F.Intrinsic.Control.CaseElse
+'				F.Data.DataTable.AddExpressionColumn("dtDropMaterial","Converted_Qty",Float,"Qty")
+
+'		F.Intrinsic.Control.EndSelect
+'		
+'		F.Intrinsic.Control.SelectCase(V.Local.sOpFactor1(1))
+'			F.Intrinsic.Control.Case("+")
+'				F.Data.DataTable.AddExpressionColumn("dtDropMaterial","Conv_Qty_Issued",Float,"Qty_Issued+FACTOR2")
+'				
+'			F.Intrinsic.Control.Case("-")
+'				F.Data.DataTable.AddExpressionColumn("dtDropMaterial","Conv_Qty_Issued",Float,"Qty_Issued-FACTOR2")
+'				
+'			F.Intrinsic.Control.Case("*")
+'				F.Data.DataTable.AddExpressionColumn("dtDropMaterial","Conv_Qty_Issued",Float,"Qty_Issued*FACTOR2")
+'				
+'			F.Intrinsic.Control.Case("/")
+'				F.Data.DataTable.AddExpressionColumn("dtDropMaterial","Conv_Qty_Issued",Float,"Qty_Issued/FACTOR2")
+'				
+'			F.Intrinsic.Control.CaseElse
+'				F.Data.DataTable.AddExpressionColumn("dtDropMaterial","Converted_Qty",Float,"Qty")
+'				F.Data.DataTable.AddExpressionColumn("dtDropMaterial","Conv_Qty_Issued",Float,"Qty_Issued")
+'		F.Intrinsic.Control.EndSelect
+'		
+'	F.Intrinsic.Control.Else	
+'		f.Data.DataTable.AddColumn("dtDropMaterial","DROP_UM","String",V.Local.sFromUM)
+'		F.Data.DataTable.AddExpressionColumn("dtDropMaterial","Converted_Qty",Float,"Qty")
+'		F.Data.DataTable.AddExpressionColumn("dtDropMaterial","Conv_Qty_Issued",Float,"Qty_Issued")
+'	F.Intrinsic.Control.EndIf
+	
+	gui.Frm_Issue_Material.GsGcDropMaterial.AddGridviewFromDatatable("gvDropMaterial","dtDropMaterial")
+	f.Intrinsic.Control.CallSub(SetGridProperties,"DTMAT","Y")
+	gui.Frm_Issue_Material.GsGcDropMaterial.MainView("gvDropMaterial")
+	f.Intrinsic.Control.Label("Skip")
+	
+	gui.Frm_Issue_Material.GsGcDropMaterial.HideWait
+
+f.Intrinsic.Control.Catch
+	f.Intrinsic.Control.CallSub(ErrorMsg, CurrentSub, v.Ambient.CurrentSubroutine)
+f.Intrinsic.Control.EndTry
+Program.Sub.LoadDropMaterialGrid.End
+
+Program.Sub.LoadEmptyGrid.Start
+f.Intrinsic.Control.Try
+	
+	'Lot/Bin
+	f.Data.DataTable.Create("dtLotBin",True)
+	f.Data.DataTable.AddColumn("dtLotBin","Location","String")
+	f.Data.DataTable.AddColumn("dtLotBin","Lot","String")
+	f.Data.DataTable.AddColumn("dtLotBin","Bin","String")
+	f.Data.DataTable.AddColumn("dtLotBin","Heat","String")
+	f.Data.DataTable.AddColumn("dtLotBin","SERIAL_NUMBER","String")
+	f.Data.DataTable.AddColumn("dtLotBin","UM_INVENTORY","String")
+	f.Data.DataTable.AddColumn("dtLotBin","Quantity","String")
+	f.Data.DataTable.AddColumn("dtLotBin","Qty_to_Issue","Float")
+	f.Data.DataTable.AddColumn("dtLotBin","Converted_Issue_Qty","Float")
+	
+	'Drop Material
+	f.Data.DataTable.Create("dtDropMaterial",True)
+	f.Data.DataTable.AddColumn("dtDropMaterial","Part","String")
+	f.Data.DataTable.AddColumn("dtDropMaterial","Location","String")
+	f.Data.DataTable.AddColumn("dtDropMaterial","Lot","String")
+	f.Data.DataTable.AddColumn("dtDropMaterial","Bin","String")
+	f.Data.DataTable.AddColumn("dtDropMaterial","To_Bin","String")
+	f.Data.DataTable.AddColumn("dtDropMaterial","Heat","String")
+	f.Data.DataTable.AddColumn("dtDropMaterial","Serial_Number","String")
+	f.Data.DataTable.AddColumn("dtDropMaterial","Qty_Issued","Float")
+	f.Data.DataTable.AddColumn("dtDropMaterial","Qty","Float")
+	f.Data.DataTable.AddColumn("dtDropMaterial","Cost","Float")
+	f.Data.DataTable.AddColumn("dtDropMaterial","DROP_UM","String")
+	f.Data.DataTable.AddColumn("dtDropMaterial","Converted_Qty","Float")
+	f.Data.DataTable.AddColumn("dtDropMaterial","UM_INVENTORY","String")
+	F.Data.DataTable.AddColumn("dtDropMaterial","OPER1",String)
+	F.Data.DataTable.AddColumn("dtDropMaterial","OPER2",String)
+	F.Data.DataTable.AddColumn("dtDropMaterial","FACTOR1","FLOAT")
+	F.Data.DataTable.AddColumn("dtDropMaterial","FACTOR2","FLOAT")
+	F.Data.DataTable.AddColumn("dtDropMaterial","Conv_Qty_Issued","FLOAT")
+	
+	F.Data.DataTable.Create("dtJob",True)
+	f.Data.DataTable.AddColumn("dtJob","Seq","String")
+	f.Data.DataTable.AddColumn("dtJob","Part","String")
+	f.Data.DataTable.AddColumn("dtJob","Location","String")
+	f.Data.DataTable.AddColumn("dtJob","Description","String")
+	f.Data.DataTable.AddColumn("dtJob","Qty","Float")
+	f.Data.DataTable.AddColumn("dtJob","UM","String")
+	f.Data.DataTable.AddColumn("dtJob","ISS_UM","String")
+	f.Data.DataTable.AddColumn("dtJob","Load","String")
+	
+	gui.Frm_Issue_Material.GsGc_LotBin.AddGridviewFromDatatable("gvLotBin","dtLotBin")
+	
+	gui.Frm_Issue_Material.GsGcDropMaterial.AddGridviewFromDatatable("gvDropMaterial","dtDropMaterial")
+	
+	Gui.Frm_Issue_Material.GsGridControl1.AddGridviewFromDatatable("gvJob","dtJob")
+	
+	f.Intrinsic.Control.CallSub(SetGridProperties)
+	gui.Frm_Issue_Material.GsGc_LotBin.MainView("gvLotBin")
+	gui.Frm_Issue_Material.GsGcDropMaterial.MainView("gvDropMaterial")
+	Gui.Frm_Issue_Material.GsGridControl1.MainView("gvJob")
+	f.Intrinsic.Control.CallSub(Deserialize)
+	
+f.Intrinsic.Control.Catch
+	f.Intrinsic.Control.CallSub(ErrorMsg, CurrentSub, v.Ambient.CurrentSubroutine)
+f.Intrinsic.Control.EndTry
+Program.Sub.LoadEmptyGrid.End
+
+Program.Sub.SetGridProperties.Start
+v.Local.sSQL.Declare
+V.Local.sToBin.Declare
+V.Local.bRet.Declare
+
+f.Intrinsic.Control.Try
+	
+	F.Intrinsic.Variable.ArgExists("DTMAT",V.Local.bRet)
+	
+	F.Intrinsic.Control.If(V.Local.bRet.Not)
+		Gui.Frm_Issue_Material.GsGc_LotBin.SetGridviewProperty("gvLotBin",V.Enum.GridViewPropertyNames!AllowColumnMoving,False)
+		
+		gui.Frm_Issue_Material.GsGc_LotBin.SetColumnProperty("gvLotBin","LOCATION","Caption","Location")
+		gui.Frm_Issue_Material.GsGc_LotBin.SetColumnProperty("gvLotBin","LOT","Caption","Lot")
+		gui.Frm_Issue_Material.GsGc_LotBin.SetColumnProperty("gvLotBin","BIN","Caption","Bin")
+		gui.Frm_Issue_Material.GsGc_LotBin.SetColumnProperty("gvLotBin","HEAT","Caption","Heat")
+		gui.Frm_Issue_Material.GsGc_LotBin.SetColumnProperty("gvLotBin","SERIAL_NUMBER","Caption","Serial Number")
+		gui.Frm_Issue_Material.GsGc_LotBin.SetColumnProperty("gvLotBin","UM_INVENTORY","Caption","Stock UM")
+		gui.Frm_Issue_Material.GsGc_LotBin.SetColumnProperty("gvLotBin","Quantity","Caption","Qty Available")
+		gui.Frm_Issue_Material.GsGc_LotBin.SetColumnProperty("gvLotBin","Qty_to_Issue","Caption","Qty to Issue")
+		gui.Frm_Issue_Material.GsGc_LotBin.SetColumnProperty("gvLotBin","Converted_Issue_Qty","Caption","Converted Stock Issue Qty")
+		
+		gui.Frm_Issue_Material.GsGc_LotBin.SetColumnProperty("gvLotBin","Qty_to_Issue","ReadOnly","false")
+		gui.Frm_Issue_Material.GsGc_LotBin.SetColumnProperty("gvLotBin","Qty_to_Issue","AllowEdit","true")
+		
+		gui.Frm_Issue_Material.GsGc_LotBin.SetColumnProperty("gvLotBin","LOT","AllowEdit","false")
+		gui.Frm_Issue_Material.GsGc_LotBin.SetColumnProperty("gvLotBin","BIN","AllowEdit","false")
+		gui.Frm_Issue_Material.GsGc_LotBin.SetColumnProperty("gvLotBin","HEAT","AllowEdit","false")
+		gui.Frm_Issue_Material.GsGc_LotBin.SetColumnProperty("gvLotBin","SERIAL_NUMBER","AllowEdit","false")
+		gui.Frm_Issue_Material.GsGc_LotBin.SetColumnProperty("gvLotBin","Quantity","AllowEdit","false")
+		gui.Frm_Issue_Material.GsGc_LotBin.SetColumnProperty("gvLotBin","Converted_Issue_Qty","AllowEdit","false")
+		
+		gui.Frm_Issue_Material.GsGc_LotBin.SetColumnProperty("gvLotBin","LOCATION","VisibleIndex","0")
+		gui.Frm_Issue_Material.GsGc_LotBin.SetColumnProperty("gvLotBin","LOT","VisibleIndex","1")
+		gui.Frm_Issue_Material.GsGc_LotBin.SetColumnProperty("gvLotBin","BIN","VisibleIndex","2")
+		gui.Frm_Issue_Material.GsGc_LotBin.SetColumnProperty("gvLotBin","HEAT","VisibleIndex","3")
+		gui.Frm_Issue_Material.GsGc_LotBin.SetColumnProperty("gvLotBin","SERIAL_NUMBER","VisibleIndex","4")
+		gui.Frm_Issue_Material.GsGc_LotBin.SetColumnProperty("gvLotBin","Quantity","VisibleIndex","5")
+		gui.Frm_Issue_Material.GsGc_LotBin.SetColumnProperty("gvLotBin","Qty_to_Issue","VisibleIndex","6")
+		gui.Frm_Issue_Material.GsGc_LotBin.SetColumnProperty("gvLotBin","Converted_Issue_Qty","VisibleIndex","7")
+		gui.Frm_Issue_Material.GsGc_LotBin.SetColumnProperty("gvLotBin","UM_INVENTORY","VisibleIndex","8")
+	
+		Gui.Frm_Issue_Material.GsGridControl1.SetGridviewProperty("gvJob",V.Enum.GridViewPropertyNames!AllowColumnMoving,False)
+		Gui.Frm_Issue_Material.GsGridControl1.SetGridviewProperty("gvJob",V.Enum.GridViewPropertyNames!Editable,False)
+		Gui.Frm_Issue_Material.GsGridControl1.SetGridviewProperty("gvJob",V.Enum.GridViewPropertyNames!ReadOnly,True)
+		
+		gui.Frm_Issue_Material.GsGridControl1.SetColumnProperty("gvJob","Seq","Caption","Seq")
+		gui.Frm_Issue_Material.GsGridControl1.SetColumnProperty("gvJob","Part","Caption","Part")
+		gui.Frm_Issue_Material.GsGridControl1.SetColumnProperty("gvJob","Location","Caption","Location")
+		gui.Frm_Issue_Material.GsGridControl1.SetColumnProperty("gvJob","Description","Caption","Description")
+		gui.Frm_Issue_Material.GsGridControl1.SetColumnProperty("gvJob","Qty","Caption","Qty Remaining")
+		gui.Frm_Issue_Material.GsGridControl1.SetColumnProperty("gvJob","UM","Caption","UM")
+		gui.Frm_Issue_Material.GsGridControl1.SetColumnProperty("gvJob","ISS_UM","Caption","ISS UM")
+		gui.Frm_Issue_Material.GsGridControl1.SetColumnProperty("gvJob","Load","Caption"," ")
+		
+		Gui.Frm_Issue_Material.GsGridControl1.SetColumnProperty("gvJob","Load","Fixed","Right")
+		Gui.Frm_Issue_Material.GsGridControl1.ColumnEdit("gvJob","Load","EditorButton","Load")
+		
+		gui.Frm_Issue_Material.GsGridControl1.SetColumnProperty("gvJob","Location","Visible",False)
+		gui.Frm_Issue_Material.GsGridControl1.SetColumnProperty("gvJob","Location","Allowshowhide",False)
+		
+		gui.Frm_Issue_Material.GsGridControl1.SetColumnProperty("gvJob","ISS_UM","Visible",False)
+		gui.Frm_Issue_Material.GsGridControl1.SetColumnProperty("gvJob","ISS_UM","Allowshowhide",False)
+		
+		gui.Frm_Issue_Material.GsGridControl1.SetColumnProperty("gvJob","Seq","VisibleIndex","0")
+		gui.Frm_Issue_Material.GsGridControl1.SetColumnProperty("gvJob","Part","VisibleIndex","1")
+		gui.Frm_Issue_Material.GsGridControl1.SetColumnProperty("gvJob","Location","VisibleIndex","2")
+		gui.Frm_Issue_Material.GsGridControl1.SetColumnProperty("gvJob","Description","VisibleIndex","3")
+		gui.Frm_Issue_Material.GsGridControl1.SetColumnProperty("gvJob","Qty","VisibleIndex","4")
+		gui.Frm_Issue_Material.GsGridControl1.SetColumnProperty("gvJob","UM","VisibleIndex","5")
+	F.Intrinsic.Control.EndIf
+	
+	F.Data.Dictionary.CreateFromSQL("Bin","con","Select Bin, Bin From V_Bin_Master Order By Bin")
+	F.Data.Dictionary.ReturnAllPairs("Bin",V.Local.sToBin)
+	F.Intrinsic.String.Split(V.Local.sToBin,"!*!",V.Local.sToBin)
+	F.Data.Dictionary.Close("Bin")
+		
+	Gui.Frm_Issue_Material.GsGcDropMaterial.SetGridviewProperty("gvDropMaterial",V.Enum.GridViewPropertyNames!AllowColumnMoving,False)
+	gui.Frm_Issue_Material.GsGcDropMaterial.SetColumnProperty("gvDropMaterial","Part","Caption","Part")
+	gui.Frm_Issue_Material.GsGcDropMaterial.SetColumnProperty("gvDropMaterial","Location","Caption","Location")
+	gui.Frm_Issue_Material.GsGcDropMaterial.SetColumnProperty("gvDropMaterial","Lot","Caption","Lot")
+	gui.Frm_Issue_Material.GsGcDropMaterial.SetColumnProperty("gvDropMaterial","Bin","Caption","Issued Bin")
+	gui.Frm_Issue_Material.GsGcDropMaterial.SetColumnProperty("gvDropMaterial","TO_Bin","Caption","To Bin")
+	gui.Frm_Issue_Material.GsGcDropMaterial.SetColumnProperty("gvDropMaterial","Heat","Caption","Heat")
+	gui.Frm_Issue_Material.GsGcDropMaterial.SetColumnProperty("gvDropMaterial","Serial_Number","Caption","Serial Number")
+	gui.Frm_Issue_Material.GsGcDropMaterial.SetColumnProperty("gvDropMaterial","Qty_Issued","Caption","Issued Qty")
+	gui.Frm_Issue_Material.GsGcDropMaterial.SetColumnProperty("gvDropMaterial","Conv_Qty_Issued","Caption","Converted Issued Qty")
+	gui.Frm_Issue_Material.GsGcDropMaterial.SetColumnProperty("gvDropMaterial","Qty","Caption","Drop Qty")
+	gui.Frm_Issue_Material.GsGcDropMaterial.SetColumnProperty("gvDropMaterial","Converted_Qty","Caption","Converted Qty")
+	gui.Frm_Issue_Material.GsGcDropMaterial.SetColumnProperty("gvDropMaterial","UM_INVENTORY","Caption","Stock UOM")
+	gui.Frm_Issue_Material.GsGcDropMaterial.SetColumnProperty("gvDropMaterial","DROP_UM","Caption","Drop UOM")
+	gui.Frm_Issue_Material.GsGcDropMaterial.SetColumnProperty("gvDropMaterial","FACTOR1","Caption","Factor 1")
+	gui.Frm_Issue_Material.GsGcDropMaterial.SetColumnProperty("gvDropMaterial","FACTOR2","Caption","Factor 2")
+	
+	gui.Frm_Issue_Material.GsGcDropMaterial.SetColumnProperty("gvDropMaterial","TO_Bin","ReadOnly","false")
+	gui.Frm_Issue_Material.GsGcDropMaterial.SetColumnProperty("gvDropMaterial","TO_Bin","AllowEdit","true")
+	
+	gui.Frm_Issue_Material.GsGcDropMaterial.SetColumnProperty("gvDropMaterial","Qty_Issued","Visible","false")
+	gui.Frm_Issue_Material.GsGcDropMaterial.SetColumnProperty("gvDropMaterial","Qty_Issued","AllowShowHide","False")
+	
+	gui.Frm_Issue_Material.GsGcDropMaterial.SetColumnProperty("gvDropMaterial","OPER1","Visible","false")
+	gui.Frm_Issue_Material.GsGcDropMaterial.SetColumnProperty("gvDropMaterial","OPER1","AllowShowHide","False")
+	gui.Frm_Issue_Material.GsGcDropMaterial.SetColumnProperty("gvDropMaterial","OPER2","Visible","false")
+	gui.Frm_Issue_Material.GsGcDropMaterial.SetColumnProperty("gvDropMaterial","OPER2","AllowShowHide","False")
+	
+	gui.Frm_Issue_Material.GsGcDropMaterial.SetColumnProperty("gvDropMaterial","FACTOR1","Visible","false")
+	gui.Frm_Issue_Material.GsGcDropMaterial.SetColumnProperty("gvDropMaterial","FACTOR1","AllowShowHide","False")
+	gui.Frm_Issue_Material.GsGcDropMaterial.SetColumnProperty("gvDropMaterial","FACTOR2","Visible","false")
+	gui.Frm_Issue_Material.GsGcDropMaterial.SetColumnProperty("gvDropMaterial","FACTOR2","AllowShowHide","False")
+	
+	gui.Frm_Issue_Material.GsGcDropMaterial.SetColumnProperty("gvDropMaterial","Bin","Visible","false")
+	gui.Frm_Issue_Material.GsGcDropMaterial.SetColumnProperty("gvDropMaterial","Bin","AllowShowHide","False")
+	
+	gui.Frm_Issue_Material.GsGcDropMaterial.SetColumnProperty("gvDropMaterial","Qty","ReadOnly","false")
+	gui.Frm_Issue_Material.GsGcDropMaterial.SetColumnProperty("gvDropMaterial","Qty","AllowEdit","true")
+	
+	gui.Frm_Issue_Material.GsGcDropMaterial.SetColumnProperty("gvDropMaterial","Cost","Visible","false")
+	gui.Frm_Issue_Material.GsGcDropMaterial.SetColumnProperty("gvDropMaterial","Cost","AllowShowHide","False")
+	
+	gui.Frm_Issue_Material.GsGcDropMaterial.SetColumnProperty("gvDropMaterial","PART","VisibleIndex","0")
+	gui.Frm_Issue_Material.GsGcDropMaterial.SetColumnProperty("gvDropMaterial","LOCATION","VisibleIndex","1")
+	gui.Frm_Issue_Material.GsGcDropMaterial.SetColumnProperty("gvDropMaterial","LOT","VisibleIndex","2")
+	gui.Frm_Issue_Material.GsGcDropMaterial.SetColumnProperty("gvDropMaterial","TO_BIN","VisibleIndex","3")
+	gui.Frm_Issue_Material.GsGcDropMaterial.SetColumnProperty("gvDropMaterial","HEAT","VisibleIndex","4")
+	gui.Frm_Issue_Material.GsGcDropMaterial.SetColumnProperty("gvDropMaterial","SERIAL_NUMBER","VisibleIndex","5")
+	gui.Frm_Issue_Material.GsGcDropMaterial.SetColumnProperty("gvDropMaterial","Conv_Qty_Issued","VisibleIndex","6")
+	gui.Frm_Issue_Material.GsGcDropMaterial.SetColumnProperty("gvDropMaterial","Qty","VisibleIndex","7")
+	gui.Frm_Issue_Material.GsGcDropMaterial.SetColumnProperty("gvDropMaterial","DROP_UM","VisibleIndex","8")
+	gui.Frm_Issue_Material.GsGcDropMaterial.SetColumnProperty("gvDropMaterial","Converted_Qty","VisibleIndex","9")
+	gui.Frm_Issue_Material.GsGcDropMaterial.SetColumnProperty("gvDropMaterial","UM_INVENTORY","VisibleIndex","10")
+	
+	Gui.Frm_Issue_Material.GsGcDropMaterial.ColumnEdit("gvDropMaterial","To_Bin","DropDownList",V.Local.sToBin)
+	
+f.Intrinsic.Control.Catch
+	f.Intrinsic.Control.CallSub(ErrorMsg, CurrentSub, v.Ambient.CurrentSubroutine)
+f.Intrinsic.Control.EndTry
+Program.Sub.SetGridProperties.End
+
+Program.Sub.LoadDropDowns.Start
+F.Intrinsic.Control.SetErrorHandler("LoadDropDowns_Err")
+F.Intrinsic.Control.ClearErrors
+
+V.Local.sError.Declare(String)
+v.Local.sSQL.Declare
+v.Local.sPartUOM.Declare
+v.Local.iC.Declare
+v.Local.sPartIssued.Declare
+V.Local.sFilter.Declare
+
+	gui.Frm_Issue_Material.cbo_Issue_Material.Text("")
+	gui.Frm_Issue_Material.cbo_RTS_UOM.Text("")
+	gui.Frm_Issue_Material.cbo_Issue_Material.ClearItems()
+	gui.Frm_Issue_Material.cbo_RTS_UOM.ClearItems()
+	
+	v.Local.sPartIssued.Set(v.Screen.Frm_Issue_Material!txt_Part_Issued.Text)
+
+	f.Intrinsic.String.Build("Select UOM, UOM from GCG_6994_UOM_MAINT where PART = '{0}'",v.Local.sPartIssued.RTrim,v.Local.sSQL)
+	F.Data.Dictionary.CreateFromSQL("UOM",con,V.Local.sSQL)
+	
+	f.ODBC.Connection!con.ExecuteAndReturn("Select CODE from UM_CODES",v.Local.sPartUOM)
+	f.Intrinsic.String.Split(v.Local.sPartUOM,"#$#",v.Local.sPartUOM)
+	
+	f.Intrinsic.Control.If(v.Local.sPartUOM(0),<>,"")
+	
+		f.Intrinsic.Control.For(v.Local.iC,0,v.Local.sPartUOM.UBound,1)
+			F.Intrinsic.Control.Try
+				F.Data.Dictionary.UpdateItem("UOM",v.Local.sPartUOM(v.Local.iC),v.Local.sPartUOM(v.Local.iC))
+			F.Intrinsic.Control.Catch
+				F.Data.Dictionary.AddItem("UOM",v.Local.sPartUOM(v.Local.iC),v.Local.sPartUOM(v.Local.iC))
+			F.Intrinsic.Control.EndTry
+		f.Intrinsic.Control.Next(v.Local.iC)
+		
+	f.Intrinsic.Control.EndIf
+	
+	Gui.Frm_Issue_Material.cbo_Issue_Material.AddItems("Dictionary","UOM")
+	F.Data.Dictionary.Close("UOM")
+
+	'currently this is hardcoded 
+	gui.Frm_Issue_Material.cbo_RTS_UOM.AddItem("LB",0)
+
+	F.Intrinsic.Control.If(V.DataTable.dtJob.Exists)
+		F.Intrinsic.String.Build("Seq = '{0}'",V.Screen.Frm_Issue_Material!txt_Sequence.Text,V.Local.sFilter)
+		F.Data.DataView.Create("dtJob","Temp",22,V.Local.sFilter,"")
+		F.Intrinsic.Control.If(V.DataView.dtJob!Temp.RowCount--,<>,-1)
+			Gui.Frm_Issue_Material.cbo_Issue_Material.Text(V.DataView.dtJob!Temp(V.DataView.dtJob!Temp.RowCount--).ISS_UM!FieldValTrim)
+		F.Intrinsic.Control.EndIf
+		F.Data.DataView.Close("dtJob","Temp")
+	F.Intrinsic.Control.EndIf
+
+F.Intrinsic.Control.ExitSub
+
+F.Intrinsic.Control.Label("LoadDropDowns_Err")
+F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+	f.Intrinsic.Control.CallSub(ErrorMsg, CurrentSub, v.Ambient.CurrentSubroutine)
+Function.Intrinsic.Control.EndIf
+Program.Sub.LoadDropDowns.End
+
+Program.Sub.GsGc_LotBin_CellValueChanged.Start
+v.Local.fConvertedQty.Declare
+v.Local.fQtytoApply.Declare
+v.Local.sOpFactor.Declare
+v.Local.sPartTrim.Declare
+v.Local.sSQL.Declare
+v.Local.sFromUM.Declare
+v.Local.fConversion.Declare
+f.Intrinsic.Control.Try
+
+	v.Local.sPartTrim.Set(v.Screen.Frm_Issue_Material!txt_Part_Issued.Text)	
+	gui.Frm_Issue_Material.GsGc_LotBin.GetCellValueByColumnName("gvLotBin","Qty_to_Issue",v.Args.RowIndex,v.Local.fQtytoApply)
+	gui.Frm_Issue_Material.GsGc_LotBin.GetCellValueByColumnName("gvLotBin","UM_INVENTORY",v.Args.RowIndex,v.Local.sFromUM)
+
+	F.Intrinsic.Control.If(v.Screen.Frm_Issue_Material!cbo_Issue_Material.Value,<>,V.Local.sFromUM.Trim)
+		f.Intrinsic.String.Build("Select Factor, Operator from GCG_6994_UOM_MAINT where PART = '{0}' and UOM = '{1}' and TO_UOM = '{2}'",v.Local.sPartTrim.RTrim,v.Screen.Frm_Issue_Material!cbo_Issue_Material.Value,V.Local.sFromUM.Trim,v.Local.sSQL)
+		f.ODBC.Connection!con.ExecuteAndReturn(v.Local.sSQL,v.Local.sOpFactor)
+		f.Intrinsic.String.Split(v.Local.sOpFactor,"*!*",v.Local.sOpFactor)
+	F.Intrinsic.Control.Else
+		V.Local.sOpFactor.Redim(0,1)
+		V.Local.sOpFactor.Set("1")
+		V.Local.sOpFactor(1).Set("*")
+	F.Intrinsic.Control.EndIf
+	
+	'Check if custom UOM is found
+	f.Intrinsic.Control.If(v.Local.sOpFactor(0),=,"")
+		
+		f.Intrinsic.String.Build("Select Conversion from UM_CONVERSION where FROM_UM = '{0}' and TO_UM = '{1}'",v.Screen.Frm_Issue_Material!cbo_Issue_Material.Value,v.Local.sFromUM.Trim,v.Local.sSQL)
+		f.ODBC.Connection!con.ExecuteAndReturn(v.Local.sSQL,v.Local.fConversion)
+		
+		f.Intrinsic.Math.Mult(v.Local.fQtytoApply,v.Local.fConversion,v.Local.fConvertedQty)
+		
+		gui.Frm_Issue_Material.GsGc_LotBin.SetCellValueByColumnName("gvLotBin","Converted_Issue_Qty",v.Args.RowIndex,v.Local.fConvertedQty)
+		f.Intrinsic.Control.GoTo("Skip")
+		
+	f.Intrinsic.Control.EndIf
+	
+	f.Intrinsic.Control.SelectCase(v.Local.sOpFactor(1))
+		f.Intrinsic.Control.Case("*")
+			f.Intrinsic.Math.Mult(v.Local.fQtytoApply,v.Local.sOpFactor(0),v.Local.fConvertedQty)
+		f.Intrinsic.Control.Case("/")
+			f.Intrinsic.Math.Div(v.Local.fQtytoApply,v.Local.sOpFactor(0),v.Local.fConvertedQty)
+		f.Intrinsic.Control.Case("+")
+			f.Intrinsic.Math.Add(v.Local.fQtytoApply,v.Local.sOpFactor(0),v.Local.fConvertedQty)
+		f.Intrinsic.Control.Case("-")
+			f.Intrinsic.Math.Sub(v.Local.fQtytoApply,v.Local.sOpFactor(0),v.Local.fConvertedQty)
+	f.Intrinsic.Control.EndSelect
+	
+	gui.Frm_Issue_Material.GsGc_LotBin.SetCellValueByColumnName("gvLotBin","Converted_Issue_Qty",v.Args.RowIndex,v.Local.fConvertedQty)
+	
+	f.Intrinsic.Control.Label("Skip")
+	
+	
+f.Intrinsic.Control.Catch
+	f.Intrinsic.Control.CallSub(ErrorMsg, CurrentSub, v.Ambient.CurrentSubroutine)
+f.Intrinsic.Control.EndTry
+Program.Sub.GsGc_LotBin_CellValueChanged.End
+
+Program.Sub.cmd_Issue_Material_Click.Start
+v.Local.iC.Declare
+v.Local.iRowCount.Declare
+v.Local.sJob.Declare
+v.Local.sJobSuffix.Declare
+v.Local.sJobSequence.Declare
+v.Local.sPart.Declare
+v.Local.sPartTrim.Declare
+v.Local.sRev.Declare
+v.Local.sLocation.Declare
+v.Local.fQty.Declare
+v.Local.sLot.Declare
+v.Local.sBin.Declare
+v.Local.sHeat.Declare
+v.Local.sSerial.Declare
+v.Local.fQtyTotal.Declare(Float,0)
+v.Local.iRet.Declare
+V.Local.sQty.Declare
+
+f.Intrinsic.Control.Try
+
+	gui.Frm_Issue_Material.GsGc_LotBin.InvokeWait("Issue Material...","Custom Issue Material [6994]")
+	
+	gui.Frm_Issue_Material.GsGc_LotBin.GetRowCount("gvLotBin",v.Local.iRowCount)
+	
+	F.Data.DataView.Create("dtLotBin","Temp",22,"Qty_to_Issue > 0","")
+	F.Intrinsic.Control.For(V.Local.iC,0,V.DataView.dtLotBin!Temp.RowCount--,1)
+		
+		F.Intrinsic.String.RPad(v.Screen.Frm_Issue_Material!txt_Part_Issued.Text," ",20,V.Local.sPart)
+		f.Intrinsic.String.Right(V.Local.sPart,3,v.Local.sRev)
+		f.Intrinsic.String.Left(V.Local.sPart,17,v.Local.sPart)
+		
+		F.Intrinsic.String.Format(V.DataView.dtLotBin!Temp(v.Local.iC).Converted_Issue_Qty!FieldValFloat,"#####0.0000",V.Local.sQty)
+		f.Data.Datatable.AddRow("450100","Part",v.Local.sPart.Trim,"Rev",v.Local.sRev.Trim,"Location",V.DataView.dtLotBin!Temp(V.Local.ic).Location!FieldValTrim,"Quantity",v.Local.sQty,"Lot",V.DataView.dtLotBin!Temp(V.Local.ic).Lot!FieldValTrim,"Bin",V.DataView.dtLotBin!Temp(V.Local.ic).Bin!FieldValTrim,"Heat",V.DataView.dtLotBin!Temp(V.Local.ic).Heat!FieldValTrim,"Serial",V.DataView.dtLotBin!Temp(V.Local.ic).Serial_Number!FieldValTrim,"WONumber",v.Screen.Frm_Issue_Material!txt_Work_Order.Text,"WOSuffix",v.Screen.Frm_Issue_Material!txt_Suffix.Text,"WOSeq",v.Screen.Frm_Issue_Material!txt_Sequence.Text)
+	F.Intrinsic.Control.Next(V.Local.iC)
+	F.Data.DataView.Close("dtLotBin","Temp")
+	
+	F.Intrinsic.Control.If(V.DataTable.450100.RowCount--,<>,-1)
+		f.Intrinsic.Control.CallSub(450100Sync)
+	f.Intrinsic.Control.EndIf
+	
+	f.Intrinsic.Control.If(v.Screen.Frm_Issue_Material!cbo_Issue_Material.Value,<>,"")
+		f.Intrinsic.Control.CallSub(LoadLotBinGrid)
+	f.Intrinsic.Control.EndIf
+	
+	gui.Frm_Issue_Material.GsGc_LotBin.HideWait
+
+f.Intrinsic.Control.Catch
+	f.Intrinsic.Control.CallSub(ErrorMsg, CurrentSub, v.Ambient.CurrentSubroutine)
+f.Intrinsic.Control.EndTry
+Program.Sub.cmd_Issue_Material_Click.End
+
+Program.Sub.CreateDir.Start
+V.Local.bRet.Declare(Boolean,False)
+f.Intrinsic.Control.Try
+	
+	'Creating custom directory in Global file path if its not there
+	F.Intrinsic.Control.If(V.Caller.GlobalDir.Right1,=,"\")
+		F.Intrinsic.String.Build("{0}Custom\",V.Caller.GlobalDir,V.Global.sFileLocation)
+	F.Intrinsic.Control.Else
+		F.Intrinsic.String.Build("{0}\Custom\",V.Caller.GlobalDir,V.Global.sFileLocation)
+	F.Intrinsic.Control.EndIf
+	
+	F.Intrinsic.File.DirExists(V.Global.sFileLocation,V.Local.bRet)
+	
+	F.Intrinsic.Control.If(V.Local.bRet,=,False)
+		F.Intrinsic.File.CreateDir(V.Global.sFileLocation)
+	F.Intrinsic.Control.EndIf
+	
+	F.Intrinsic.String.Build("{0}6994\",V.Global.sFileLocation,V.Global.sFileLocation)
+	
+	F.Intrinsic.File.DirExists(V.Global.sFileLocation,V.Local.bRet)
+	
+	F.Intrinsic.Control.If(V.Local.bRet,=,False)
+		F.Intrinsic.File.CreateDir(V.Global.sFileLocation)
+	F.Intrinsic.Control.EndIf
+
+f.Intrinsic.Control.Catch
+	f.Intrinsic.Control.CallSub(ErrorMsg, CurrentSub, v.Ambient.CurrentSubroutine)
+f.Intrinsic.Control.EndTry
+Program.Sub.CreateDir.End
+
+Program.Sub.ResetTextFile.Start
+v.Local.sCustomPath.Declare
+v.Local.sJobInfo.Declare
+f.Intrinsic.Control.Try
+	
+	f.Intrinsic.String.Build("{0}\CUSTOM\6994\{1}Job.txt",v.Caller.GlobalDir,V.Caller.Terminal,v.Local.sCustomPath)
+	f.Intrinsic.String.Build("{0}*!*{1}*!*{2}*!*{3}","","","","",v.Local.sJobInfo)
+	f.Intrinsic.File.String2File(v.Local.sCustomPath,v.Local.sJobInfo)
+	
+f.Intrinsic.Control.Catch
+	f.Intrinsic.Control.CallSub(ErrorMsg, CurrentSub, v.Ambient.CurrentSubroutine)
+f.Intrinsic.Control.EndTry
+Program.Sub.ResetTextFile.End
+
+Program.Sub.LoadPassedJob.Start
+v.Local.sCustomPath.Declare
+v.Local.sJobInfo.Declare
+v.Local.sSQL.Declare
+v.Local.sRet.Declare
+v.Local.sInvUM.Declare
+f.Intrinsic.Control.Try
+	
+	gui.Frm_Issue_Material.txt_Work_Order.Text(v.Args.Job)
+	gui.Frm_Issue_Material.txt_Suffix.Text(v.Args.Suffix)
+	
+	F.Intrinsic.Control.CallSub(txt_Suffix_LostFocus)
+'	gui.Frm_Issue_Material.txt_Sequence.Text(v.Args.Sequence)
+'	
+'	'Grab Part issued
+'	f.Intrinsic.String.Build("select PART from JOB_OPERATIONS where JOB = '{0}' and SUFFIX = '{1}' and SEQ = '{2}'",v.Args.Job.Trim,v.Args.Suffix.Trim,v.Args.Sequence.Trim,v.Local.sSQL)
+'	
+'	f.ODBC.Connection!con.ExecuteAndReturn(v.Local.sSQL,v.Local.sRet)
+'	
+'	gui.Frm_Issue_Material.txt_Part_Issued.Text(v.Local.sRet.RTrim)
+'	
+'	'GRAB INV UM
+'	f.Intrinsic.String.Build("select DISTINCT UM_INVENTORY from INVENTORY_MSTR where PART = '{0}'",v.Local.sRet,v.Local.sSQL)
+'	
+'	f.ODBC.Connection!con.ExecuteAndReturn(v.Local.sSQL,v.Local.sRet)
+'	v.Local.sInvUM.Set(v.Local.sRet)
+'	
+'	'Grab part made
+'	f.Intrinsic.String.Build("select PART from JOB_HEADER where JOB = '{0}' and SUFFIX = '{1}'",v.Args.Job.Trim,v.Args.Suffix.Trim,v.Local.sSQL)
+'	
+'	f.ODBC.Connection!con.ExecuteAndReturn(v.Local.sSQL,v.Local.sRet)
+'	
+'	gui.Frm_Issue_Material.txt_Part_Made.Text(v.Local.sRet.RTrim)
+'	
+'	'Grab Qty Remain
+'	f.Intrinsic.String.Build("select QTY_COMMITTED, QTY_ISSUED from JOB_COMMITMENTS where JOB = '{0}' and SUFFIX = '{1}' and SEQUENCE = '{2}'",v.Args.Job.Trim,v.Args.Suffix.Trim,v.Args.Sequence.Trim,v.Local.sSQL)
+'	
+'	f.ODBC.Connection!con.ExecuteAndReturn(v.Local.sSQL,v.Local.sRet)
+'	f.Intrinsic.String.Split(v.Local.sRet,"*!*",v.Local.sRet)
+'	f.Intrinsic.Math.Sub(v.Local.sRet(0),v.Local.sRet(1),v.Local.sRet)
+'	
+'	f.Intrinsic.String.Build("{0} {1}",v.Local.sRet,v.Local.sInvUM,v.Local.sRet)
+'	gui.Frm_Issue_Material.txt_Qty_Remain_UOM.Text(v.Local.sRet.RTrim)
+'	
+'	f.Intrinsic.String.Build("select B.Seq, B.Part, A.Location, B.Description, B.Hours_Estimated-B.Hours_Actual as Qty, B.UM, '' as ISS_UM from JOB_HEADER A JOIN JOB_OPERATIONS B on A.JOB = B.JOB and A.SUFFIX = B.SUFFIX where A.JOB = '{0}' and A.SUFFIX = '{1}' and LMO = 'M' order by B.Seq",v.DataTable.LOOKUP_WORK_ORDER_RESULT(0).JOB!FIELDVALTRIM,v.DataTable.LOOKUP_WORK_ORDER_RESULT(0).SUFFIX!FIELDVALTRIM,v.Local.sSQL)
+'	F.Intrinsic.Control.If(V.DataTable.dtJob.Exists)
+'		F.Data.DataTable.Close("dtJob")
+'	F.Intrinsic.Control.EndIf
+'	F.Data.DataTable.CreateFromSQL("dtJob",con,V.Local.sSQL,True)
+'	
+'	f.Intrinsic.Control.CallSub(LoadDropDowns)
+'	
+'	F.Intrinsic.Control.CallSub(LoadDropMaterialGrid)
+	
+f.Intrinsic.Control.Catch
+	f.Intrinsic.Control.CallSub(ErrorMsg, CurrentSub, v.Ambient.CurrentSubroutine)
+f.Intrinsic.Control.EndTry
+Program.Sub.LoadPassedJob.End
+
+Program.Sub.cbo_Issue_Material_Change.Start
+f.Intrinsic.Control.Try
+	V.Local.sFilter.Declare
+	V.Local.iRet.Declare
+	
+	F.Data.DataView.Create("dtLotBin","Temp",22,"Qty_to_Issue > 0","")
+
+	F.Intrinsic.Control.If(V.DataView.dtLotBin!Temp.RowCount--,<>,-1)
+		F.Intrinsic.UI.Msgbox("There is Qty to Issue.  Do you want to reload the grid with a different UM Conversion","Attention",4,V.Local.iRet)
+		f.Intrinsic.Control.If(v.Local.iRet,<>,6)
+			F.Data.DataView.Close("dtLotBin","Temp")
+			F.Intrinsic.String.Build("Seq = '{0}'",V.Screen.Frm_Issue_Material!txt_Sequence.Text,V.Local.sFilter)
+			F.Data.DataView.Create("dtJob","Temp",22,V.Local.sFilter,"")
+			F.Intrinsic.Control.If(V.DataView.dtJob!Temp.RowCount--,<>,-1)
+				F.Intrinsic.Control.BlockEvents
+					Gui.Frm_Issue_Material.cbo_Issue_Material.Text(V.DataView.dtJob!Temp(V.DataView.dtJob!Temp.RowCount--).ISS_UM!FieldValTrim)
+				F.Intrinsic.Control.UnBlockEvents
+			F.Intrinsic.Control.EndIf
+			F.Data.DataView.Close("dtJob","Temp")
+			F.Intrinsic.Control.ExitSub
+		f.Intrinsic.Control.EndIf
+	F.Intrinsic.Control.EndIf
+	
+	F.Data.DataView.Close("dtLotBin","Temp")
+	
+	f.Intrinsic.Control.If(v.Screen.Frm_Issue_Material!cbo_Issue_Material.Value,<>,"")
+		F.Intrinsic.String.Build("Seq = '{0}'",V.Screen.Frm_Issue_Material!txt_Sequence.Text,V.Local.sFilter)
+		F.Data.DataView.Create("dtJob","Temp",22,V.Local.sFilter,"")
+		F.Intrinsic.Control.If(V.DataView.dtJob!Temp.RowCount--,<>,-1)
+			F.Data.DataView.SetValue("dtJob","Temp",-1,"ISS_UM",V.Screen.Frm_Issue_Material!cbo_Issue_Material.Text)
+		F.Intrinsic.Control.EndIf
+		F.Data.DataView.Close("dtJob","Temp")
+		f.Intrinsic.Control.CallSub(LoadLotBinGrid)
+	f.Intrinsic.Control.EndIf
+	
+f.Intrinsic.Control.Catch
+	f.Intrinsic.Control.CallSub(ErrorMsg, CurrentSub, v.Ambient.CurrentSubroutine)
+f.Intrinsic.Control.EndTry
+Program.Sub.cbo_Issue_Material_Change.End
+
+Program.Sub.cbo_RTS_UOM_Change.Start
+f.Intrinsic.Control.Try
+	
+	f.Intrinsic.Control.If(v.Screen.Frm_Issue_Material!cbo_RTS_UOM.Value,<>,"")
+		f.Intrinsic.Control.CallSub(LoadDropMaterialGrid)
+	f.Intrinsic.Control.EndIf
+
+f.Intrinsic.Control.Catch
+	f.Intrinsic.Control.CallSub(ErrorMsg, CurrentSub, v.Ambient.CurrentSubroutine)
+f.Intrinsic.Control.EndTry
+Program.Sub.cbo_RTS_UOM_Change.End
+
+Program.Sub.Serialize.Start
+f.Intrinsic.Control.Try
+
+	V.Local.sSerialize.Declare 
+
+	gui.Frm_Issue_Material.GsGc_LotBin.Serialize("gvLotBin",V.Local.sSerialize)
+	F.Global.Registry.AddValue(V.Caller.User,V.Caller.CompanyCode,"gvLotBin",6994,1001,False,"Serialize",False,0,-999.0,1/1/1980,12:00:00 AM,V.Local.sSerialize)
+	
+f.Intrinsic.Control.Catch
+	f.Intrinsic.Control.CallSub(ErrorMsg, CurrentSub, v.Ambient.CurrentSubroutine)
+	f.Intrinsic.Control.EndTry
+Program.Sub.Serialize.End
+
+Program.Sub.Deserialize.Start
+f.Intrinsic.Control.Try
+
+	V.Local.sSerialize.Declare
+	
+	F.Global.Registry.ReadValue(V.Caller.User,V.Caller.CompanyCode,"gvLotBin",6994,1001,6,"",V.Local.sSerialize)
+	F.Intrinsic.Control.If(V.Local.sSerialize.trim,<>,"")
+		gui.Frm_Issue_Material.GsGc_LotBin.Deserialize(V.Local.sSerialize)
+	F.Intrinsic.Control.EndIf
+	
+f.Intrinsic.Control.Catch
+	f.Intrinsic.Control.CallSub(ErrorMsg, CurrentSub, v.Ambient.CurrentSubroutine)
+f.Intrinsic.Control.EndTry
+Program.Sub.Deserialize.End
+
+Program.Sub.cmd_Drop_Material_Click.Start
+v.Local.iC.Declare
+v.Local.iRowCount.Declare
+v.Local.sJob.Declare
+v.Local.sJobSuffix.Declare
+v.Local.sJobSequence.Declare
+v.Local.sPart.Declare
+v.Local.sPartTrim.Declare
+v.Local.sRev.Declare
+v.Local.sLocation.Declare
+v.Local.fQty.Declare
+v.Local.sLot.Declare
+v.Local.sBin.Declare
+v.Local.sHeat.Declare
+v.Local.sSerial.Declare
+v.Local.fQtyTotal.Declare(Float,0)
+v.Local.iRet.Declare
+V.Local.sSql.Declare
+V.Local.sQty.Declare
+
+f.Intrinsic.Control.Try
+
+	gui.Frm_Issue_Material.GsGcDropMaterial.InvokeWait("Issue Material...","Custom Issue Material [6994]")
+
+	F.Data.DataView.Create("dtDropMaterial","Temp",22,"Converted_Qty > 0","")
+	F.Intrinsic.Control.For(V.Local.iC,0,V.DataView.dtDropMaterial!Temp.RowCount--,1)
+		v.Local.sPartTrim.Set(V.DataView.dtDropMaterial!Temp(V.Local.iC).Part!FieldValTrim)
+		
+		F.Intrinsic.String.Build("Select Part From Item_Master Where Part = '{0}' and Location = '{1}' and Lot = '{2}' and Bin = '{3}' and Heat = '{4}' and Serial_Number = '{5}'",V.Local.sPartTrim.Trim,V.DataView.dtDropMaterial!Temp(V.Local.iC).Location!FieldValTrim,V.DataView.dtDropMaterial!Temp(V.Local.iC).Lot!FieldValTrim,V.DataView.dtDropMaterial!Temp(V.Local.iC).To_Bin!FieldValTrim,V.DataView.dtDropMaterial!Temp(V.Local.iC).Heat!FieldValTrim,V.DataView.dtDropMaterial!Temp(V.Local.iC).Serial_Number!FieldValTrim,V.Local.sSql)
+		F.ODBC.Connection!Con.ExecuteAndReturn(V.Local.sSql,V.Local.sPart)
+		F.Intrinsic.Control.If(V.Local.sPart.Trim,=,"")
+			'adding Item Master Record and setting cost to cost retreived from Item Hist
+			V.Local.sSql.Set("SELECT * from ITEM_MASTER")
+			Function.ODBC.Connection!Con.OpenRecordsetRW("rstitem",V.Local.sSql)
+
+			Function.ODBC.Con!rstitem.AddNew
+			Function.ODBC.Con!rstitem.Set!PART(V.Local.sPartTrim.Trim)
+			Function.ODBC.Con!rstitem.Set!LOCATION(V.DataView.dtDropMaterial!Temp(V.Local.iC).Location!FieldValTrim)
+			Function.ODBC.Con!rstitem.Set!LOT(V.DataView.dtDropMaterial!Temp(V.Local.iC).Lot!FieldValTrim)
+			Function.ODBC.Con!rstitem.Set!BIN(V.DataView.dtDropMaterial!Temp(V.Local.iC).To_Bin!FieldValTrim)
+			Function.ODBC.Con!rstitem.Set!HEAT(V.DataView.dtDropMaterial!Temp(V.Local.iC).Heat!FieldValTrim)
+			Function.ODBC.Con!rstitem.Set!SERIAL_NUMBER(V.DataView.dtDropMaterial!Temp(V.Local.iC).Serial_Number!FieldValTrim)
+			Function.ODBC.Con!rstitem.Set!QUANTITY(0)
+			Function.ODBC.Con!rstitem.Set!QTY_AVAILABLE_SHIP(0)
+			Function.ODBC.Con!rstitem.Set!UNIT_COST(V.DataView.dtDropMaterial!Temp(V.Local.iC).Cost!FieldValFloat)
+			Function.ODBC.Con!rstitem.Set!MATL_COST(V.DataView.dtDropMaterial!Temp(V.Local.iC).Cost!FieldValFloat)
+			Function.ODBC.Con!rstitem.Set!DATE_LAST_REC("00000000")
+			Function.ODBC.Con!rstitem.Set!DATE_EXPIRATION("00000000")
+			Function.ODBC.Con!rstitem.Set!USERID(V.Caller.User)
+			F.ODBC.Con!rstitem.Update
+			F.ODBC.Con!rstitem.Close
+		F.Intrinsic.Control.EndIf
+		F.Intrinsic.String.RPad(V.Local.sPartTrim.Trim," ",20,V.Local.sPart)
+		F.Intrinsic.String.Right(V.Local.sPart,3,V.Local.sRev)
+		F.Intrinsic.String.Left(V.Local.sPart,17,V.Local.sPart)
+		
+		f.Intrinsic.Math.Mult(V.DataView.dtDropMaterial!Temp(V.Local.iC).Converted_Qty!FieldValFloat,-1,v.Local.fQty)
+		F.Intrinsic.String.Format(V.Local.fQty,"#####0.0000",V.Local.sQty)
+		f.Data.Datatable.AddRow("450100","Part",v.Local.sPart.Trim,"Rev",v.Local.sRev.Trim,"Location",V.DataView.dtDropMaterial!Temp(V.Local.iC).Location!FieldValTrim,"Quantity",v.Local.sQty,"Lot",V.DataView.dtDropMaterial!Temp(V.Local.iC).Lot!FieldValTrim,"Bin",V.DataView.dtDropMaterial!Temp(V.Local.iC).To_Bin!FieldValTrim,"Heat",V.DataView.dtDropMaterial!Temp(V.Local.iC).Heat!FieldValTrim,"Serial",V.DataView.dtDropMaterial!Temp(V.Local.iC).Serial_Number!FieldValTrim,"WONumber",v.Screen.Frm_Issue_Material!txt_Work_Order.Text,"WOSuffix",v.Screen.Frm_Issue_Material!txt_Suffix.Text,"WOSeq",v.Screen.Frm_Issue_Material!txt_Sequence.Text)
+		
+	F.Intrinsic.Control.Next(V.Local.iC)
+	F.Data.DataView.Close("dtDropMaterial","Temp")
+	
+	f.Intrinsic.Control.CallSub(450100Sync)
+
+	f.Intrinsic.Control.CallSub(LoadDropMaterialGrid)
+	
+	gui.Frm_Issue_Material.GsGcDropMaterial.HideWait
+	
+f.Intrinsic.Control.Catch
+	f.Intrinsic.Control.CallSub(ErrorMsg, CurrentSub, v.Ambient.CurrentSubroutine)
+f.Intrinsic.Control.EndTry
+Program.Sub.cmd_Drop_Material_Click.End
+
+Program.Sub.GsGcDropMaterial_CellValueChanged.Start
+v.Local.fConvertedQty.Declare
+v.Local.fQtytoApply.Declare
+v.Local.sOpFactor.Declare
+v.Local.sPartTrim.Declare
+v.Local.sSQL.Declare
+v.Local.sFromUM.Declare
+v.Local.fConversion.Declare
+f.Intrinsic.Control.Try
+	
+F.Intrinsic.Control.SelectCase(V.Args.Column.UCase)
+	F.Intrinsic.Control.Case("QTY")
+		F.Intrinsic.Control.If(V.Args.Value,>,V.DataTable.dtDropMaterial(V.Args.RowIndex).Conv_Qty_Issued!FieldValFloat)
+			F.Data.DataTable.SetValue("dtDropMaterial",V.Args.RowIndex,"Qty",V.DataTable.dtDropMaterial(V.Args.RowIndex).Conv_Qty_Issued!FieldValFloat)
+		F.Intrinsic.Control.EndIf
+F.Intrinsic.Control.EndSelect
+	
+f.Intrinsic.Control.Catch
+	f.Intrinsic.Control.CallSub(ErrorMsg, CurrentSub, v.Ambient.CurrentSubroutine)
+f.Intrinsic.Control.EndTry
+Program.Sub.GsGcDropMaterial_CellValueChanged.End
+
+Program.Sub.cmdClear_Click.Start
+f.Intrinsic.Control.Try
+
+F.Intrinsic.Control.BlockEvents
+Gui.Frm_Issue_Material.txt_Part_Issued.Text("")
+Gui.Frm_Issue_Material.txt_Part_Made.Text("")
+Gui.Frm_Issue_Material.txt_Qty_Remain_UOM.Text("")
+Gui.Frm_Issue_Material.txt_Sequence.Text("")
+Gui.Frm_Issue_Material.txt_Suffix.Text("")
+Gui.Frm_Issue_Material.txt_Work_Order.Text("")
+Gui.Frm_Issue_Material.cbo_Issue_Material.ClearItems
+Gui.Frm_Issue_Material.cbo_RTS_UOM.ClearItems
+Gui.Frm_Issue_Material.cbo_Issue_Material.Text("")
+Gui.Frm_Issue_Material.cbo_RTS_UOM.Text("")
+F.Data.DataTable.DeleteRow("dtDropMaterial")
+F.Data.DataTable.AcceptChanges("dtDropMaterial")
+F.Data.DataTable.DeleteRow("dtLotBin")
+F.Data.DataTable.AcceptChanges("dtLotBin")
+F.Data.DataTable.DeleteRow("dtJob")
+F.Data.DataTable.AcceptChanges("dtJob")
+F.Intrinsic.Control.UnBlockEvents
+	
+f.Intrinsic.Control.Catch
+	f.Intrinsic.Control.CallSub(ErrorMsg, CurrentSub, v.Ambient.CurrentSubroutine)
+f.Intrinsic.Control.EndTry
+Program.Sub.cmdClear_Click.End
+
+Program.Sub.cmd_ISS_PART_Click.Start
+f.Intrinsic.Control.Try
+
+gui.Frm_Issue_Material.lookup_Part.Show()
+
+f.Intrinsic.Control.Catch
+	f.Intrinsic.Control.CallSub(ErrorMsg, CurrentSub, v.Ambient.CurrentSubroutine)
+f.Intrinsic.Control.EndTry
+Program.Sub.cmd_ISS_PART_Click.End
+
+Program.Sub.lookup_Part_SelectionMade.Start
+f.Intrinsic.Control.Try
+
+F.Data.DataTable.SetValue("dtJob",V.Global.iIndex,"Part",v.DataTable.LOOKUP_PART_RESULT(0).PART!FIELDVALTRIM)
+
+f.Intrinsic.Control.Catch
+	f.Intrinsic.Control.CallSub(ErrorMsg, CurrentSub, v.Ambient.CurrentSubroutine)
+f.Intrinsic.Control.EndTry
+Program.Sub.lookup_Part_SelectionMade.End
+
+Program.Sub.GsGridControl1_RowCellClick.Start
+f.Intrinsic.Control.Try
+
+V.Local.iRet.Declare
+
+F.Intrinsic.Control.SelectCase(V.Args.Column.UCase)
+	F.Intrinsic.Control.Case("PART")
+		V.Global.iIndex.Set(V.Args.RowIndex)
+		gui.Frm_Issue_Material.lookup_Part.Show()
+
+		
+	F.Intrinsic.Control.Case("LOAD")
+		F.Data.DataView.Create("dtDropMaterial","Temp",22,"Converted_Qty > 0","")
+		F.Data.DataView.Create("dtLotBin","Temp",22,"Qty_to_Issue > 0","")
+		
+		F.Intrinsic.Control.If(V.DataView.dtDropMaterial!Temp.RowCount--,<>,-1,"AND",V.DataView.dtLotBin!Temp.RowCount--,<>,-1)
+			F.Intrinsic.UI.Msgbox("There is Qty to Issue and Drop Qty Entered.  Do you want to reload the grid?","Attention",4,V.Local.iRet)
+			
+		F.Intrinsic.Control.ElseIf(V.DataView.dtDropMaterial!Temp.RowCount--,<>,-1)
+			F.Intrinsic.UI.Msgbox("There is Drop Qty Entered.  Do you want to reload the grid?","Attention",4,V.Local.iRet)
+			
+		F.Intrinsic.Control.ElseIf(V.DataView.dtLotBin!Temp.RowCount--,<>,-1)
+			F.Intrinsic.UI.Msgbox("There is Qty to Issue.  Do you want to reload the grid?","Attention",4,V.Local.iRet)
+		F.Intrinsic.Control.Else
+			V.Local.iRet.Set(6)
+		F.Intrinsic.Control.EndIf
+		
+		F.Data.DataView.Close("dtDropMaterial","Temp")
+		F.Data.DataView.Close("dtLotBin","Temp")
+		
+		F.Intrinsic.Control.If(V.Local.iRet,=,6)
+			Gui.Frm_Issue_Material..Enabled(False)
+			F.Intrinsic.Control.BlockEvents
+			Gui.Frm_Issue_Material.txt_Sequence.Text(V.DataTable.dtJob(V.Args.RowIndex).Seq!FieldValTrim)
+			Gui.Frm_Issue_Material.txt_Part_Issued.Text(V.DataTable.dtJob(V.Args.RowIndex).Part!FieldValTrim)
+			
+			f.Intrinsic.Control.CallSub(LoadDropDowns)
+			
+			F.Intrinsic.Control.CallSub(LoadDropMaterialGrid)
+			
+			F.Intrinsic.Control.If(V.DataTable.dtJob(V.Args.RowIndex).ISS_UM!FieldValTrim,=,"")
+				Gui.Frm_Issue_Material.cbo_Issue_Material.Text(V.DataTable.dtJob(V.Args.RowIndex).UM!FieldValTrim)
+				F.Data.DataTable.SetValue("dtJob",V.Args.RowIndex,"ISS_UM",V.DataTable.dtJob(V.Args.RowIndex).UM!FieldValTrim)
+			F.Intrinsic.Control.Else
+				Gui.Frm_Issue_Material.cbo_Issue_Material.Text(V.DataTable.dtJob(V.Args.RowIndex).ISS_UM!FieldValTrim)
+			F.Intrinsic.Control.EndIf
+			F.Intrinsic.Control.UnBlockEvents
+			f.Intrinsic.Control.CallSub(LoadLotBinGrid)
+			Gui.Frm_Issue_Material..Enabled(True)
+		F.Intrinsic.Control.EndIf
+		
+F.Intrinsic.Control.EndSelect
+
+f.Intrinsic.Control.Catch
+	f.Intrinsic.Control.CallSub(ErrorMsg, CurrentSub, v.Ambient.CurrentSubroutine)
+f.Intrinsic.Control.EndTry
+Program.Sub.GsGridControl1_RowCellClick.End
+
+Program.Sub.txt_Suffix_LostFocus.Start
+F.Intrinsic.Control.Try
+V.Local.sSql.Declare
+V.Local.sPart.Declare
+V.Local.sRet.Declare
+V.Local.sInvUM.Declare
+V.Local.sLoc.Declare
+
+F.Intrinsic.String.Build("select PART from JOB_HEADER where JOB = '{0}' and SUFFIX = '{1}'",V.Screen.Frm_Issue_Material!txt_Work_Order.Text,V.Screen.Frm_Issue_Material!txt_Suffix.Text,V.Local.sSql)
+
+F.ODBC.Connection!Con.ExecuteAndReturn(V.Local.sSql,V.Local.sPart)
+
+F.Intrinsic.Control.If(V.Local.sPart.Trim,<>,"")
+	
+	Gui.Frm_Issue_Material.txt_Part_Made.Text(V.Local.sPart)
+	
+	f.Intrinsic.String.Build("select B.Seq, B.Part, A.Location, B.Description, B.Hours_Estimated-B.Hours_Actual as Qty, B.UM, '' as ISS_UM from JOB_HEADER A JOIN JOB_OPERATIONS B on A.JOB = B.JOB and A.SUFFIX = B.SUFFIX where A.JOB = '{0}' and A.SUFFIX = '{1}' and LMO = 'M' order by B.Seq",V.Screen.Frm_Issue_Material!txt_Work_Order.Text,V.Screen.Frm_Issue_Material!txt_Suffix.Text,v.Local.sSQL)
+
+	F.Data.DataTable.CreateFromSQL("dtJobTemp",con,V.Local.sSQL,True)
+	F.Data.DataTable.DeleteRow("dtJob")
+	F.Data.DataTable.AcceptChanges("dtJob")
+	F.Data.DataTable.Merge("dtJobTemp","dtJob",False,2)
+	F.Data.DataTable.Close("dtJobTemp")
+	
+	f.Intrinsic.String.Build("select Location from JOB_HEADER where JOB = '{0}' and SUFFIX = '{1}'",V.Screen.Frm_Issue_Material!txt_Work_Order.Text,V.Screen.Frm_Issue_Material!txt_Suffix.Text,v.Local.sSQL)
+	
+	f.ODBC.Connection!con.ExecuteAndReturn(v.Local.sSQL,v.Local.sLoc)
+	
+	'GRAB INV UM
+	f.Intrinsic.String.Build("select Top 1 UM_INVENTORY from INVENTORY_MSTR where PART = '{0}'",V.Local.sPart.Trim,v.Local.sSQL)
+	
+	f.ODBC.Connection!con.ExecuteAndReturn(v.Local.sSQL,v.Local.sRet)
+	v.Local.sInvUM.Set(v.Local.sRet)
+	
+	F.Intrinsic.Control.If(V.DataTable.dtInv.Exists)
+		F.Data.DataTable.Close("dtInv")
+	F.Intrinsic.Control.EndIf
+	
+	F.Intrinsic.String.Build("select PART, DESCRIPTION, LOCATION, UM_INVENTORY as UM from INVENTORY_MSTR where Location = '{0}' and UM_INVENTORY = '{1}' and Qty_OnHand > 0 order by Part",V.Local.sLoc,V.Local.sInvUM,V.Local.sSQL)
+	F.Data.DataTable.CreateFromSQL("dtInv","con",V.Local.sSQL,True)
+	gui.Frm_Issue_Material.lookup_Part.DataTableBasis("dtInv")
+	
+F.Intrinsic.Control.Else
+	F.Intrinsic.Control.CallSub(cmdClear_Click)
+	Gui.Frm_Issue_Material.txt_Work_Order.SetFocus
+	F.Intrinsic.UI.Msgbox("Job Not Found.........","Attention")
+F.Intrinsic.Control.EndIf
+
+f.Intrinsic.Control.Catch
+	f.Intrinsic.Control.CallSub(ErrorMsg, CurrentSub, v.Ambient.CurrentSubroutine)
+f.Intrinsic.Control.EndTry
+Program.Sub.txt_Suffix_LostFocus.End
+
+Program.Sub.txt_Suffix_GotFocus.Start
+F.Intrinsic.Control.Try
+
+Gui.Frm_Issue_Material.txt_Suffix.SelectAll
+
+f.Intrinsic.Control.Catch
+	f.Intrinsic.Control.CallSub(ErrorMsg, CurrentSub, v.Ambient.CurrentSubroutine)
+f.Intrinsic.Control.EndTry
+Program.Sub.txt_Suffix_GotFocus.End
+
+Program.Sub.txt_Work_Order_GotFocus.Start
+F.Intrinsic.Control.Try
+
+Gui.Frm_Issue_Material.txt_Work_Order.SelectAll
+
+f.Intrinsic.Control.Catch
+	f.Intrinsic.Control.CallSub(ErrorMsg, CurrentSub, v.Ambient.CurrentSubroutine)
+f.Intrinsic.Control.EndTry
+Program.Sub.txt_Work_Order_GotFocus.End
+
+Program.Sub.Comments.Start
+${$5$}$20.1.8789.15628$}$1
+${$6$}$rking$}$20240226152554758$}$QNdZLVy4bWuiWa9jh1ZTiPY99LydZoBN5dIV4lF2KOSKzKbMGzmVkf1LVrXisMrhjPh5V5ZmF8o=
+Program.Sub.Comments.End
