@@ -1,0 +1,563 @@
+﻿Program.Sub.ScreenSU.Start
+Gui.F_Quote_Lines_UM..Create(BaseForm)
+Gui.F_Quote_Lines_UM..Size(261,152)
+Gui.F_Quote_Lines_UM..MinX(0)
+Gui.F_Quote_Lines_UM..MinY(0)
+Gui.F_Quote_Lines_UM..Position(0,0)
+Gui.F_Quote_Lines_UM..BackColor(-2147483633)
+Gui.F_Quote_Lines_UM..MousePointer(0)
+Gui.F_Quote_Lines_UM..MaxButton(False)
+Gui.F_Quote_Lines_UM..Sizeable(False)
+Gui.F_Quote_Lines_UM..Event(UnLoad,F_Quote_Lines_UM_UnLoad)
+Gui.F_Quote_Lines_UM..Caption("Form")
+Gui.F_Quote_Lines_UM..AlwaysOnTop(False)
+Gui.F_Quote_Lines_UM..FontName("Tahoma")
+Gui.F_Quote_Lines_UM..FontSize(8.25)
+Gui.F_Quote_Lines_UM..ControlBox(True)
+Gui.F_Quote_Lines_UM..MinButton(True)
+Gui.F_Quote_Lines_UM..Moveable(True)
+Gui.F_Quote_Lines_UM..ShowInTaskBar(True)
+Gui.F_Quote_Lines_UM..TitleBar(True)
+Gui.F_Quote_Lines_UM.txtUM.Create(TextBox,"",True,51,22,0,12,53,True,0,"Arial",8,-2147483643,1)
+Gui.F_Quote_Lines_UM.txtUM.MaxLength(4)
+Gui.F_Quote_Lines_UM.txtUM.Event(LostFocus,txtUM_LostFocus)
+Gui.F_Quote_Lines_UM.txtUM.Locked(True)
+Gui.F_Quote_Lines_UM.lblUM.Create(Label,"UM",True,20,16,0,16,33,True,0,"Arial",8,-2147483633,0,0)
+Gui.F_Quote_Lines_UM.lblUM.BorderStyle(0)
+Gui.F_Quote_Lines_UM.cmdBRW.Create(Button)
+Gui.F_Quote_Lines_UM.cmdBRW.Size(31,21)
+Gui.F_Quote_Lines_UM.cmdBRW.Position(66,52)
+Gui.F_Quote_Lines_UM.cmdBRW.Caption("^")
+Gui.F_Quote_Lines_UM.cmdBRW.Event(Click,cmdBRW_Click)
+Gui.F_Quote_Lines_UM.cmdBRW.Enabled(True)
+Gui.F_Quote_Lines_UM.cmdBRW.Visible(True)
+Gui.F_Quote_Lines_UM.cmdBRW.Zorder(0)
+Gui.F_Quote_Lines_UM.cmdBRW.FontName("Tahoma")
+Gui.F_Quote_Lines_UM.cmdBRW.FontSize(7.8)
+Gui.F_Quote_Lines_UM.cmdSave.Create(Button)
+Gui.F_Quote_Lines_UM.cmdSave.Size(85,24)
+Gui.F_Quote_Lines_UM.cmdSave.Position(11,78)
+Gui.F_Quote_Lines_UM.cmdSave.Caption("Save")
+Gui.F_Quote_Lines_UM.cmdSave.Event(Click,cmdSave_Click)
+Gui.F_Quote_Lines_UM.cmdSave.Enabled(True)
+Gui.F_Quote_Lines_UM.cmdSave.Visible(True)
+Gui.F_Quote_Lines_UM.cmdSave.Zorder(0)
+Gui.F_Quote_Lines_UM.cmdSave.FontName("Tahoma")
+Gui.F_Quote_Lines_UM.cmdSave.FontSize(7.8)
+Gui.F_Quote_Lines_UM.txtQty.Create(TextBox,"",True,44,22,0,107,52,True,0,"Arial",8,-2147483643,1)
+Gui.F_Quote_Lines_UM.txtQty.Locked(True)
+Gui.F_Quote_Lines_UM.lblQty.Create(Label,"Quantity",True,49,16,0,107,36,True,0,"Arial",8,-2147483633,0,0)
+Gui.F_Quote_Lines_UM.lblQty.BorderStyle(0)
+Gui.F_Quote_Lines_UM.txtPrice.Create(TextBox,"",True,64,22,0,171,51,True,0,"Arial",8,-2147483643,1)
+Gui.F_Quote_Lines_UM.txtPrice.Locked(True)
+Gui.F_Quote_Lines_UM.lblPrice.Create(Label,"Price per Unit",True,79,16,0,172,35,True,0,"Arial",8,-2147483633,0,0)
+Gui.F_Quote_Lines_UM.lblPrice.BorderStyle(0)
+Program.Sub.ScreenSU.End
+
+Program.Sub.Preflight.Start
+V.Global.sOrder.Declare
+V.Global.sLine.Declare
+V.Global.fQty.Declare
+V.Global.fPrice.Declare
+V.Global.fWeight.Declare
+V.Global.sPart.Declare
+V.Global.sLoc.Declare
+Program.Sub.Preflight.End
+
+
+
+Program.Sub.Main.Start
+Function.Intrinsic.UI.UsePixels ' Allows you to use Pixels instead of Twips throughout
+
+F.Intrinsic.Control.Try
+
+
+F.Intrinsic.Control.If(V.Caller.Hook,=,10260)
+'Quote Lines Populate Hook
+	V.Passed.000202.Set("Custom UM")
+	f.Intrinsic.Control.CallSub(GetConversion)
+	
+F.Intrinsic.Control.ElseIf(V.Caller.Hook,=,10680)
+	'Quote Lines Script 1 Hook
+	F.Intrinsic.Control.CallSub(CustomUMScreen)
+	
+F.Intrinsic.Control.ElseIf(V.Caller.Hook,=,12010)
+'Order Lines Populate Hook
+	F.Intrinsic.Control.If(V.Caller.Switches,=,"O","or",V.Caller.Switches,=,"N")
+		F.Intrinsic.UI.ChangeCallerProperty(V.Passed.GAB-TEXT-1,"LOCK",1)
+		F.Intrinsic.UI.ChangeCallerProperty(V.Passed.GAB-BTN-1,"LOCK",0)
+	F.Intrinsic.Control.EndIf
+	
+	'setup GAB controls to be used on Order Lines screen
+	F.Intrinsic.Variable.SetProperty("GAB-TEXT-1","PL","282")
+	F.Intrinsic.Variable.SetProperty("GAB-LBL-1","PL","210")
+	F.Intrinsic.Variable.SetProperty("GAB-BTN-1","PL","325")
+	F.Intrinsic.Variable.SetProperty("GAB-TEXT-2","PL","420")
+	F.Intrinsic.Variable.SetProperty("GAB-LBL-2","PL","355")
+	F.Intrinsic.Variable.SetProperty("GAB-TEXT-3","PL","420")
+	F.Intrinsic.Variable.SetProperty("GAB-LBL-3","PL","347")
+	
+	F.Intrinsic.Variable.SetProperty("GAB-TEXT-1","PT","200")
+	F.Intrinsic.Variable.SetProperty("GAB-LBL-1","PT","202")
+	F.Intrinsic.Variable.SetProperty("GAB-BTN-1","PT","198")
+	F.Intrinsic.Variable.SetProperty("GAB-TEXT-2","PT","200")
+	F.Intrinsic.Variable.SetProperty("GAB-LBL-2","PT","202")
+	F.Intrinsic.Variable.SetProperty("GAB-TEXT-3","PT","225")
+	F.Intrinsic.Variable.SetProperty("GAB-LBL-3","PT","227")
+	
+	F.Intrinsic.Variable.SetProperty("GAB-TEXT-1","PW","40")
+	F.Intrinsic.Variable.SetProperty("GAB-LBL-1","PW","55")
+	F.Intrinsic.Variable.SetProperty("GAB-BTN-1","PW","19")
+	F.Intrinsic.Variable.SetProperty("GAB-TEXT-2","PW","85")
+	F.Intrinsic.Variable.SetProperty("GAB-LBL-2","PW","55")
+	F.Intrinsic.Variable.SetProperty("GAB-TEXT-3","PW","85")
+	F.Intrinsic.Variable.SetProperty("GAB-LBL-3","PW","65")
+	
+	F.Intrinsic.Variable.SetProperty("GAB-BTN-1","PH","19")
+	
+	V.Passed.GAB-TEXT-1.Set("")
+	V.Passed.GAB-LBL-1.Set("Custom UM")
+	V.Passed.GAB-BTN-1.Set("")
+	V.Passed.GAB-TEXT-2.Set("")
+	V.Passed.GAB-LBL-2.Set("Custom Qty")
+	V.Passed.GAB-TEXT-3.Set("")
+	V.Passed.GAB-LBL-3.Set("Custom Price")
+	
+	F.Intrinsic.String.LPad(V.Passed.000060,"0",7,V.Global.sOrder)
+	F.Intrinsic.String.LPad(V.Passed.000051,"0",3,V.Global.sLine)
+	F.Intrinsic.String.Build("{0}{1}",V.Global.sLine,"0",V.Global.sLine)
+	V.Global.fQty.Set(V.Passed.000007)
+	V.Global.fPrice.Set(V.Passed.000009)
+	V.Global.fWeight.Set(V.Passed.000016)
+	F.Intrinsic.String.GSSPartString(V.Passed.000052.Trim,V.Passed.000053.Trim,V.Global.sPart)
+	V.Global.sLoc.Set(V.Passed.000054)
+
+	f.Intrinsic.Control.CallSub(GetConversion)
+	
+F.Intrinsic.Control.ElseIf(V.Caller.Hook,=,12120,"or",V.Caller.Hook,=,12140)
+	'Order Lines Update Order Qty Hook or Order Lines Update Current Price Hook
+	F.Intrinsic.Control.If(V.Passed.GAB-TEXT-1.Trim,=,"")
+		F.Intrinsic.Control.End
+	F.Intrinsic.Control.EndIf
+
+	V.Global.fQty.Set(V.Passed.000007)
+	V.Global.fPrice.Set(V.Passed.000009)
+	V.Global.fWeight.Set(V.Passed.000016)
+	F.Intrinsic.String.GSSPartString(V.Passed.000052.Trim,V.Passed.000053.Trim,V.Global.sPart)
+	V.Global.sLoc.Set(V.Passed.000054)
+	f.Intrinsic.Control.CallSub(ReadConv)
+	
+F.Intrinsic.Control.ElseIf(V.Caller.Hook,=,12231)
+	'Order Lines Post Save Hook
+	F.Intrinsic.Control.CallSub(SaveCustomUM)
+	V.Passed.GAB-TEXT-1.Set("")
+	V.Passed.GAB-TEXT-2.Set("")
+	V.Passed.GAB-TEXT-3.Set("")
+	
+F.Intrinsic.Control.ElseIf(V.Caller.Hook,=,12431)
+	'Order Lines GAB-BTN-1 Hook
+	F.Intrinsic.String.LPad(V.Passed.000060,"0",7,V.Global.sOrder)
+	F.Intrinsic.String.LPad(V.Passed.000051,"0",3,V.Global.sLine)
+	F.Intrinsic.String.Build("{0}{1}",V.Global.sLine,"0",V.Global.sLine)
+	V.Global.fQty.Set(V.Passed.000007)
+	V.Global.fPrice.Set(V.Passed.000009)
+	V.Global.fWeight.Set(V.Passed.000016)
+	F.Intrinsic.String.GSSPartString(V.Passed.000052.Trim,V.Passed.000053.Trim,V.Global.sPart)
+	V.Global.sLoc.Set(V.Passed.000054)
+	F.Intrinsic.Control.CallSub(BRWButtonClicked)
+	
+F.Intrinsic.Control.ElseIf(V.Caller.Hook,=,12040)
+'part change
+	V.Passed.GAB-TEXT-1.Set("")
+	V.Passed.GAB-TEXT-2.Set("")
+	V.Passed.GAB-TEXT-3.Set("")
+	
+F.Intrinsic.Control.ElseIf(V.Caller.Hook,=,12705)
+'	'Order Lines Line changed Hook
+	F.Intrinsic.Control.CallSub(GetCustomUM)
+
+F.Intrinsic.Control.Else
+	F.Intrinsic.Control.End
+	
+F.Intrinsic.Control.EndIf
+
+f.Intrinsic.Control.Catch
+	f.Intrinsic.Control.CallSub(ErrorMsg, CurrentSub, v.Ambient.CurrentSubroutine)
+f.Intrinsic.Control.EndTry
+Program.Sub.Main.End
+
+Program.Sub.ErrorMsg.Start
+v.Local.sError.Declare
+f.Intrinsic.String.Build("Project GCG_6994_Orders.g2u {0}{0}Subroutine: {1}{0}Error: {2} with Description: {3}", v.Ambient.NewLine, v.Args.CurrentSub, v.Ambient.ErrorNumber, v.Ambient.ErrorDescription, v.Local.sError)
+f.Intrinsic.UI.Msgbox(v.Local.sError)
+f.ODBC.Connection!con.Close
+f.Intrinsic.Control.End
+Program.Sub.ErrorMsg.End
+
+
+Program.Sub.BRWButtonClicked.Start
+F.Intrinsic.Control.Try
+	V.Local.sRet.Declare
+	V.Local.sSQL.Declare
+	V.Local.fCustQty.Declare
+	
+	F.ODBC.Connection!con.OpenCompanyConnection
+	
+	f.Intrinsic.String.Build("select TO_UOM,DESCRIPTION,Operator,Factor from GCG_6994_UOM_MAINT where part = '{0}' and UOM = '{1}'",V.Global.sPart.trim,V.Passed.000006.Trim,V.Local.sSQL)
+	
+	f.Intrinsic.String.Build("{0} union select TO_UM,'GLOBAL UOM','*',Conversion from UM_CONVERSION where from_UM = '{1}'  ",V.Local.sSQL,V.Passed.000006.Trim,V.Local.sSQL)
+	
+	
+	F.Intrinsic.UI.Browser("Custom UMs","con",V.Local.sSQL,"UM*!*Description*!*Operator*!*Factor","10*!*50*!*10*!*10",V.Local.sRet)
+	F.ODBC.Connection!con.Close
+	
+	
+	F.Intrinsic.Control.If(V.Local.sRet.IsNotCancel)
+		F.Intrinsic.String.Split(V.Local.sRet,"*!*",V.Local.sRet)
+		F.Intrinsic.Control.If(V.Passed.GAB-TEXT-1.Trim,!=,V.Local.sRet(0).Trim)
+			V.Passed.GAB-TEXT-1.Set(V.Local.sRet(0).Trim)
+	
+			f.Intrinsic.Control.CallSub(ReadConv)
+		F.Intrinsic.Control.EndIf
+	F.Intrinsic.Control.EndIf
+
+f.Intrinsic.Control.Catch
+	f.Intrinsic.Control.CallSub(ErrorMsg, CurrentSub, v.Ambient.CurrentSubroutine)
+f.Intrinsic.Control.EndTry
+Program.Sub.BRWButtonClicked.End
+
+Program.Sub.GetConversion.Start
+F.Intrinsic.Control.Try
+	v.Local.ssql.Declare
+	v.Local.sRet.Declare
+	v.local.sFilname.Declare
+	
+	
+	F.ODBC.Connection!con.OpenCompanyConnection
+	v.Local.ssql.set("select Part,Location,UOM,TO_UOM,Operator,Factor from GCG_6994_UOM_MAINT union select 'GLOBALUM','',from_UM,TO_UM,'*',Conversion from UM_CONVERSION")
+	f.Data.DataTable.CreateFromSQL("DTCONV","con",v.Local.ssql)
+	f.Data.DataView.Create("DTCONV","DVCONV")
+
+	f.Data.DataView.ToString("DTCONV", "DVCONV", "Part*!*Location*!*UOM*!*TO_UOM*!*Operator*!*Factor", "*!*",v.Ambient.NewLine,v.Local.sRet)
+	
+	f.Data.DataTable.Close("DTCONV")
+
+	f.Intrinsic.String.Build("{0}\GCG_6994_Data.cfg",v.Caller.LocalGSSTempDir,v.local.sFilname)
+	f.Intrinsic.File.String2File(v.local.sFilname,v.Local.sRet)
+	
+	F.ODBC.Connection!con.Close
+	
+f.Intrinsic.Control.Catch
+	f.Intrinsic.Control.CallSub(ErrorMsg, CurrentSub, v.Ambient.CurrentSubroutine)
+f.Intrinsic.Control.EndTry
+Program.Sub.GetConversion.End
+
+Program.Sub.ReadConv.Start
+F.Intrinsic.Control.Try
+	v.local.sFilname.Declare
+	V.Local.sRet.Declare
+	V.Local.sFilter.Declare
+	V.Local.sPartRevLoc.Declare
+	V.local.sPart.Declare
+	V.Local.fCustQty.Declare
+	v.Local.bret.Declare
+	V.Local.sOp.Declare
+
+	f.Intrinsic.String.Build("{0}\GCG_6994_Data.cfg",v.Caller.LocalGSSTempDir,v.local.sFilname)
+	f.Intrinsic.File.File2String(V.Local.sFilname,V.Local.sRet)
+	F.Data.DataTable.CreateFromString("DTUOMCONV",V.Local.sRet,"Part*!*Loc*!*UOM*!*TO_UOM*!*Operator*!*Factor","string*!*string*!*string*!*string*!*string*!*string","*!*",v.Ambient.NewLine)
+	f.Data.DataView.Create("DTUOMCONV","DVConfig")
+	f.Data.DataTable.AddExpressionColumn("DTUOMCONV","PartRevLoc","String","trim([Part])+trim([Loc])")
+	F.Intrinsic.String.GSSPartString(V.Passed.000052.Trim,V.Passed.000053.Trim,V.local.sPart)
+	f.Intrinsic.String.Build("{0}{1}",V.local.sPart,V.Passed.000054.Trim,V.Local.sPartRevLoc)
+	f.Intrinsic.String.Build("UOM = '{0}' and Part = '{1}' and TO_UOM = '{2}'",v.Passed.000006.trim,V.Local.sPartRevLoc,V.Passed.GAB-TEXT-1,V.Local.sFilter)	
+	f.Data.DataView.SetFilter("DTUOMCONV","DVConfig",V.Local.sFilter)	
+	f.Intrinsic.Control.If(v.DataView.DTUOMCONV!DVConfig.RowCount,>,0)
+		V.Local.sRet.Set(V.DataView.DTUOMCONV!DVConfig(0).Factor!FieldVal)
+		v.Local.bret.Set(True)
+		V.Local.sOp.Set(V.DataView.DTUOMCONV!DVConfig(0).Operator!FieldVal)
+	f.Intrinsic.Control.Else
+		f.Intrinsic.String.Build("UOM = '{0}' and Part = 'GLOBALUM' and TO_UOM = '{1}'",v.Passed.000006.trim,V.Passed.GAB-TEXT-1,V.Local.sFilter)	
+		f.Data.DataView.SetFilter("DTUOMCONV","DVConfig",V.Local.sFilter)	
+		f.Intrinsic.Control.If(v.DataView.DTUOMCONV!DVConfig.RowCount,>,0)
+			V.Local.sRet.Set(V.DataView.DTUOMCONV!DVConfig(0).Factor!FieldVal)
+			v.Local.bret.Set(True)
+			V.Local.sOp.Set(V.DataView.DTUOMCONV!DVConfig(0).Operator!FieldVal)
+		f.Intrinsic.Control.EndIf
+	f.Intrinsic.Control.EndIf
+	
+	f.Intrinsic.Control.If(v.Local.bret)
+		F.Intrinsic.Control.If(V.Local.sOp.Trim,=,"*")
+			f.Intrinsic.Math.Mult(V.Local.sRet.float,V.Passed.000007.float,V.Local.fCustQty)
+		F.Intrinsic.Control.ElseIf(V.Local.sOp.Trim,=,"/")
+			F.Intrinsic.Math.Div(V.Local.sRet.float,V.Passed.000007.float,V.Local.fCustQty)
+		F.Intrinsic.Control.ElseIf(V.Local.sOp.Trim,=,"+")
+			F.Intrinsic.Math.Add(V.Local.sRet.float,V.Passed.000007.float,V.Local.fCustQty)
+		F.Intrinsic.Control.ElseIf(V.Local.sOp.Trim,=,"-")
+			F.Intrinsic.Math.Sub(V.Local.sRet.float,V.Passed.000007.float,V.Local.fCustQty)
+		F.Intrinsic.Control.EndIf
+
+		V.Passed.GAB-TEXT-2.Set(V.Local.fCustQty)
+		f.Intrinsic.Math.Div(V.Passed.000032.float,V.Local.fCustQty,v.Local.fCustQty)
+		V.Passed.GAB-TEXT-3.Set(V.Local.fCustQty)
+	f.Intrinsic.Control.EndIf
+
+	f.Data.DataView.close("DTUOMCONV","DVConfig")
+	f.Data.DataTable.Close("DTUOMCONV")
+	
+f.Intrinsic.Control.Catch
+	f.Intrinsic.Control.CallSub(ErrorMsg, CurrentSub, v.Ambient.CurrentSubroutine)
+f.Intrinsic.Control.EndTry
+Program.Sub.ReadConv.End
+
+Program.Sub.SaveCustomUM.Start
+F.Intrinsic.Control.Try
+	V.Local.sSQL.Declare
+	V.local.sOrder.Declare
+	V.local.sLine.Declare
+	
+	F.Intrinsic.String.LPad(V.Passed.000060,"0",7,V.local.sOrder)
+	F.Intrinsic.String.LPad(V.Passed.000051,"0",3,V.local.sLine)
+	F.Intrinsic.String.RPad(V.local.sLine,"0",4,V.local.sLine)
+	F.Intrinsic.String.Build("select ORDER_NO, LINE, UM, QTY, UNIT_PRICE from GCG_6994_ORD where ORDER_NO = '{0}' and LINE = '{1}';",V.local.sOrder,V.local.sLine,V.Local.sSQL)
+	
+	F.ODBC.Connection!con.OpenCompanyConnection
+	F.ODBC.Connection!con.OpenRecordsetRW("rstOrdUM",V.Local.sSQL)
+	F.Intrinsic.Control.If(V.ODBC.con!rstOrdUM.EOF)
+		F.ODBC.con!rstOrdUM.AddNew
+		F.ODBC.con!rstOrdUM.Set!ORDER_NO(V.local.sOrder)
+		F.ODBC.con!rstOrdUM.Set!LINE(V.local.sLine)
+	F.Intrinsic.Control.EndIf
+	
+		F.ODBC.con!rstOrdUM.Set!UM(V.Passed.GAB-TEXT-1)
+		F.ODBC.con!rstOrdUM.Set!QTY(V.Passed.GAB-TEXT-2)
+		F.ODBC.con!rstOrdUM.Set!UNIT_PRICE(V.Passed.GAB-TEXT-3)
+		F.ODBC.con!rstOrdUM.Update
+	
+	F.ODBC.con!rstOrdUM.Close
+	F.ODBC.Connection!con.Close
+
+f.Intrinsic.Control.Catch
+	f.Intrinsic.Control.CallSub(ErrorMsg, CurrentSub, v.Ambient.CurrentSubroutine)
+f.Intrinsic.Control.EndTry
+Program.Sub.SaveCustomUM.End
+
+Program.Sub.GetCustomUM.Start
+F.Intrinsic.Control.Try
+V.Local.sSQL.Declare
+V.local.sOrder.Declare
+V.local.sLine.Declare
+
+F.Intrinsic.String.LPad(V.Passed.000060,"0",7,V.local.sOrder)
+F.Intrinsic.String.LPad(V.Passed.000051,"0",3,V.local.sLine)
+F.Intrinsic.String.Build("select ORDER_NO, LINE, UM, QTY, UNIT_PRICE from GCG_6994_ORD where ORDER_NO = '{0}' and LINE = '{1}';",V.local.sOrder,V.local.sLine,V.Local.sSQL)
+
+F.ODBC.Connection!con.OpenCompanyConnection
+
+f.Data.DataTable.CreateFromSQL("DTUOM","con",V.Local.sSQL)
+F.Intrinsic.Control.If(v.DataTable.DTUOM.RowCount,>,0)
+	V.Passed.GAB-TEXT-1.Set(v.DataTable.DTUOM(0).UM!FieldValTrim) 
+	V.Passed.GAB-TEXT-2.Set(v.DataTable.DTUOM(0).QTY!FieldVal)
+	V.Passed.GAB-TEXT-3.Set(v.DataTable.DTUOM(0).UNIT_PRICE!FieldVal)
+f.Intrinsic.Control.Else
+	V.Passed.GAB-TEXT-1.Set("") 
+	V.Passed.GAB-TEXT-2.Set("")
+	V.Passed.GAB-TEXT-3.Set("")
+f.Intrinsic.Control.EndIf
+
+f.Data.DataTable.Close("DTUOM")
+F.ODBC.Connection!con.Close
+
+f.Intrinsic.Control.Catch
+f.Intrinsic.Control.CallSub(ErrorMsg, CurrentSub, v.Ambient.CurrentSubroutine)
+f.Intrinsic.Control.EndTry
+Program.Sub.GetCustomUM.End
+
+Program.Sub.CustomUMScreen.Start
+F.Intrinsic.Control.Try
+V.Local.sSQL.Declare
+V.Local.sCaption.Declare
+V.local.sQuote.Declare
+V.local.sLine.Declare
+V.local.fQty.Declare
+V.local.fPrice.Declare
+V.local.sPart.Declare
+V.local.sLoc.Declare
+
+F.Intrinsic.String.LPad(V.Passed.000060,"0",7,V.local.sQuote)
+F.Intrinsic.String.LPad(V.Passed.000051,"0",3,V.local.sLine)
+F.Intrinsic.String.Build("{0}{1}",V.local.sLine,V.Passed.000090,V.local.sLine)
+V.local.fQty.Set(V.Passed.000007)
+V.local.fPrice.Set(V.Passed.000009)
+
+F.Intrinsic.String.GSSPartString(V.Passed.000052.Trim,V.Passed.000053.Trim,V.local.sPart)
+V.local.sLoc.Set(V.Passed.000054)
+	
+F.Intrinsic.Control.If(V.local.sPart.Trim,=,"","or",V.local.fQty,=,0,V.local.fPrice,=,0)
+	F.Intrinsic.UI.Msgbox("Please enter more information")
+	F.Intrinsic.Control.ExitSub
+F.Intrinsic.Control.EndIf
+
+'Check table for Quotes for UM
+F.ODBC.Connection!con.OpenCompanyConnection
+F.Intrinsic.String.Build("select UM, QTY, UNIT_PRICE from GCG_6994_Qte where QUOTE = '{0}' and LINE = '{1}';",V.local.sQuote,V.local.sLine,V.Local.sSQL)
+F.ODBC.Connection!con.OpenRecordsetRO("rstQteUM",V.Local.sSQL)
+
+	F.Intrinsic.Control.If(V.ODBC.con!rstQteUM.EOF,=,false)
+		Gui.F_Quote_Lines_UM.txtUM.Text(V.ODBC.con!rstQteUM.FieldValTrim!UM)
+		Gui.F_Quote_Lines_UM.txtQty.Text(V.ODBC.con!rstQteUM.FieldVal!QTY)
+		Gui.F_Quote_Lines_UM.txtPrice.Text(V.ODBC.con!rstQteUM.FieldVal!UNIT_PRICE)
+	F.Intrinsic.Control.EndIf
+F.ODBC.con!rstQteUM.Close
+F.ODBC.Connection!con.Close
+
+F.Intrinsic.String.Build("Custom UM Quote: {0} Line: {1}",V.local.sQuote,V.local.sLine,V.Local.sCaption)
+Gui.F_Quote_Lines_UM..Caption(V.Local.sCaption)
+Gui.F_Quote_Lines_UM..Show
+
+f.Intrinsic.Control.Catch
+	f.Intrinsic.Control.CallSub(ErrorMsg, CurrentSub, v.Ambient.CurrentSubroutine)
+f.Intrinsic.Control.EndTry
+Program.Sub.CustomUMScreen.End
+
+Program.Sub.F_Quote_Lines_UM_UnLoad.Start
+F.Intrinsic.Control.End
+Program.Sub.F_Quote_Lines_UM_UnLoad.End
+Program.Sub.txtUM_LostFocus.Start
+Program.Sub.txtUM_LostFocus.End
+
+Program.Sub.cmdBRW_Click.Start
+F.Intrinsic.Control.Try
+V.Local.sRet.Declare
+V.Local.sSQL.Declare
+V.local.sPart.Declare
+V.local.sLoc.Declare
+
+F.Intrinsic.String.GSSPartString(V.Passed.000052.Trim,V.Passed.000053.Trim,V.local.sPart)
+V.local.sLoc.Set(V.Passed.000054)
+	
+	
+F.ODBC.Connection!con.OpenCompanyConnection
+
+f.Intrinsic.String.Build("select TO_UOM,DESCRIPTION,Operator,Factor from GCG_6994_UOM_MAINT where part = '{0}' and UOM = '{2}' and location = '{1}'",V.local.sPart.trim,V.local.sLoc.trim,V.Passed.000006.Trim,V.Local.sSQL)
+
+f.Intrinsic.String.Build("{0} union select TO_UM,'GLOBAL UOM','*',Conversion from UM_CONVERSION where from_UM = '{1}'  ",V.Local.sSQL,V.Passed.000006.Trim,V.Local.sSQL)
+
+
+F.Intrinsic.UI.Browser("Custom UMs","con",V.Local.sSQL,"UM*!*Description*!*Operator*!*Factor","10*!*50*!*10*!*10",V.Local.sRet)
+F.ODBC.Connection!con.Close
+
+
+F.Intrinsic.Control.If(V.Local.sRet.IsNotCancel)
+	F.Intrinsic.String.Split(V.Local.sRet,"*!*",V.Local.sRet)
+	Gui.F_Quote_Lines_UM.txtUM.Text(V.Local.sRet(0).Trim)
+
+	f.Intrinsic.Control.CallSub(ReadConv_Quote)
+F.Intrinsic.Control.EndIf
+
+F.Intrinsic.Control.Catch
+	f.Intrinsic.Control.CallSub(ErrorMsg, CurrentSub, v.Ambient.CurrentSubroutine)
+	F.Intrinsic.Control.EndTry
+Program.Sub.cmdBRW_Click.End
+
+Program.Sub.CMDSAVE_CLICK.Start
+F.Intrinsic.Control.Try
+V.Local.sSQL.Declare
+V.local.sQuote.Declare
+V.local.sLine.Declare
+
+f.Intrinsic.Control.If(V.Screen.F_Quote_Lines_UM!txtUM.Text.Trim,=,"")
+	f.Intrinsic.UI.Msgbox("Invalid UOM")
+	f.Intrinsic.Control.ExitSub
+f.Intrinsic.Control.elseIf(V.Screen.F_Quote_Lines_UM!txtQty.Text.text.trim,=,"")
+	f.Intrinsic.UI.Msgbox("Invalid Quantity")
+	f.Intrinsic.Control.ExitSub
+f.Intrinsic.Control.EndIf
+
+F.Intrinsic.String.LPad(V.Passed.000060,"0",7,V.local.sQuote)
+F.Intrinsic.String.LPad(V.Passed.000051,"0",3,V.local.sLine)
+F.Intrinsic.String.RPad(V.local.sLine,"0",4,V.local.sLine)
+F.Intrinsic.String.Build("select QUOTE, LINE, UM, QTY, UNIT_PRICE from GCG_6994_QTE where QUOTE = '{0}' and LINE = '{1}';",V.local.sQuote,V.local.sLine,V.Local.sSQL)
+
+F.ODBC.Connection!con.OpenCompanyConnection
+F.ODBC.Connection!con.OpenRecordsetRW("rstQteUM",V.Local.sSQL)
+F.Intrinsic.Control.If(V.ODBC.con!rstQteUM.EOF)
+	F.ODBC.con!rstQteUM.AddNew
+	F.ODBC.con!rstQteUM.Set!QUOTE(V.local.sQuote)
+	F.ODBC.con!rstQteUM.Set!LINE(V.local.sLine)
+F.Intrinsic.Control.Endif
+	F.ODBC.con!rstQteUM.Set!UM(V.Screen.F_Quote_Lines_UM!txtUM.Text.Trim)
+	F.ODBC.con!rstQteUM.Set!QTY(V.Screen.F_Quote_Lines_UM!txtQty.Text.Float)
+	F.ODBC.con!rstQteUM.Set!UNIT_PRICE(V.Screen.F_Quote_Lines_UM!txtPrice.Text.Float)
+	F.ODBC.con!rstQteUM.Update
+	F.Intrinsic.UI.Msgbox("Saved!")
+F.ODBC.con!rstQteUM.Close
+F.ODBC.Connection!con.Close
+
+F.Intrinsic.Control.Catch
+	f.Intrinsic.Control.CallSub(ErrorMsg, CurrentSub, v.Ambient.CurrentSubroutine)
+F.Intrinsic.Control.EndTry
+Program.Sub.CMDSAVE_CLICK.End
+
+Program.Sub.ReadConv_Quote.Start
+F.Intrinsic.Control.Try
+v.local.sFilname.Declare
+V.Local.sRet.Declare
+V.Local.sFilter.Declare
+V.Local.sPartRevLoc.Declare
+V.local.sPart.Declare
+V.Local.fCustQty.Declare
+v.Local.bret.Declare
+V.Local.sOp.Declare
+
+f.Intrinsic.String.Build("{0}\GCG_6994_Data.cfg",v.Caller.LocalGSSTempDir,v.local.sFilname)
+f.Intrinsic.File.File2String(V.Local.sFilname,V.Local.sRet)
+F.Data.DataTable.CreateFromString("DTUOMCONV",V.Local.sRet,"Part*!*Loc*!*UOM*!*TO_UOM*!*Operator*!*Factor","string*!*string*!*string*!*string*!*string*!*string","*!*",v.Ambient.NewLine)
+f.Data.DataView.Create("DTUOMCONV","DVConfig")
+f.Data.DataTable.AddExpressionColumn("DTUOMCONV","PartRevLoc","String","trim([Part])+trim([Loc])")
+F.Intrinsic.String.GSSPartString(V.Passed.000052.Trim,V.Passed.000053.Trim,V.local.sPart)
+f.Intrinsic.String.Build("{0}{1}",V.local.sPart,V.Passed.000054.Trim,V.Local.sPartRevLoc)
+f.Intrinsic.String.Build("UOM = '{0}' and Part = '{1}' and TO_UOM = '{2}'",v.Passed.000006.trim,V.Local.sPartRevLoc,v.Screen.F_Quote_Lines_UM!txtUM.Text,V.Local.sFilter)	
+f.Data.DataView.SetFilter("DTUOMCONV","DVConfig",V.Local.sFilter)	
+f.Intrinsic.Control.If(v.DataView.DTUOMCONV!DVConfig.RowCount,>,0)
+	V.Local.sRet.Set(V.DataView.DTUOMCONV!DVConfig(0).Factor!FieldVal)
+	v.Local.bret.Set(True)
+	V.Local.sOp.Set(V.DataView.DTUOMCONV!DVConfig(0).Operator!FieldVal)
+f.Intrinsic.Control.Else
+	f.Intrinsic.String.Build("UOM = '{0}' and Part = 'GLOBALUM' and TO_UOM = '{1}'",v.Passed.000006.trim,v.Screen.F_Quote_Lines_UM!txtUM.Text,V.Local.sFilter)	
+	f.Data.DataView.SetFilter("DTUOMCONV","DVConfig",V.Local.sFilter)	
+	f.Intrinsic.Control.If(v.DataView.DTUOMCONV!DVConfig.RowCount,>,0)
+		V.Local.sRet.Set(V.DataView.DTUOMCONV!DVConfig(0).Factor!FieldVal)
+		v.Local.bret.Set(True)
+		V.Local.sOp.Set(V.DataView.DTUOMCONV!DVConfig(0).Operator!FieldVal)
+	f.Intrinsic.Control.EndIf
+f.Intrinsic.Control.EndIf
+
+f.Intrinsic.Control.If(v.Local.bret)
+	F.Intrinsic.Control.If(V.Local.sOp.Trim,=,"*")
+		f.Intrinsic.Math.Mult(V.Local.sRet.float,V.Passed.000007.float,V.Local.fCustQty)
+	F.Intrinsic.Control.ElseIf(V.Local.sOp.Trim,=,"/")
+		F.Intrinsic.Math.Div(V.Local.sRet.float,V.Passed.000007.float,V.Local.fCustQty)
+	F.Intrinsic.Control.ElseIf(V.Local.sOp.Trim,=,"+")
+		F.Intrinsic.Math.Add(V.Local.sRet.float,V.Passed.000007.float,V.Local.fCustQty)
+	F.Intrinsic.Control.ElseIf(V.Local.sOp.Trim,=,"-")
+		F.Intrinsic.Math.Sub(V.Local.sRet.float,V.Passed.000007.float,V.Local.fCustQty)
+	F.Intrinsic.Control.EndIf
+
+	Gui.F_Quote_Lines_UM.txtQty.Text(V.Local.fCustQty)
+	f.Intrinsic.Math.Div(V.Passed.000032.float,V.Local.fCustQty,v.Local.fCustQty)
+	Gui.F_Quote_Lines_UM.txtPrice.Text(V.Local.fCustQty)
+f.Intrinsic.Control.EndIf
+
+f.Data.DataView.close("DTUOMCONV","DVConfig")
+f.Data.DataTable.Close("DTUOMCONV")
+	
+f.Intrinsic.Control.Catch
+	f.Intrinsic.Control.CallSub(ErrorMsg, CurrentSub, v.Ambient.CurrentSubroutine)
+f.Intrinsic.Control.EndTry
+Program.Sub.ReadConv_Quote.End
+
+Program.Sub.Comments.Start
+${$5$}$20.1.8713.32002$}$1
+${$6$}$rking$}$20240124122324532$}$QNdZLVy4bWuiWa9jh1ZTiPY99LydZoBNJ1j0ryYxuhSaxKk0gDJ9a9I9Piq+cMvTKtdaXEc9Sg4=
+Program.Sub.Comments.End
